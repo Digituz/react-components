@@ -11,4 +11,4 @@ before_script: lerna bootstrap
 script: lerna run test --scope $PACKAGE
 after_success:
 - npm config set //registry.npmjs.org/:_authToken $NPM_TOKEN
-- lerna publish --skip-git --conventional-commits --yes
+- lerna publish --skip-git --yes
