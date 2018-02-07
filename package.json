@@ -4,6 +4,6 @@
 	},
   "scripts": {
     "preRelease": "lerna run test",
-    "release": "npm run preRelease && lerna publish --conventional-commits --yes --skip-npm"
+    "release": "npm run preRelease && lerna publish --skip-npm"
   }
 }
