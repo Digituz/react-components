@@ -1,0 +1,15 @@
+language: node_js
+node_js:
+- node
+env:
+- PACKAGE=Button
+- PACKAGE=Input
+script: lerna run test --scope $PACKAGE
+deploy:
+  provider: npm
+  email: bruno.krebs@digituz.com.br
+  api_key:
+    secure: kRwO2XYNM/CO4tkb1SdmGazAeD129VSKlarZ1lhbQgevsLnyN/dp5gMqEORZAEzIdILNQoagyCzQd3g1CcgpKVrgG13m/xrRBfpp5S4DWOlzSIFJ5FZcSlDK3IJaf+ZqCpjHQ4AWyjZDwmXMNQlizvExXrB5qACT8bb4a8B6ZIdCNscIN64JdW6Hy2szaAOW30C4MLS/o3W3O0ZonQel0bz6D9xzIwJOgtVAA/cXkhJrZOmJ+LdvemfRe2m8BfZAXg3Fl9UxvMEBCO/3aU6BSefM+dTVi7KZgvnSgM7QjMzkX7ZygESVw7y03MJnYZWsNpSCvfL4nhBC//U3/OrfoyQQY2PxpGr9UWMOkCg6eqAVCTSCyCxA3Vcn20PMy7xnwehA1TFsSm83mTDTo3x+FpyZfJaGAaOd41THH6QdxDxKTEbltRWm2UZiwQ134XNl83xxKvrggnaqJCcCe82p0T0L1Xz7rKpT4NZqC24WZ9THtn0o/9tsBNVwOxRELtrxIZWiPa/bjpsy+0q1HtBOXvfTG+hpfiJ7vUx6Tni0RNXbn0IJhbRXMN20hGFC0hvSZe8m3BFX77zKBu04psdbX4Ccr8gEYz3iw5PKbToD/GuDaXuHh+Cp+8q3p/ONveNSI1ShkncIwdYScXqOIT+gC0LHDe/xJjsSp0zyCMPk5hs=
+  on:
+    tags: true
+    repo: Digituz/react-components
