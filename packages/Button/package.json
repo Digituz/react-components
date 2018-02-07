@@ -1,6 +1,6 @@
 {
   "name": "@digituz/react-button",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "React Button Element",
   "main": "index.js",
   "scripts": {
