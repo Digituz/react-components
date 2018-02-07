@@ -1,5 +1,5 @@
 {
-  "name": "Button",
+  "name": "@Digituz/ReactButton",
   "version": "0.0.0",
   "description": "React Button Element",
   "main": "index.js",

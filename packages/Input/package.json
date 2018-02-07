@@ -1,5 +1,5 @@
 {
-  "name": "Input",
+  "name": "@Digituz/ReactInput",
   "version": "0.0.0",
   "description": "React Input Element",
   "main": "index.js",
