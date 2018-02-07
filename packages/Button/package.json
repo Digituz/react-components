@@ -1,5 +1,5 @@
 {
-  "name": "@Digituz/ReactButton",
+  "name": "@digituz/react-button",
   "version": "0.0.0",
   "description": "React Button Element",
   "main": "index.js",
@@ -12,5 +12,8 @@
   "dependencies": {
     "prop-types": "^15.6.0",
     "react": "^16.2.0"
+  },
+  "publishConfig": {
+    "access": "public"
   }
 }
