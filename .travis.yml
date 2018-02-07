@@ -2,15 +2,13 @@ language: node_js
 node_js:
 - node
 env:
-- PACKAGE=@digituz/react-button
-- PACKAGE=@digituz/react-input
+  matrix:
+  - PACKAGE=@digituz/react-button
+  - PACKAGE=@digituz/react-input
+  global:
+    secure: Be6J9uK3v+ZkmL80j/9npqyKAg24zwUkZaz5bDDDFgPp8blS2vD+CL/i41XmBZDzvbj0yqPhOoYU/HVGF5avpzV4xWhgg8Z2/QaxpgFm1AmhiVUkVdmlb+ZECI6aDp9V/jSBHQRFReKe/UbTVhK+wFMB8zJkO+YxvF3L4hyWSNig9KXp2HeaebGUUiitBpsz1oxWc5p0a/Hkix7i2qr+jx2V7GZWh5D1n59HJFwU3InGNB1gbb+psa6gmR7ObX39Kn5fjTsb6Ui2CQAqcAuoDGKZO517t9GjfO5jNMjSE5GQxhXbToz3iS9a53JxR8v0ZMS5C8zlQalaWzNK0qmMKfTSMY2vfHvaiDowhNIdgKlyDeMb3FC83ck8UUtBMY1XhzUtr/PNpvOeTlwQht9XkaH+dnwdI29QvE28YuSgqDxv44KureCyX4igORxA6HD0HS0a7l+heWKcfc4CDNlrLNs/D5+jpB9Kx20O2wViTjUHeEjT/6xTNW8JHobFxKDGFMd3vpggeJPe68h8jQy3xr3BVcJCDm4gpzotWY1o6w2G5Lf6Lm2NQf4EoXdiuNlQ5tR8rD8ezCXLmTcRBduAZgMxfB/EsOIRTOSz9wP0ez1tCQ4nQZFT2gUUg1YZkV71TRK7Q+IXVJvMZDy1MTCChY0EaE3HiUahJFD3KIY67Nk=
 before_script: lerna bootstrap
 script: lerna run test --scope $PACKAGE
-deploy:
-  provider: npm
-  email: bruno.krebs@digituz.com.br
-  api_key:
-    secure: kRwO2XYNM/CO4tkb1SdmGazAeD129VSKlarZ1lhbQgevsLnyN/dp5gMqEORZAEzIdILNQoagyCzQd3g1CcgpKVrgG13m/xrRBfpp5S4DWOlzSIFJ5FZcSlDK3IJaf+ZqCpjHQ4AWyjZDwmXMNQlizvExXrB5qACT8bb4a8B6ZIdCNscIN64JdW6Hy2szaAOW30C4MLS/o3W3O0ZonQel0bz6D9xzIwJOgtVAA/cXkhJrZOmJ+LdvemfRe2m8BfZAXg3Fl9UxvMEBCO/3aU6BSefM+dTVi7KZgvnSgM7QjMzkX7ZygESVw7y03MJnYZWsNpSCvfL4nhBC//U3/OrfoyQQY2PxpGr9UWMOkCg6eqAVCTSCyCxA3Vcn20PMy7xnwehA1TFsSm83mTDTo3x+FpyZfJaGAaOd41THH6QdxDxKTEbltRWm2UZiwQ134XNl83xxKvrggnaqJCcCe82p0T0L1Xz7rKpT4NZqC24WZ9THtn0o/9tsBNVwOxRELtrxIZWiPa/bjpsy+0q1HtBOXvfTG+hpfiJ7vUx6Tni0RNXbn0IJhbRXMN20hGFC0hvSZe8m3BFX77zKBu04psdbX4Ccr8gEYz3iw5PKbToD/GuDaXuHh+Cp+8q3p/ONveNSI1ShkncIwdYScXqOIT+gC0LHDe/xJjsSp0zyCMPk5hs=
-  on:
-    tags: true
-    repo: Digituz/react-components
+after_success:
+- echo "//registry.npmjs.org/:_authToken=\${NPM_TOKEN}" > .npmrc
+- lerna publish --skip-git --conventional-commits --yes
