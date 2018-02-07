@@ -4,7 +4,7 @@ node_js:
 env:
 - PACKAGE=@digituz/react-button
 - PACKAGE=@digituz/react-input
-before_install: lerna bootstrap
+before_script: lerna bootstrap
 script: lerna run test --scope $PACKAGE
 deploy:
   provider: npm
