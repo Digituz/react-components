@@ -1,14 +1,19 @@
-import React from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
-const Input = props => (
-  <input
-    className={props.className}
-    value={props.value}
-    onChange={props.onChange}
-    placeholder={props.placeholder}
-  />
-);
+class Input extends Component {
+  render() {
+    const className = this.props.className || 'digituz-react-input';
+    return (
+      <input
+        className={className}
+        value={this.props.value}
+        onChange={this.props.onChange}
+        placeholder={this.props.placeholder}
+      />
+    );
+  }
+}
 
 Input.propTypes = {
   className: PropTypes.string,
