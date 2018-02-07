@@ -4,14 +4,19 @@
   "description": "React Input Element",
   "main": "./dist/Input.js",
   "scripts": {
-    "prepublishOnly": "babel ./src -d ./dist"
+    "prepublishOnly": "babel ./src -d ./dist",
+    "test": "jest"
+  },
+  "jest": {
+    "setupTestFrameworkScriptFile": "./test/setupTests.js"
   },
   "keywords": [],
   "author": "",
   "license": "MIT",
   "dependencies": {
     "prop-types": "^15.6.0",
-    "react": "^16.2.0"
+    "react": "^16.2.0",
+    "react-dom": "^16.2.0"
   },
   "publishConfig": {
     "access": "public"
@@ -19,6 +24,11 @@
   "devDependencies": {
     "babel-cli": "^6.26.0",
     "babel-preset-env": "^1.6.1",
-    "babel-preset-react": "^6.24.1"
+    "babel-preset-react": "^6.24.1",
+    "enzyme": "^3.3.0",
+    "enzyme-adapter-react-16": "^1.1.1",
+    "expect": "^22.1.0",
+    "jest": "^22.1.4",
+    "jest-enzyme": "^4.2.0"
   }
 }
