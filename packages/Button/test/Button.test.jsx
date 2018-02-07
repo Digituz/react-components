@@ -7,7 +7,7 @@ import Button from '../src/Button';
 describe('A suite', function() {
   it('should render without throwing an error', function() {
     const buttonLabel = 'Hello, world!';
-    const defaultClass = 'digituz-react-button-test';
+    const defaultClass = 'digituz-react-button';
 
     const wrapper = mount(<Button onClick={() => {}} text={buttonLabel} />);
     expect(wrapper.text()).toEqual(buttonLabel);
