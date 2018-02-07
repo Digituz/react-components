@@ -10,5 +10,6 @@ env:
 before_script: lerna bootstrap
 script: lerna run test --scope $PACKAGE
 after_success:
+- if [ -z "${TRAVIS_TAG}" ]; then exit 0; fi
 - npm config set //registry.npmjs.org/:_authToken $NPM_TOKEN
 - lerna exec --scope $PACKAGE -- npm publish
