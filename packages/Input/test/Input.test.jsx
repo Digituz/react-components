@@ -7,7 +7,7 @@ import Input from '../src/Input';
 describe('A suite', function() {
   it('should render without throwing an error', function() {
     const inputValue = 'Some value!';
-    const defaultClass = 'digituz-react-input-test1';
+    const defaultClass = 'digituz-react-input';
 
     const wrapper = mount(<Input onChange={() => {}} value={inputValue}/>);
     const input = wrapper.find('input');

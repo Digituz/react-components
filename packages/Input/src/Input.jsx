@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 class Input extends Component {
   render() {
-    const className = this.props.className || 'digituz-react-input-test1';
+    const className = this.props.className || 'digituz-react-input';
     return (
       <input
         className={className}
