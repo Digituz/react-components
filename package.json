@@ -1,5 +1,9 @@
 {
 	"devDependencies": {
 		"lerna": "^2.8.0"
-	}
+	},
+  "scripts": {
+    "preRelease": "lerna run test",
+    "release": "npm run preRelease && lerna publish --skip-npm"
+  }
 }
