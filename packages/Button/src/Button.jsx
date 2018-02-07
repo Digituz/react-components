@@ -1,14 +1,19 @@
-import React from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
-const Button = props => (
-  <button
-    className={props.className}
-    onClick={props.onClick}
-  >
-    {props.text}
-  </button>
-);
+class Button extends Component {
+  render() {
+    const className = this.props.className || 'digituz-react-button';
+    return (
+      <button
+        className={className}
+        onClick={this.props.onClick}
+      >
+        {this.props.text}
+      </button>
+    );
+  }
+}
 
 Button.propTypes = {
   onClick: PropTypes.func.isRequired,
