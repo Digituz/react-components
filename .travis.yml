@@ -13,3 +13,7 @@ before_script:
 script:
   - cd $PACKAGE
   - npm test
+after_success:
+  - if [ -z "${TRAVIS_TAG}" ]; then exit 0; fi
+  - npm config set //registry.npmjs.org/:_authToken $NPM_TOKEN
+  - npm publish
