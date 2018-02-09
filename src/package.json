@@ -1,14 +1,10 @@
 {
-  "name": "@digituz/react-input",
-  "version": "0.0.18",
-  "description": "React Input Element",
-  "main": "./dist/Input.js",
+  "name": "src",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
   "scripts": {
-    "prepublishOnly": "babel ./src -d ./dist",
-    "test": "jest"
-  },
-  "jest": {
-    "setupTestFrameworkScriptFile": "./test/setupTests.js"
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
   "author": "",
@@ -18,17 +14,14 @@
     "react": "^16.2.0",
     "react-dom": "^16.2.0"
   },
-  "publishConfig": {
-    "access": "public"
-  },
   "devDependencies": {
     "babel-cli": "^6.26.0",
     "babel-preset-env": "^1.6.1",
     "babel-preset-react": "^6.24.1",
     "enzyme": "^3.3.0",
     "enzyme-adapter-react-16": "^1.1.1",
-    "expect": "^22.1.0",
-    "jest": "^22.1.4",
+    "expect": "^22.2.2",
+    "jest": "^22.2.2",
     "jest-enzyme": "^4.2.0"
   }
 }
