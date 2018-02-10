@@ -1,11 +1,11 @@
 {
   "name": "@digituz/react-button",
-  "version": "0.0.18",
+  "version": "0.0.20",
   "description": "React Button Element",
   "main": "./dist/Button.js",
   "scripts": {
     "prepublishOnly": "../node_modules/.bin/babel ./src -d ./dist",
-    "test": "../node_modules/.bin/jest --setupTestFrameworkScriptFile=../jestConfig.js"
+    "test": "../node_modules/.bin/jest --setupTestFrameworkScriptFile=../jest-config.js"
   },
   "keywords": [],
   "author": "",
