@@ -6,16 +6,16 @@ env:
   - PACKAGE=Button
   - PACKAGE=Input
   global:
-    secure: Be6J9uK3v+ZkmL80j/9npqyKAg24zwUkZaz5bDDDFgPp8blS2vD+CL/i41XmBZDzvbj0yqPhOoYU/HVGF5avpzV4xWhgg8Z2/QaxpgFm1AmhiVUkVdmlb+ZECI6aDp9V/jSBHQRFReKe/UbTVhK+wFMB8zJkO+YxvF3L4hyWSNig9KXp2HeaebGUUiitBpsz1oxWc5p0a/Hkix7i2qr+jx2V7GZWh5D1n59HJFwU3InGNB1gbb+psa6gmR7ObX39Kn5fjTsb6Ui2CQAqcAuoDGKZO517t9GjfO5jNMjSE5GQxhXbToz3iS9a53JxR8v0ZMS5C8zlQalaWzNK0qmMKfTSMY2vfHvaiDowhNIdgKlyDeMb3FC83ck8UUtBMY1XhzUtr/PNpvOeTlwQht9XkaH+dnwdI29QvE28YuSgqDxv44KureCyX4igORxA6HD0HS0a7l+heWKcfc4CDNlrLNs/D5+jpB9Kx20O2wViTjUHeEjT/6xTNW8JHobFxKDGFMd3vpggeJPe68h8jQy3xr3BVcJCDm4gpzotWY1o6w2G5Lf6Lm2NQf4EoXdiuNlQ5tR8rD8ezCXLmTcRBduAZgMxfB/EsOIRTOSz9wP0ez1tCQ4nQZFT2gUUg1YZkV71TRK7Q+IXVJvMZDy1MTCChY0EaE3HiUahJFD3KIY67Nk=
+  - secure: gs0W1eGlExhbKNha2UMJMzzVV2QbF1SlxWN6TG0gh55vI4q7RmIGYo3yVlgmx4fk/dl5yHQqhtKnHJcXvYlvju8hMu+8PFilzp+rhCe5eox5f9Hhu2y9llAeX1KTJ24/5VsyDuM528q+V1pbELLCY2Sr5gCaXozCgTR1604X6bJHtC6f4Q/wQ7wZaoo08Ahx08xSeFrpfTAbv4x7EK6aiz42uhyLGy1kNa2yxH0fAsMZ13Al/C4/ectjlC5uS6C9Fuh+MZzqzmyk4DeO8W2JSbI5auwE6BTHInr7E/ncoBY58dHiv6ISP6ikWFvsFZ3MicxoXclYZWjzRedW+Uo893ABX73T+fIQzGaMTFX+MMmvBYK5Lio8sUrT2LHJnxdVvyol+XqGkTLLCAKX5J6SML2m6pJtllzKapPM8pG51X9+BUDRb7Y6NzD3R8WUBMgT9qi3CH4WbhkeJU/T8N7y3au6QJNPX5PtCC7s8txnz9QQWM3FN1DPSjAcTDJdx27j2yAq/LwI3CrPob4wsxY1T3GEdCfwOrgN8zhAPU2B4xdt+5JpyTlyhAa54L2JMMmS3D8Ibjrmus7IoRY/dwQDa8uodJDBIFV5EHmOt3PYs776Q5fMascYWQ+dylZZ6nLATVDvCzQHuLu/jCu34gGba9LOxa/k8CDbYP4naQmLlds=
 before_script:
-  - cd src
-  - npm install
+- cd src
+- npm install
 script:
-  - cd $PACKAGE
-  - npm test
+- cd $PACKAGE
+- npm test
 after_success:
-  - if [ -z "${TRAVIS_TAG}" ]; then exit 0; fi
-  - npm config set //registry.npmjs.org/:_authToken $NPM_TOKEN
-  - npm whoami
-  - pwd
-  - npm publish
+- if [ -z "${TRAVIS_TAG}" ]; then exit 0; fi
+- npm config set //registry.npmjs.org/:_authToken $NPM_TOKEN
+- npm whoami
+- pwd
+- npm publish

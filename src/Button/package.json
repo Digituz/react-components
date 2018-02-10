@@ -1,6 +1,6 @@
 {
   "name": "@digituz/react-button",
-  "version": "0.0.20",
+  "version": "0.0.21",
   "description": "React Button Element",
   "main": "./dist/Button.js",
   "scripts": {
