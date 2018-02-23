@@ -21,6 +21,8 @@ mapLocalPackages().then(localPackages => {
   const installingLocalPackage = localPackages.includes(pkg);
   if (!installingLocalPackage) {
     installExternalPackage(pkg, destinationPkg);
+  } else {
+    installInternalPackage(pkg, destinationPkg);
   }
 });
 
@@ -29,7 +31,7 @@ function mapLocalPackages() {
     let pointers = fs.readdirSync(__dirname);
 
     pointers = pointers.filter((pointer) => {
-      const stat = fs.lstatSync(__dirname + '/' + pointer);
+      const stat = fs.lstatSync(`${__dirname}/${pointer}`);
       if (stat.isDirectory() && pointer !== 'node_modules') {
         return pointer;
       }
@@ -40,15 +42,48 @@ function mapLocalPackages() {
   });
 }
 
+function installInternalPackage(pkg, destinationPkg) {
+  const link = spawn('npm', ['link'], { cwd: `${__dirname}/${pkg}`});
+
+  link.stdout.on('data', (data) => {
+    console.log(data.toString());
+  });
+
+  link.stderr.on('data', (data) => {
+    console.error(data.toString());
+  });
+
+  link.on('close', (code) => {
+    if (code === 0) {
+      console.log('Internal packaged linked successfully.');
+      const pkgDescription = require(`${__dirname}/${pkg}/package.json`);
+
+      const link2 = spawn('npm', ['link', pkgDescription.name], { cwd: `${__dirname}/${destinationPkg}`});
+
+      link2.stdout.on('data', (data) => {
+        console.log(data.toString());
+      });
+
+      link2.stderr.on('data', (data) => {
+        console.error(data.toString());
+      });
+
+      link2.on('close', (code) => {
+        console.log('Link process finished successfully.');
+      });
+    }
+  });
+}
+
 function installExternalPackage(pkg, destinationPkg) {
-  const install = spawn('npm', ['install', pkg], { cwd: __dirname + '/' + destinationPkg });
+  const install = spawn('npm', ['install', pkg], { cwd: `${__dirname}/${destinationPkg}`});
 
   install.stdout.on('data', (data) => {
-    console.log(`stdout: ${data}`);
+    console.log(data.toString());
   });
 
   install.stderr.on('data', (data) => {
-    console.log(`stderr: ${data}`);
+    console.error(data.toString());
   });
 
   install.on('close', (code) => {
