@@ -1,0 +1,8 @@
+button.digituz-react-button {
+  padding: 10px;
+  border-radius: 2px;
+  border-color: deepskyblue;
+  background-color: deepskyblue;
+  line-height: 20px;
+  cursor: pointer;
+}

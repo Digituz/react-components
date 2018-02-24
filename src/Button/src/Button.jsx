@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import './Button.css';
 
 class Button extends Component {
   render() {
-    const className = this.props.className || 'digituz-react-button-test';
+    const className = this.props.className || 'digituz-react-button';
     return (
       <button
         className={className}

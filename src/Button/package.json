@@ -4,7 +4,9 @@
   "description": "React Button Element",
   "main": "./dist/Button.js",
   "scripts": {
-    "prepublishOnly": "../node_modules/.bin/babel ./src -d ./dist",
+    "babelify": "../node_modules/.bin/babel ./src -d ./dist",
+    "processCss": "../node_modules/.bin/cleancss -o ./dist/Button.css ./src/Button.css",
+    "prepublishOnly": "npm run babelify",
     "test": "../node_modules/.bin/jest --setupTestFrameworkScriptFile=../jest-config.js"
   },
   "keywords": [],
