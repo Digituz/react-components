@@ -63,3 +63,4 @@ typings/
 
 # ignoring dist
 dist/
+.DS_Store
