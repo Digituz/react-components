@@ -6,7 +6,7 @@
   "scripts": {
     "babelify": "../node_modules/.bin/babel ./src -d ./dist",
     "processCss": "../node_modules/.bin/cleancss -o ./dist/Button.css ./src/Button.css",
-    "prepublishOnly": "npm run babelify",
+    "prepublishOnly": "npm run babelify && npm run processCss",
     "test": "../node_modules/.bin/jest --setupTestFrameworkScriptFile=../jest-config.js"
   },
   "keywords": [],

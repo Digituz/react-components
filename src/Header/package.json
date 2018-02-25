@@ -4,7 +4,9 @@
   "description": "React Header",
   "main": "./dist/Header.js",
   "scripts": {
-    "prepublishOnly": "../node_modules/.bin/babel ./src -d ./dist",
+    "babelify": "../node_modules/.bin/babel ./src -d ./dist",
+    "processCss": "../node_modules/.bin/cleancss -o ./dist/Header.css ./src/Header.css",
+    "prepublishOnly": "npm run babelify && npm run processCss",
     "test": "../node_modules/.bin/jest --setupTestFrameworkScriptFile=../jest-config.js"
   },
   "keywords": [],

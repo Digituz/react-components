@@ -1,0 +1,9 @@
+div.digituz-header {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+}
+
+div.digituz-header div:nth-child(2) {
+  text-align: right;
+}
