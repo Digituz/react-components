@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "monorepo dev"
   },
   "keywords": [],
   "author": "",
@@ -15,6 +15,7 @@
     "react-dom": "^16.2.0"
   },
   "devDependencies": {
+    "@digituz/monorepo": "0.0.1",
     "babel-cli": "^6.26.0",
     "babel-preset-env": "^1.6.1",
     "babel-preset-react": "^6.24.1",
@@ -23,6 +24,9 @@
     "enzyme-adapter-react-16": "^1.1.1",
     "expect": "^22.2.2",
     "jest": "^22.2.2",
-    "jest-enzyme": "^4.2.0"
+    "jest-enzyme": "^4.2.0",
+    "node-sass": "^4.7.2",
+    "nodemon": "^1.15.1",
+    "watch": "^1.0.2"
   }
 }

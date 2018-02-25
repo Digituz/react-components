@@ -5,8 +5,8 @@
   "main": "./dist/Header.js",
   "scripts": {
     "babelify": "../node_modules/.bin/babel ./src -d ./dist",
-    "processCss": "../node_modules/.bin/cleancss -o ./dist/Header.css ./src/Header.css",
-    "prepublishOnly": "npm run babelify && npm run processCss",
+    "processCss": "../node_modules/.bin/node-sass --output-style compressed -o ./dist/ ./src/",
+    "prepublishOnly": "../node_modules/.bin/babel ./src -d ./dist",
     "test": "../node_modules/.bin/jest --setupTestFrameworkScriptFile=../jest-config.js"
   },
   "keywords": [],
