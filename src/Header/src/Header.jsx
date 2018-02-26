@@ -4,7 +4,7 @@ import './Header.css';
 
 class Header extends Component {
   render() {
-    const className = this.props.className || 'digituz-header';
+    const className = this.props.className || 'digituz-react-header';
     return (
       <div className={className}>
         <div>
