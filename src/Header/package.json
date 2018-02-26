@@ -11,5 +11,10 @@
   },
   "keywords": [],
   "author": "",
-  "license": "MIT"
+  "license": "MIT",
+  "jest": {
+    "moduleNameMapper": {
+      "\\.(css|less)$": "<rootDir>/../styleMock.js"
+    }
+  }
 }

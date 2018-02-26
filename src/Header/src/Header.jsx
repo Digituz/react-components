@@ -20,6 +20,7 @@ class Header extends Component {
 
 Header.propTypes = {
   title: PropTypes.string.isRequired,
+  className: PropTypes.string,
 };
 
 Header.defaultProps = {
