@@ -1,11 +1,9 @@
 {
-  "name": "src",
+  "name": "@digituz/react-components",
+  "private": true,
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
-  "scripts": {
-    "dev": "monorepo dev"
-  },
   "keywords": [],
   "author": "",
   "license": "MIT",
@@ -28,5 +26,16 @@
     "node-sass": "^4.7.2",
     "nodemon": "^1.15.1",
     "watch": "^1.0.2"
+  },
+  "scripts": {
+    "babelify": "babel ./src -d ./dist",
+    "processCss": "node-sass --output-style compressed -o ./dist/ ./src/",
+    "prepublishOnly": "npm run babelify && npm run processCss",
+    "test": "jest --setupTestFrameworkScriptFile=jest-config.js"
+  },
+  "jest": {
+    "moduleNameMapper": {
+      "\\.(css|less)$": "<rootDir>/../styleMock.js"
+    }
   }
 }
