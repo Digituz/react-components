@@ -6,6 +6,10 @@
   "main": "index.js",
   "keywords": [],
   "author": "",
+  "repository" : {
+    "type" : "git",
+    "url" : "https://github.com/Digituz/react-components"
+  },
   "license": "MIT",
   "dependencies": {
     "prop-types": "^15.6.0",
