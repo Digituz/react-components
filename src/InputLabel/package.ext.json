@@ -2,5 +2,8 @@
   "name": "@digituz/react-input-label",
   "version": "0.0.22",
   "description": "React Input Label",
-  "main": "./dist/InputLabel.js"
+  "main": "./dist/InputLabel.js",
+  "dependencies": {
+    "@digituz/react-input": "^0.0.23"
+  }
 }
