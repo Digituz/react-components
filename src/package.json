@@ -31,11 +31,12 @@
     "babelify": "babel ./src -d ./dist",
     "processCss": "node-sass --output-style compressed -o ./dist/ ./src/",
     "prepublishOnly": "npm run babelify && npm run processCss",
-    "test": "jest --setupTestFrameworkScriptFile=jest-config.js"
+    "test": "jest"
   },
   "jest": {
     "moduleNameMapper": {
       "\\.(css|less)$": "<rootDir>/../styleMock.js"
-    }
+    },
+    "setupTestFrameworkScriptFile": "./jest-config.js"
   }
 }
