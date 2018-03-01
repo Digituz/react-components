@@ -11,9 +11,5 @@ before_script:
 script:
 - monorepo test
 after_success:
-- echo $TRAVIS_TAG
 - if [ -z "${TRAVIS_TAG}" ]; then exit 0; fi
-- npm config set //registry.npmjs.org/:_authToken $NPM_TOKEN
-- npm whoami
-- pwd
-- npm publish
+- monorepo publish
