@@ -24,6 +24,8 @@
     "babel-preset-react": "^6.24.1",
     "css-loader": "^0.28.10",
     "http-server": "^0.11.1",
+    "node-sass": "^4.7.2",
+    "style-loader": "^0.20.2",
     "webpack": "^4.0.1",
     "webpack-cli": "^2.0.9"
   }
