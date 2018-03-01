@@ -13,7 +13,10 @@
   "author": "Bruno Krebs",
   "license": "MIT",
   "dependencies": {
+    "@digituz/react-button": "^1.0.3",
     "@digituz/react-header": "^1.0.3",
+    "@digituz/react-input": "^1.0.3",
+    "@digituz/react-input-label": "^1.0.3",
     "react": "^16.2.0",
     "react-dom": "^16.2.0"
   },
