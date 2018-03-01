@@ -6,9 +6,9 @@
   "main": "index.js",
   "keywords": [],
   "author": "",
-  "repository" : {
-    "type" : "git",
-    "url" : "https://github.com/Digituz/react-components"
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Digituz/react-components"
   },
   "license": "MIT",
   "dependencies": {
@@ -17,7 +17,7 @@
     "react-dom": "^16.2.0"
   },
   "devDependencies": {
-    "@digituz/monorepo": "^1.0.0",
+    "@digituz/monorepo": "^1.1.0",
     "babel-cli": "^6.26.0",
     "babel-preset-env": "^1.6.1",
     "babel-preset-react": "^6.24.1",
