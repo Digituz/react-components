@@ -1,0 +1,6 @@
+{
+  "name": "@digituz/react-panel-body",
+  "version": "1.0.9",
+  "description": "React Panel Body",
+  "main": "./dist/PanelBody.js"
+}
