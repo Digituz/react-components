@@ -1,0 +1,9 @@
+{
+  "name": "@digituz/react-panel",
+  "version": "1.0.3",
+  "description": "React Panel",
+  "main": "./dist/Panel.js",
+  "dependencies": {
+    "@digituz/react-header": "^1.0.3"
+  }
+}
