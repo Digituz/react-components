@@ -1,9 +1,9 @@
-div.digituz-react-header {
+div.digituz-react-panel-header {
   display: grid;
   grid-template-columns: 1fr 1fr;
   align-items: center;
 }
 
-div.digituz-react-header div:nth-child(2) {
+div.digituz-react-panel-header div:nth-child(2) {
   text-align: right;
 }

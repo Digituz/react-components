@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import './Header.css';
+import './PanelHeader.css';
 
-class Header extends Component {
+class PanelHeader extends Component {
   render() {
-    const className = this.props.className || 'digituz-react-header';
+    const className = this.props.className || 'digituz-react-panel-header';
     return (
       <div className={className}>
         <div>
@@ -18,13 +18,13 @@ class Header extends Component {
   }
 }
 
-Header.propTypes = {
+PanelHeader.propTypes = {
   title: PropTypes.string.isRequired,
   className: PropTypes.string,
 };
 
-Header.defaultProps = {
+PanelHeader.defaultProps = {
   className: '',
 };
 
-export default Header;
+export default PanelHeader;
