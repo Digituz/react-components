@@ -10,11 +10,10 @@ describe('Panel Test Suite', function() {
     const paragraph = 'This is some paragraph';
 
     const wrapper = mount(
-      <Panel title={title}>
+      <Panel>
         <p>{paragraph}</p>
       </Panel>
     );
-    expect(wrapper.find('h1').text()).toEqual(title);
     expect(wrapper.find('p').text()).toEqual(paragraph);
   });
 });

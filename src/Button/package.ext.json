@@ -1,6 +1,6 @@
 {
   "name": "@digituz/react-button",
-  "version": "1.0.7",
+  "version": "1.0.8",
   "description": "React Button",
   "main": "./dist/Button.js"
 }
