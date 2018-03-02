@@ -2,8 +2,18 @@ div.digituz-react-panel-header {
   display: grid;
   grid-template-columns: 1fr 1fr;
   align-items: center;
-}
+  background-color: #fff;
+  box-shadow: 0 3px 5px #ccc;
+  padding-left: 15px;
+  padding-right: 15px;
 
-div.digituz-react-panel-header div:nth-child(2) {
-  text-align: right;
+  h1 {
+    font-size: 20px;
+    line-height: 35px;
+    color: #666;
+  }
+
+  div:nth-child(2) {
+    text-align: right;
+  }
 }

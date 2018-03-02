@@ -14,14 +14,4 @@ describe('Header test suite', function() {
     const header = div.find('h1');
     expect(header.text()).toEqual(title);
   });
-
-  it('should enable devs to change className', function() {
-    const title = 'Other value.';
-    const otherClass = 'some-crazy-class';
-
-    const wrapper = mount(<PanelHeader title={title} className={otherClass} />);
-    const div = wrapper.find(`.${otherClass}`);
-    const header = div.find('h1');
-    expect(header.text()).toEqual(title);
-  });
 });

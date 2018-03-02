@@ -1,6 +1,6 @@
 {
   "name": "@digituz/react-panel-header",
-  "version": "1.0.8",
+  "version": "1.0.9",
   "description": "React Panel Header",
   "main": "./dist/PanelHeader.js"
 }
