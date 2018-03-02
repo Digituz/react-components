@@ -1,6 +1,6 @@
 {
   "name": "@digituz/react-input-label",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "description": "React Input Label",
   "main": "./dist/InputLabel.js",
   "dependencies": {
