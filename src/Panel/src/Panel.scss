@@ -1,0 +1,12 @@
+div.digituz-panel {
+  display: grid;
+  grid-template-rows: 4px 60px 1fr;
+}
+
+div.digituz-panel-coloured-border {
+  background-image: linear-gradient(to right, #3498db 33%, #62cb31 33%, #62cb31 66%, #ffb606 66%, #ffb606 100%);
+}
+
+div.digituz-panel-body {
+  margin-top: 50px;
+}

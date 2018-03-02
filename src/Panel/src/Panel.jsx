@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Header from '@digituz/react-header'
 import PropTypes from 'prop-types';
+import './Panel.scss'
 
 class Panel extends Component {
   render() {
