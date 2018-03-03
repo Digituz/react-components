@@ -1,4 +1,9 @@
 div.digituz-react-card {
-  border: 1px solid #ccc;
-  box-shadow: 3px 3px 3px #ccc;
+  border: 1px solid #ddd;
+  box-shadow: 2px 2px 2px #ddd;
+  padding: 20px;
+
+  > h2 {
+    margin-top: 10px;
+  }
 }
