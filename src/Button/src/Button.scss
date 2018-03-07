@@ -1,3 +1,5 @@
+@import '../../global-style';
+
 button.digituz-react-button {
   padding: 5px 10px 5px 10px;
   border-radius: 2px;
@@ -7,4 +9,5 @@ button.digituz-react-button {
   cursor: pointer;
   color: #fff;
   font-size: 14px;
+  box-shadow: $default-shadow;
 }

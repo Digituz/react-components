@@ -1,9 +1,14 @@
+@import '../../global-style';
+
 div.digituz-react-card {
   border: 1px solid #ddd;
-  box-shadow: 2px 2px 2px #ddd;
+  box-shadow: $default-shadow;
   padding: 20px;
 
   > h2 {
     margin-top: 10px;
+    padding-bottom: 10px;
+    font-size: 18px;
+    border-bottom: 1px solid #eee;
   }
 }

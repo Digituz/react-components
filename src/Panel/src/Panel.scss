@@ -1,7 +1,10 @@
+@import '../../global-style';
+
 div.digituz-panel {
   display: grid;
   grid-template-rows: 4px 60px 1fr;
-  color: #666;
+  color: $default-color;
+  font-size: 15px;
 }
 
 div.digituz-panel-coloured-border {
