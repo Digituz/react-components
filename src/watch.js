@@ -14,8 +14,14 @@ watch.createMonitor('./', watchOptions, (monitor) => {
 
     const pkg = file.split('/')[0];
 
-    const execution = spawnSync('npm', ['run', 'prepublishOnly'], { cwd: `${__dirname}/${pkg}` });
-    console.log(execution.stdout.toString());
-    console.log(execution.stderr.toString());
+    const run = ['monorepo', ['runScript', '-r', 'prepublishOnly']];
+    if (pkg !== 'global-style.scss') run[1].push('-p', pkg);
+
+    console.log(`Running prepublishOnly for ${pkg}.`);
+
+    const execution = spawnSync(...run);
+
+    if (execution.stdout) return console.log(execution.stdout.toString());
+    if (execution.stderr) return console.log(execution.stderr.toString());
   });
 });
