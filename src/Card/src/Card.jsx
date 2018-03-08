@@ -8,13 +8,9 @@ class Card extends Component {
   }
 
   render() {
-    const style = {
-      gridColumnStart: this.props.offset + 1,
-      gridColumnEnd: `span ${this.props.span}`,
-    };
-
+    const classes = `digituz-react-card ${this.props.className}`;
     return (
-      <div style={style} className="digituz-react-card">
+      <div className={classes}>
         {this.props.children}
       </div>
     )
@@ -22,41 +18,11 @@ class Card extends Component {
 }
 
 Card.propTypes = {
-  sm: PropTypes.instanceOf(PropTypes.shape({
-    span: PropTypes.number,
-    offset: PropTypes.number,
-  })),
-  md: PropTypes.instanceOf(PropTypes.shape({
-    span: PropTypes.number,
-    offset: PropTypes.number,
-  })),
-  lg: PropTypes.instanceOf(PropTypes.shape({
-    span: PropTypes.number,
-    offset: PropTypes.number,
-  })),
-  xl: PropTypes.instanceOf(PropTypes.shape({
-    span: PropTypes.number,
-    offset: PropTypes.number,
-  })),
+  className: PropTypes.string,
 };
 
 Card.defaultProps = {
-  sm: {
-    span: 1,
-    offset: `auto`,
-  },
-  md: {
-    span: 1,
-    offset: `auto`,
-  },
-  lg: {
-    span: 1,
-    offset: `auto`,
-  },
-  xl: {
-    span: 1,
-    offset: `auto`,
-  },
+  className: '',
 };
 
 export default Card;

@@ -1,22 +1,58 @@
 @import '../../global-style';
 
 div.digituz-react-panel-body {
-  margin: 20px;
-  margin-top: 30px;
+  margin: 30px 20px 20px;
   display: grid;
   grid-column-gap: 15px;
   grid-row-gap: 15px;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(12, 1fr);
+}
 
-  @include md {
-    grid-template-columns: repeat(6, 1fr);
+// I'm using one loop for each screen size so
+// bigger size have precedence over smaller sizes
+// check this for more info:
+// https://developer.mozilla.org/en/docs/Web/CSS/Specificity
+
+$i: 1;
+@while $i <= 12 {
+  @include sm-up {
+    .col-sm-#{$i} {
+      grid-column-end: span $i;
+    }
   }
 
-  @include lg {
-    grid-template-columns: repeat(9, 1fr);
+  $i: $i + 1;
+}
+
+$i: 1;
+@while $i <= 12 {
+  @include md-up {
+    .col-md-#{$i} {
+      grid-column-end: span $i;
+    }
   }
 
+  $i: $i + 1;
+}
+
+$i: 1;
+@while $i <= 12 {
+  @include lg-up {
+    .col-lg-#{$i} {
+      grid-column-end: span $i;
+    }
+  }
+
+  $i: $i + 1;
+}
+
+$i: 1;
+@while $i <= 12 {
   @include xl {
-    grid-template-columns: repeat(12, 1fr);
+    .col-xl-#{$i} {
+      grid-column-end: span $i;
+    }
   }
+
+  $i: $i + 1;
 }
