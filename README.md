@@ -12,6 +12,14 @@ For the moment, this monorepo contains the following components:
 - [`InputLabel`](./src/InputLabel)
 - [`Panel`](./src/Panel)
 
+## Creating New Components
+
+There is a script on `./src/create-component.js` file that takes as an argument the name of the component and create boilerplate code and files to it. To use it, go to `./src` and issue this:
+
+```bash
+node create-component MyComponentName
+```
+
 ## Releasing New Versions
 
 This section is divided into two parts. First, there will be a subsection that explains how to use `@digituz/monorepo` to release new versions. After that, there will be a subsection about Travis CI.
