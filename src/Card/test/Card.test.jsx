@@ -41,7 +41,6 @@ describe('Card test suite', function() {
     expect(div.find('hr')).toBeDefined();
 
     const sameDiv = wrapper.find(`div.${customClass}`);
-    console.log(wrapper.debug());
     expect(sameDiv.hasClass(defaultClass)).toEqual(true);
     expect(sameDiv.hasClass(customClass)).toEqual(true);
     expect(sameDiv.find('hr')).toBeDefined();
