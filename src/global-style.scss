@@ -1,5 +1,10 @@
 $default-color: #777;
+$lighter-color: #999;
 $default-shadow: 2px 2px 2px #ccc;
+
+* {
+  -webkit-tap-highlight-color: transparent;
+}
 
 @mixin sm {
   @media (max-width: 479px) {
