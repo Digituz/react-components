@@ -7,19 +7,13 @@ class PanelHeader extends Component {
     const className = this.props.className || 'digituz-react-panel-header';
     return (
       <div className={className}>
-        <div>
-          <h1>{this.props.title}</h1>
-        </div>
-        <div>
-          {this.props.children}
-        </div>
+        {this.props.children}
       </div>
     );
   }
 }
 
 PanelHeader.propTypes = {
-  title: PropTypes.string.isRequired,
   className: PropTypes.string,
 };
 

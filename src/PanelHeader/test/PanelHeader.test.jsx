@@ -9,7 +9,11 @@ describe('Header test suite', function() {
     const title = 'Some value!';
     const defaultClass = 'digituz-react-panel-header';
 
-    const wrapper = mount(<PanelHeader title={title} />);
+    const wrapper = mount(
+      <PanelHeader>
+        <h1>{title}</h1>
+      </PanelHeader>
+    );
     const div = wrapper.find(`.${defaultClass}`);
     const header = div.find('h1');
     expect(header.text()).toEqual(title);
