@@ -46,7 +46,25 @@ class VerticalMenu extends Component {
               <line x1="10" y1="20" x2="30" y2="20" stroke="gray" strokeWidth="2" />
               <line x1="11" y1="20" x2="20" y2="28" stroke="gray" strokeWidth="2" />
             </svg>
-            { this.props.children }
+            {
+              this.props.submenus.map((submenu, idx) => (
+                <div key={idx}>
+                  <h3>{submenu.title}</h3>
+                  <ul>
+                    {
+                      submenu.items.map((item, idx) => (
+                        <li key={idx}>
+                          <svg height="10" width="20">
+                            <circle cx="5" cy="5" r="5" fill={item.color} />
+                          </svg>
+                          { item.title }
+                        </li>
+                      ))
+                    }
+                  </ul>
+                </div>
+              ))
+            }
           </div>
           <p className="powered-by-digituz">Powered by Digituz</p>
         </div>
@@ -57,6 +75,14 @@ class VerticalMenu extends Component {
 
 VerticalMenu.propTypes = {
   className: PropTypes.string,
+  submenus: PropTypes.arrayOf(PropTypes.shape({
+    title: PropTypes.string.isRequired,
+    items: PropTypes.arrayOf(PropTypes.shape({
+      title: PropTypes.string.isRequired,
+      color: PropTypes.string.isRequired,
+      onClick: PropTypes.func.isRequired,
+    })),
+  })),
 };
 
 VerticalMenu.defaultProps = {

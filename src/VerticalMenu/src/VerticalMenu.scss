@@ -23,19 +23,28 @@ div.digituz-react-vertical-menu-container {
   }
 
   .menu-options-container {
-    padding: 20px;
-
     ul {
       list-style-type: none;
       padding-left: 0;
+
+      &:hover {
+        cursor: pointer;
+      }
     }
 
     li {
       line-height: 40px;
+      padding-left: 20px;
+
+      &:hover {
+        cursor: pointer;
+        background-color: #eee;
+      }
     }
 
     h3 {
-      margin-top: 10px;
+      margin-top: 30px;
+      margin-left: 20px;
       text-transform: uppercase;
       font-size: 14px;
       letter-spacing: 2px;
