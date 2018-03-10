@@ -16,6 +16,10 @@ div.digituz-react-panel-body {
 $i: 1;
 @while $i <= 12 {
   @include sm-up {
+    .col-sm-offset-#{$i} {
+      grid-column-start: $i + 1;
+    }
+
     .col-sm-#{$i} {
       grid-column-end: span $i;
     }
@@ -27,6 +31,10 @@ $i: 1;
 $i: 1;
 @while $i <= 12 {
   @include md-up {
+    .col-md-offset-#{$i} {
+      grid-column-start: $i + 1;
+    }
+
     .col-md-#{$i} {
       grid-column-end: span $i;
     }
@@ -38,6 +46,10 @@ $i: 1;
 $i: 1;
 @while $i <= 12 {
   @include lg-up {
+    .col-lg-offset-#{$i} {
+      grid-column-start: $i + 1;
+    }
+
     .col-lg-#{$i} {
       grid-column-end: span $i;
     }
@@ -49,6 +61,10 @@ $i: 1;
 $i: 1;
 @while $i <= 12 {
   @include xl {
+    .col-xl-offset-#{$i} {
+      grid-column-start: $i + 1;
+    }
+
     .col-xl-#{$i} {
       grid-column-end: span $i;
     }
