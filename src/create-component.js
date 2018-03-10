@@ -19,7 +19,7 @@ createIfNeeded(testPath);
 writeIfEmpty(`${sourcePath}/${componentName}.jsx`,
 `import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import '.${componentName}.css';
+import './${componentName}.css';
 
 class ${componentName} extends Component {
   render() {

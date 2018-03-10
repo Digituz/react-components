@@ -2,5 +2,8 @@
   "name": "@digituz/react-panel-body",
   "version": "1.2.1",
   "description": "React Panel Body",
-  "main": "./dist/PanelBody.js"
+  "main": "./dist/PanelBody.js",
+  "dependencies": {
+    "@digituz/react-grid": "^1.2.1"
+  }
 }
