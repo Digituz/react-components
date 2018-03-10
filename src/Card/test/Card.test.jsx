@@ -7,16 +7,15 @@ import Card from '../src/Card';
 describe('Card test suite', function() {
   it('should render without throwing an error', function() {
     const defaultClass = 'digituz-react-card';
-    const title = 'Some paragraph content...';
+    const title = 'Some nice title!';
 
     const wrapper = mount(
-      <Card>
-        <p>{title}</p>
+      <Card title={title}>
         <div><hr /></div>
       </Card>
     );
     const div = wrapper.find(`.${defaultClass}`);
-    const header = div.find('p');
+    const header = div.find('h2');
     expect(header.text()).toEqual(title);
 
     expect(div.find('hr')).toBeDefined();
@@ -28,13 +27,12 @@ describe('Card test suite', function() {
     const title = 'I like pies!';
 
     const wrapper = mount(
-      <Card className={customClass}>
-        <p>{title}</p>
+      <Card title={title} className={customClass}>
         <div><hr /></div>
       </Card>
     );
     const div = wrapper.find(`div.${defaultClass}`);
-    const header = div.find('p');
+    const header = div.find('h2');
     expect(header.text()).toEqual(title);
     expect(div.hasClass(defaultClass)).toEqual(true);
     expect(div.hasClass(customClass)).toEqual(true);

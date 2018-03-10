@@ -11,7 +11,12 @@ class Card extends Component {
     const classes = `digituz-react-card ${this.props.className}`;
     return (
       <div className={classes}>
-        {this.props.children}
+        <div className="digituz-react-card-header">
+          <h2>{this.props.title}</h2>
+        </div>
+        <div className="digituz-react-card-body">
+          {this.props.children}
+        </div>
       </div>
     )
   }
@@ -19,6 +24,7 @@ class Card extends Component {
 
 Card.propTypes = {
   className: PropTypes.string,
+  title: PropTypes.string.isRequired,
 };
 
 Card.defaultProps = {
