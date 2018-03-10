@@ -1,7 +1,7 @@
 @import '../../global-style.scss';
 
 div.digituz-react-grid {
-  margin: 15px;
+  margin: 15px 0 15px 0;
   display: grid;
   grid-column-gap: 15px;
   grid-row-gap: 15px;
@@ -16,11 +16,11 @@ div.digituz-react-grid {
 $i: 1;
 @while $i <= 12 {
   @include sm-up {
-    .col-sm-offset-#{$i} {
+    .sm-pad-#{$i} {
       grid-column-start: $i + 1;
     }
 
-    .col-sm-#{$i} {
+    .sm-#{$i} {
       grid-column-end: span $i;
     }
   }
@@ -31,11 +31,11 @@ $i: 1;
 $i: 1;
 @while $i <= 12 {
   @include md-up {
-    .col-md-offset-#{$i} {
+    .md-pad-#{$i} {
       grid-column-start: $i + 1;
     }
 
-    .col-md-#{$i} {
+    .md-#{$i} {
       grid-column-end: span $i;
     }
   }
@@ -46,11 +46,11 @@ $i: 1;
 $i: 1;
 @while $i <= 12 {
   @include lg-up {
-    .col-lg-offset-#{$i} {
+    .lg-pad-#{$i} {
       grid-column-start: $i + 1;
     }
 
-    .col-lg-#{$i} {
+    .lg-#{$i} {
       grid-column-end: span $i;
     }
   }
@@ -61,11 +61,11 @@ $i: 1;
 $i: 1;
 @while $i <= 12 {
   @include xl {
-    .col-xl-offset-#{$i} {
+    .xl-pad-#{$i} {
       grid-column-start: $i + 1;
     }
 
-    .col-xl-#{$i} {
+    .xl-#{$i} {
       grid-column-end: span $i;
     }
   }

@@ -31,9 +31,9 @@ class VerticalMenu extends Component {
       <div className="digituz-react-vertical-menu-container">
         <div onClick={() => { this.openMenu() }}>
           <svg className="menu-svg-button">
-            <line x1="10" y1="12" x2="30" y2="12" stroke="gray" strokeWidth="2" />
-            <line x1="10" y1="20" x2="30" y2="20" stroke="gray" strokeWidth="2" />
-            <line x1="10" y1="28" x2="30" y2="28" stroke="gray" strokeWidth="2" />
+            <line x1="13" y1="15" x2="27" y2="15" stroke="gray" strokeWidth="2" />
+            <line x1="13" y1="20" x2="27" y2="20" stroke="gray" strokeWidth="2" />
+            <line x1="13" y1="25" x2="27" y2="25" stroke="gray" strokeWidth="2" />
           </svg>
         </div>
         <If condition={this.state.visible}>

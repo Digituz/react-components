@@ -1,12 +1,12 @@
 @import '../../global-style';
 
 div.digituz-react-vertical-menu-container {
-  width: 60px;
+  width: 40px;
 
   svg.menu-svg-button {
     width: 40px;
     height: 40px;
-    margin-top: 10px;
+    margin-top: 5px;
 
     transition: background-color 0.5s ease;
 
@@ -65,7 +65,7 @@ div.digituz-react-vertical-menu-container {
 }
 
 div.digituz-react-vertical-menu-overlay {
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
   width: 100%;
@@ -73,7 +73,7 @@ div.digituz-react-vertical-menu-overlay {
 }
 
 div.digituz-react-vertical-menu {
-  position: absolute;
+  position: fixed;
   top: 0;
   left: -250px;
   width: 250px;
