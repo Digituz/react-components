@@ -1,6 +1,6 @@
 {
   "name": "@digituz/react-modal",
-  "version": "1.2.2",
+  "version": "1.2.3",
   "description": "React Modal",
   "main": "./dist/Modal.js",
   "dependencies": {
