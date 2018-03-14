@@ -7,7 +7,7 @@ import InputLabel from '@digituz/react-input-label';
 import Modal from '@digituz/react-modal';
 import Panel from '@digituz/react-panel';
 import PanelBody from '@digituz/react-panel-body';
-import PanelHeader from '@digituz/react-header';
+import PanelHeader from '@digituz/react-panel-header';
 import VerticalMenu from '@digituz/react-vertical-menu';
 
 export {
