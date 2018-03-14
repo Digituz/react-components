@@ -1,0 +1,23 @@
+{
+  "name": "@digituz/react-components",
+  "version": "1.2.3",
+  "description": "React Components",
+  "main": "./dist/ReactComponents.js",
+  "scripts": {
+    "prepublishOnly": "npm run babelify",
+    "test": "echo 'no tests right now'"
+  },
+  "dependencies": {
+    "@digituz/react-button": "^1.2.3",
+    "@digituz/react-card": "^1.2.3",
+    "@digituz/react-grid": "^1.2.3",
+    "@digituz/react-header": "^1.0.8",
+    "@digituz/react-if": "^1.2.3",
+    "@digituz/react-input-label": "^1.2.3",
+    "@digituz/react-modal": "^1.2.3",
+    "@digituz/react-panel": "^1.2.3",
+    "@digituz/react-panel-body": "^1.2.3",
+    "@digituz/react-panel-header": "^1.2.3",
+    "@digituz/react-vertical-menu": "^1.2.3"
+  }
+}
