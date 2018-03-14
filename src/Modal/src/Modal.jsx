@@ -1,34 +1,37 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import Button from '@digituz/react-button';
-import If from '@digituz/react-if';
+import Card from '@digituz/react-card';
 import './Modal.css';
 
 class Modal extends Component {
   render() {
     return (
       <div className="digituz-react-modal-overlay">
-        <h3>Hello, friend!</h3>
-        <p>Not goot to go yet, I guess.</p>
-        <If condition={this.props.onSuccess}>
-          <Button onClick={this.props.onSuccess} text="Ok" />
-        </If>
-        <If condition={this.props.onFailure}>
-          <Button onClick={this.props.onFailure} text="Cancel" />
-        </If>
+        <Card title="Hello, friend!!">
+          <p>Not good to go yet, I guess.</p>
+          <div className="digituz-react-modal-actions">
+            <Button onClick={this.props.onSuccess} text={this.props.successLabel} />
+            <Button onClick={this.props.onFailure} text={this.props.cancelLabel} />
+          </div>
+        </Card>
       </div>
     );
   }
 }
 
 Modal.propTypes = {
+  cancelLabel: PropTypes.string,
+  onCancel: PropTypes.func,
   onSuccess: PropTypes.func,
-  onFailure: PropTypes.func,
+  successLabel: PropTypes.string,
 };
 
 Modal.defaultProps = {
-  onSuccess: null,
-  onFailure: null,
+  cancelLabel: 'Cancel',
+  onCancel: () => {},
+  onSuccess: () => {},
+  successLabel: 'Ok',
 };
 
 export default Modal;
