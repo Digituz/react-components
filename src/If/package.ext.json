@@ -1,6 +1,6 @@
 {
   "name": "@digituz/react-if",
-  "version": "1.2.4",
+  "version": "1.2.5",
   "description": "React If",
   "main": "./dist/If.js",
   "scripts": {
