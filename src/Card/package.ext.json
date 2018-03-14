@@ -1,6 +1,6 @@
 {
   "name": "@digituz/react-card",
-  "version": "1.2.3",
+  "version": "1.2.4",
   "description": "React Card",
   "main": "./dist/Card.js"
 }
