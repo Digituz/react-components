@@ -5,12 +5,10 @@ env:
   global:
   - secure: NOeA9+diIY2bmExiHi96v42xlNM+xrVyuVL2Z46OQhKMyw2XEGop16kC4LXmF2nRZ22NH1pHggMrXfyk+7GoyYx23OSKlNVZzZ7m6+EHOj6SxdFjnzA4Sgc9gGrErkvG2tAb72UN/3x9bBf1Nmt+vjWcCmOi3Kgb8Rv/kWYTeh+IdRltv9AIxtjbpPyQJDOCiN2biT+t7WxIvUOwIlkuIIc3nTA+5McBIp2VlQQ6EtgIKKSUKCfnxzF3KVC8lw8wzbH7pUpXN7qBVMkt5FI3Bkq2QCWQ67z5o7MDgHMw7J7jntTpTu0wGV4iFcVSUya0THdPzeyJJfuL5qS293DXpAgQGvVnbkbTxTEgpmKZ6rVagEpLc9NikZNHe41rBarndIyaBz71J0dYEobvz7B/JNowPP113am7+CoyOXXVQBYGGDyPGeBAsu4byn3QdG8mEP1LBQZfQlX3WKbM9UiXu07tiZbFH4jXkwXTsPPYXX6N/7UW/oErxD1Axda30nWIng4CGX5LuuipkcvQbFu9A3wlqvvtrcP0sFj0WQXPzcUFP7ItRoilHnyybyFuepw0RlJP7biEb1Q/O+SkCYpMjnqywyqJESwexq8g5hhCEPncdgXY8JbYdDK5h4y+wLOUG8naiUIpKUzXi3UaVIK5UVdLmNYqZVtgcZlKo1GzRls=
 before_script:
-- cd src
 - npm install
-- monorepo bootstrap
 script:
-- monorepo test
+- npm test
 after_success:
 - if [ -z "${TRAVIS_TAG}" ]; then exit 0; fi
 - npm config set //registry.npmjs.org/:_authToken $NPM_TOKEN
-- monorepo publish
+- npm publish
