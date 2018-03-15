@@ -2,7 +2,7 @@ import React from 'react';
 import { mount } from 'enzyme';
 import expect from 'expect';
 
-import PanelHeader from '../src/PanelHeader/PanelHeader';
+import PanelHeader from '../PanelHeader/PanelHeader';
 
 describe('Header test suite', function() {
   it('should render without throwing an error', function() {

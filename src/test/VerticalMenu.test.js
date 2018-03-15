@@ -2,7 +2,7 @@ import React from 'react';
 import { mount } from 'enzyme';
 import expect from 'expect';
 
-import VerticalMenu from '../src/VerticalMenu/VerticalMenu';
+import VerticalMenu from '../VerticalMenu/VerticalMenu';
 
 describe('VerticalMenu test suite', () => {
   it('should render without throwing an error', function() {

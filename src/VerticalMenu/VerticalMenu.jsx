@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import If from '@digituz/react-if';
+import If from '../If/If';
 import './VerticalMenu.css';
 
 class VerticalMenu extends Component {

@@ -2,7 +2,7 @@ import React from 'react';
 import { mount } from 'enzyme';
 import expect from 'expect';
 
-import PanelBody from '../src/PanelBody/PanelBody';
+import PanelBody from '../PanelBody/PanelBody';
 
 describe('PanelBody test suite', function() {
   it('should render without throwing an error', function() {

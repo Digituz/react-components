@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Grid from '@digituz/react-grid';
+import Grid from '../Grid/Grid';
 import './PanelBody.css';
 
 class PanelBody extends Component {

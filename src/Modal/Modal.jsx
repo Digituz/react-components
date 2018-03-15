@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import Button from '@digituz/react-button';
-import Card from '@digituz/react-card';
+import Button from '../Button/Button';
+import Card from '../Card/Card';
 import './Modal.css';
 
 class Modal extends Component {
   render() {
+    console.log(this.props.onSuccess);
     return (
       <div className="digituz-react-modal-overlay">
         <Card title="Hello, friend!!">

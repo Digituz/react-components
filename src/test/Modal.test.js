@@ -2,7 +2,7 @@ import React from 'react';
 import { mount } from 'enzyme';
 import expect from 'expect';
 
-import Modal from '../src/Modal/Modal';
+import Modal from '../Modal/Modal';
 
 describe('Modal test suite', function() {
   it('should render without throwing an error', function() {
