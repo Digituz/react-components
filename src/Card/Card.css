@@ -1,0 +1,38 @@
+@import '../global-style';
+
+div.digituz-react-card {
+  border: 1px solid #ddd;
+  background-color: #fff;
+  border-bottom: none;
+  border-right: none;
+  border-radius: 3px;
+  box-shadow: $default-shadow;
+
+  .digituz-react-card-header {
+    background-color: whitesmoke;
+    border-top-left-radius: 3px;
+    border-top-right-radius: 3px;
+    border-bottom: 1px solid #ddd;
+    padding: 10px 15px 10px 15px;
+
+    > h2 {
+      font-size: 16px;
+      letter-spacing: 1px;
+      color: #777777;
+      margin: 0;
+    }
+  }
+
+  .digituz-react-card-body {
+    padding: 20px 15px 20px 15px;
+
+    > .digituz-react-grid {
+      margin: 0;
+
+      > * {
+        margin-top: 0;
+        margin-bottom: 0;
+      }
+    }
+  }
+}

@@ -1,9 +1,0 @@
-{
-  "name": "@digituz/react-input",
-  "version": "1.2.6",
-  "description": "React Input",
-  "main": "./dist/Input.js",
-  "scripts": {
-    "prepublishOnly": "npm run babelify"
-  }
-}

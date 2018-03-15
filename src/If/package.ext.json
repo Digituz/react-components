@@ -1,9 +1,0 @@
-{
-  "name": "@digituz/react-if",
-  "version": "1.2.6",
-  "description": "React If",
-  "main": "./dist/If.js",
-  "scripts": {
-    "prepublishOnly": "npm run babelify"
-  }
-}

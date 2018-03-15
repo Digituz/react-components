@@ -1,33 +1,21 @@
 {
   "name": "@digituz/react-components",
-  "private": true,
   "version": "1.2.6",
-  "description": "",
-  "main": "index.js",
-  "keywords": [],
-  "author": "",
+  "description": "Digituz React Components",
+  "main": "./dist/index.js",
+  "keywords": ["react", "components"],
+  "author": "Bruno Krebs",
   "repository": {
     "type": "git",
     "url": "https://github.com/Digituz/react-components"
   },
   "license": "MIT",
   "dependencies": {
-    "@digituz/react-button": "^1.2.5",
-    "@digituz/react-card": "^1.2.5",
-    "@digituz/react-grid": "^1.2.5",
-    "@digituz/react-if": "^1.2.5",
-    "@digituz/react-input-label": "^1.2.5",
-    "@digituz/react-modal": "^1.2.5",
-    "@digituz/react-panel": "^1.2.5",
-    "@digituz/react-panel-body": "^1.2.5",
-    "@digituz/react-panel-header": "^1.2.5",
-    "@digituz/react-vertical-menu": "^1.2.5",
     "prop-types": "^15.6.0",
     "react": "^16.2.0",
     "react-dom": "^16.2.0"
   },
   "devDependencies": {
-    "@digituz/monorepo": "^1.2.1",
     "babel-cli": "^6.26.0",
     "babel-preset-env": "^1.6.1",
     "babel-preset-react": "^6.24.1",
@@ -42,15 +30,15 @@
     "watch": "^1.0.2"
   },
   "scripts": {
-    "babelify": "babel ./src -d ./dist",
-    "processCss": "node-sass --output-style compressed -o ./dist/ ./src/",
+    "babelify": "babel ./ -d ../dist --ignore node_modules,scripts,test",
+    "processCss": "node ./scripts/sass",
     "prepublishOnly": "npm run babelify && npm run processCss",
     "test": "jest"
   },
   "jest": {
     "moduleNameMapper": {
-      "\\.(css|less)$": "<rootDir>/../styleMock.js"
+      "\\.(css|less)$": "<rootDir>/scripts/styleMock.js"
     },
-    "setupTestFrameworkScriptFile": "./jest-config.js"
+    "setupTestFrameworkScriptFile": "./scripts/jest-config.js"
   }
 }

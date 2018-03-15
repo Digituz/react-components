@@ -1,9 +1,0 @@
-{
-  "name": "@digituz/react-modal",
-  "version": "1.2.6",
-  "description": "React Modal",
-  "main": "./dist/Modal.js",
-  "dependencies": {
-    "@digituz/react-if": "^1.2.2"
-  }
-}

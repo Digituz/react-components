@@ -1,0 +1,30 @@
+@import '../global-style';
+
+div.digituz-react-modal-overlay {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  div.digituz-react-card {
+    box-shadow: 2px 2px 2px #999;
+    border-top: 3px solid #b73a2e;
+    border-left: none;
+    min-width: 250px;
+  }
+
+  div.digituz-react-modal-actions {
+    text-align: right;
+    margin-top: 30px;
+
+    .digituz-react-button {
+      margin-left: 5px;
+      min-width: 70px;
+    }
+  }
+}

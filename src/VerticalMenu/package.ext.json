@@ -1,9 +1,0 @@
-{
-  "name": "@digituz/react-vertical-menu",
-  "version": "1.2.6",
-  "description": "React VerticalMenu",
-  "main": "./dist/VerticalMenu.js",
-  "dependencies": {
-    "@digituz/react-if": "^1.2.0"
-  }
-}
