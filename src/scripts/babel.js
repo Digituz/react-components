@@ -1,16 +1,16 @@
-const sass = require('node-sass');
+const babel = require('babel-core');
 const { existsSync, mkdirSync, writeFileSync, readdirSync, lstatSync } = require('fs');
 
 const sourceDir = './';
 const destinationDir = '../dist';
-const sassFiles = [];
+const jsxFiles = [];
 
 readdirSync(sourceDir).forEach(path => {
   if (lstatSync(`${sourceDir}/${path}`).isDirectory()) {
     if (path === 'node_modules' || path === 'test') return;
     readdirSync(`${sourceDir}/${path}`).forEach(file => {
-      if ( ! file.endsWith('.scss')) return;
-      sassFiles.push({
+      if ( ! file.endsWith('.jsx')) return;
+      jsxFiles.push({
         path,
         file,
       });
@@ -18,17 +18,19 @@ readdirSync(sourceDir).forEach(path => {
   }
 });
 
+jsxFiles.push({
+  path: '',
+  file: 'index.jsx',
+});
+
 if (!existsSync(destinationDir)) mkdirSync(destinationDir);
 
-sassFiles.forEach(sassFile => {
-  const { path, file } = sassFile;
+jsxFiles.forEach(jsxFile => {
+  const { path, file } = jsxFile;
 
-  const cssContent = sass.renderSync({
-    file: `${sourceDir}/${path}/${file}`,
-    outputStyle: 'compressed'
-  });
+  const jsContent = babel.transformFileSync(`${sourceDir}/${path}/${file}`);
 
   if (!existsSync(`${destinationDir}/${path}`)) mkdirSync(`${destinationDir}/${path}`);
 
-  writeFileSync(`${destinationDir}/${path}/${file}`, cssContent.css.toString());
+  writeFileSync(`${destinationDir}/${path}/${file}`, jsContent.code.replace('.scss', '.css').toString());
 });

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import If from '../If/If';
-import './VerticalMenu.css';
+import './VerticalMenu.scss';
 
 class VerticalMenu extends Component {
   constructor(props) {

@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import Button from '../Button/Button';
 import Card from '../Card/Card';
-import './Modal.css';
+import './Modal.scss';
 
 class Modal extends Component {
   render() {

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import './PanelHeader.css';
+import './PanelHeader.scss';
 
 class PanelHeader extends Component {
   render() {

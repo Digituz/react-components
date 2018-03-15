@@ -33,7 +33,7 @@
     "watch": "^1.0.2"
   },
   "scripts": {
-    "babelify": "babel ./ -d ../dist --ignore node_modules,scripts,test",
+    "babelify": "node ./scripts/babel",
     "processCss": "node ./scripts/sass",
     "prepublishOnly": "npm run babelify && npm run processCss",
     "test": "jest"

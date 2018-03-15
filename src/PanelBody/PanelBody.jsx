@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Grid from '../Grid/Grid';
-import './PanelBody.css';
+import './PanelBody.scss';
 
 class PanelBody extends Component {
   render() {
