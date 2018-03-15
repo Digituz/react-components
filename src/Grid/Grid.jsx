@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import './Grid.css';
+import './Grid.scss';
 
 class Grid extends Component {
   render() {

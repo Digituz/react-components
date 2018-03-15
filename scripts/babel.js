@@ -1,8 +1,8 @@
 const babel = require('babel-core');
 const { existsSync, mkdirSync, writeFileSync, readdirSync, lstatSync } = require('fs');
 
-const sourceDir = './';
-const destinationDir = '../dist';
+const sourceDir = './src';
+const destinationDir = './dist';
 const jsxFiles = [];
 
 readdirSync(sourceDir).forEach(path => {
@@ -32,5 +32,8 @@ jsxFiles.forEach(jsxFile => {
 
   if (!existsSync(`${destinationDir}/${path}`)) mkdirSync(`${destinationDir}/${path}`);
 
-  writeFileSync(`${destinationDir}/${path}/${file}`, jsContent.code.replace('.scss', '.css').toString());
+  writeFileSync(
+    `${destinationDir}/${path}/${file.replace('.jsx', '.js')}`,
+    jsContent.code.replace('.scss', '.css').toString()
+  );
 });

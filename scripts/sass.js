@@ -1,8 +1,8 @@
 const sass = require('node-sass');
 const { existsSync, mkdirSync, writeFileSync, readdirSync, lstatSync } = require('fs');
 
-const sourceDir = './';
-const destinationDir = '../dist';
+const sourceDir = './src';
+const destinationDir = './dist';
 const sassFiles = [];
 
 readdirSync(sourceDir).forEach(path => {
@@ -30,5 +30,8 @@ sassFiles.forEach(sassFile => {
 
   if (!existsSync(`${destinationDir}/${path}`)) mkdirSync(`${destinationDir}/${path}`);
 
-  writeFileSync(`${destinationDir}/${path}/${file}`, cssContent.css.toString());
+  writeFileSync(
+    `${destinationDir}/${path}/${file.replace('.scss', '.css')}`,
+    cssContent.css.toString()
+  );
 });

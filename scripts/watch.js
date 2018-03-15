@@ -1,4 +1,4 @@
-const watch = require('src/scripts/watch');
+const watch = require('scripts/watch');
 const { spawnSync } = require('child_process');
 
 const watchOptions = {

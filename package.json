@@ -40,8 +40,8 @@
   },
   "jest": {
     "moduleNameMapper": {
-      "\\.(css|less)$": "<rootDir>/scripts/styleMock.js"
+      "\\.(scss|less)$": "<rootDir>/scripts/styleMock.js"
     },
-    "setupTestFrameworkScriptFile": "./scripts/jest-config.js"
+    "setupTestFrameworkScriptFile": "<rootDir>/scripts/jest-config.js"
   }
 }
