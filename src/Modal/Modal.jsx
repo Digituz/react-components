@@ -1,38 +1,46 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import Button from '../Button/Button';
-import Card from '../Card/Card';
+import If from '../If/If';
 import './Modal.scss';
 
 class Modal extends Component {
   render() {
-    console.log(this.props.onSuccess);
+    const cancelFunction = this.props.onCancel || (() => {});
     return (
       <div className="digituz-react-modal-overlay">
-        <Card title="Hello, friend!!">
-          <p>Not good to go yet, I guess.</p>
-          <div className="digituz-react-modal-actions">
-            <Button onClick={this.props.onSuccess} text={this.props.successLabel} />
-            <Button onClick={this.props.onFailure} text={this.props.cancelLabel} />
+        <div className="digituz-react-modal">
+          <div className="digituz-react-modal-gradient" />
+          <div className="digituz-react-modal-body">
+            {this.props.children}
           </div>
-        </Card>
+          <div className="digituz-react-modal-footer">
+            <If condition={this.props.onCancel !== null}>
+              <Button
+                className="default"
+                onClick={cancelFunction}
+                text="Cancel"
+              />
+            </If>
+            <Button
+              className="success"
+              onClick={this.props.onSuccess}
+              text="Ok"
+            />
+          </div>
+        </div>
       </div>
     );
   }
 }
 
 Modal.propTypes = {
-  cancelLabel: PropTypes.string,
   onCancel: PropTypes.func,
-  onSuccess: PropTypes.func,
-  successLabel: PropTypes.string,
+  onSuccess: PropTypes.func.isRequired,
 };
 
 Modal.defaultProps = {
-  cancelLabel: 'Cancel',
-  onCancel: () => {},
-  onSuccess: () => {},
-  successLabel: 'Ok',
+  onCancel: null,
 };
 
 export default Modal;

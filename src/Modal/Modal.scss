@@ -11,20 +11,34 @@ div.digituz-react-modal-overlay {
   align-items: center;
   justify-content: center;
 
-  div.digituz-react-card {
+  div.digituz-react-modal {
+    min-width: 300px;
+    background-color: #fff;
+    display: grid;
+    grid-template-rows: 5px 1fr 60px;
     box-shadow: 2px 2px 2px #999;
-    border-top: 3px solid #b73a2e;
-    border-left: none;
-    min-width: 250px;
-  }
 
-  div.digituz-react-modal-actions {
-    text-align: right;
-    margin-top: 30px;
+    > :first-child {
+      background-image: $gradient;
+    }
 
-    .digituz-react-button {
-      margin-left: 5px;
-      min-width: 70px;
+    > .digituz-react-modal-body {
+      padding: 15px;
+
+      h3 {
+        //margin-bottom: 0;
+      }
+    }
+
+    > :last-child {
+      padding: 15px;
+      border-top: 1px solid #e5e5e5;
+      background-color: #f7f9fa;
+      text-align: right;
+
+      .digituz-react-button {
+        margin-left: 10px;
+      }
     }
   }
 }
