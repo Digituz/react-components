@@ -11,27 +11,29 @@ button.digituz-react-button {
   font-size: 14px;
   box-shadow: $default-shadow;
 
+  &.default {
+    background-color: #fff;
+    border-color: #e3e3e3;
+    color: $default-color;
+  }
+
   &.danger {
     background-color: #ea6557;
     border-color: #ea6557;
-    color: #fff;
   }
 
   &.success {
     background-color: #62cb31;
     border-color: #62cb31;
-    color: #fff;
   }
 
   &.warning {
     background-color: #ffb606;
     border-color: #ffb606;
-    color: #fff;
   }
 
   &.info {
     background-color: #3498db;
     border-color: #3498db;
-    color: #fff;
   }
 }
