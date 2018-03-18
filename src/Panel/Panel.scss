@@ -8,7 +8,7 @@ div.digituz-panel {
 }
 
 div.digituz-panel-coloured-border {
-  background-image: linear-gradient(to right, #3498db 33%, #62cb31 33%, #62cb31 66%, #ffb606 66%, #ffb606 100%);
+  background-image: $gradient;
 }
 
 p, ul {
