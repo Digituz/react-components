@@ -53,7 +53,7 @@ class VerticalMenu extends Component {
                   <ul>
                     {
                       submenu.items.map((item, idx) => (
-                        <li key={idx}>
+                        <li onClick={item.onClick} key={idx}>
                           <svg height="10" width="20">
                             <circle cx="5" cy="5" r="5" fill={item.color} />
                           </svg>
