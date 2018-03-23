@@ -13,6 +13,7 @@ div.digituz-react-modal-overlay {
 
   div.digituz-react-modal {
     min-width: 300px;
+    max-width: 550px;
     background-color: #fff;
     display: grid;
     grid-template-rows: 5px 1fr 60px;
