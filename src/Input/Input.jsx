@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import './Input.scss';
 
 class Input extends Component {
   render() {
-    const className = this.props.className || 'digituz-react-input';
+    const className = 'digituz-react-input ' + this.props.className;
     return (
       <input
         id={this.props.id}

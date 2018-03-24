@@ -1,10 +1,11 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import Input from '../Input/Input';
+import './InputLabel.scss';
 
 class InputLabel extends Component {
   render() {
-    const className = this.props.className || 'digituz-react-input-label';
+    const className = 'digituz-react-input-label ' + this.props.className;
     return (
       <div className={className}>
         <label htmlFor={this.props.inputId}>{this.props.label}</label>
