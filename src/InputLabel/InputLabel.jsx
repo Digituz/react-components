@@ -15,6 +15,7 @@ class InputLabel extends Component {
           className={this.props.inputClassName}
           onChange={this.props.onChange}
           placeholder={this.props.placeholder}
+          type={this.props.type}
         />
       </div>
     )
@@ -29,12 +30,14 @@ InputLabel.propTypes = {
   className: PropTypes.string,
   inputClassName: PropTypes.string,
   placeholder: PropTypes.string,
+  type: PropTypes.string,
 };
 
 InputLabel.defaultProps = {
   className: '',
   inputClassName: '',
   placeholder: '',
+  type: 'text',
 };
 
 export default InputLabel;
