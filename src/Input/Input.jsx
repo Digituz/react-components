@@ -33,7 +33,7 @@ class Input extends Component {
       return value;
     }
     if (typeof value === 'number') {
-      return value + '';
+      return maskCurrency(value + '');
     }
     if (this.props.type === 'date' && typeof value === 'object') {
       return Input.dateToString(value);
@@ -72,8 +72,6 @@ class Input extends Component {
         Math.max(0, node.value.length - this.oldLength + this.oldIndex - 1) :
         Math.max(0, node.value.length - this.oldLength + this.oldIndex + 1);
 
-      console.log(node.value.length, this.oldLength, this.oldIndex);
-
       node.selectionStart = newIdx;
       node.selectionEnd = newIdx;
     });
@@ -83,7 +81,7 @@ class Input extends Component {
     let value = this.state.value;
 
     if (this.props.type === 'currency') {
-      value = Number(value);
+      value = Number(value.replace(/,/g, ''));
     }
 
     if (this.props.type === 'date') {
