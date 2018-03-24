@@ -75,7 +75,6 @@ class Input extends Component {
       } else {
         inserting && (lengthDiff = 1);
         newIdx = Math.max(0, node.value.length - this.oldLength + this.oldIndex - lengthDiff);
-        console.log(node.value.length, this.oldLength, this.oldIndex, lengthDiff); // 4 2 3 2
       }
 
       node.selectionStart = newIdx;
