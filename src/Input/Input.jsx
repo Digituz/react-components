@@ -66,11 +66,17 @@ class Input extends Component {
     this.setState({
       value,
     }, () => {
-      const lengthDiff = node.value.length - this.oldLength;
+      let lengthDiff = node.value.length - this.oldLength;
       const inserting = lengthDiff >= 0;
-      const newIdx = inserting ?
-        Math.max(0, node.value.length - this.oldLength + this.oldIndex - 1) :
-        Math.max(0, node.value.length - this.oldLength + this.oldIndex + 1);
+
+      let newIdx = 0;
+      if (lengthDiff === 0) {
+        newIdx = Math.max(0, node.value.length - this.oldLength + this.oldIndex);
+      } else {
+        inserting && (lengthDiff = 1);
+        newIdx = Math.max(0, node.value.length - this.oldLength + this.oldIndex - lengthDiff);
+        console.log(node.value.length, this.oldLength, this.oldIndex, lengthDiff); // 4 2 3 2
+      }
 
       node.selectionStart = newIdx;
       node.selectionEnd = newIdx;
