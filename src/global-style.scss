@@ -5,6 +5,7 @@ $gradient: linear-gradient(to right, #3498db 33%, #62cb31 33%, #62cb31 66%, #ffb
 
 * {
   -webkit-tap-highlight-color: transparent;
+  box-sizing: border-box;
 }
 
 @mixin sm {
