@@ -9,6 +9,9 @@ class Input extends Component {
     this.onBlur = this.onBlur.bind(this);
     this.onChange = this.onChange.bind(this);
 
+    this.oldLength = 0;
+    this.oldIndex = 0;
+
     this.state = {
       value: this.valueToString(this.props.value),
     }
@@ -56,8 +59,23 @@ class Input extends Component {
       value = maskJs('99/99/9999', value);
     }
 
+    const node = event.target;
+    this.oldLength = this.state.value.length;
+    this.oldIndex = node.selectionStart;
+
     this.setState({
       value,
+    }, () => {
+      const lengthDiff = node.value.length - this.oldLength;
+      const inserting = lengthDiff >= 0;
+      const newIdx = inserting ?
+        Math.max(0, node.value.length - this.oldLength + this.oldIndex - 1) :
+        Math.max(0, node.value.length - this.oldLength + this.oldIndex + 1);
+
+      console.log(node.value.length, this.oldLength, this.oldIndex);
+
+      node.selectionStart = newIdx;
+      node.selectionEnd = newIdx;
     });
   }
 
