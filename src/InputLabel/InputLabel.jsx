@@ -13,7 +13,7 @@ class InputLabel extends Component {
           id={this.props.inputId}
           value={this.props.value}
           className={this.props.inputClassName}
-          onChange={this.props.onChange}
+          onBlur={this.props.onBlur}
           placeholder={this.props.placeholder}
           type={this.props.type}
         />
@@ -25,8 +25,12 @@ class InputLabel extends Component {
 InputLabel.propTypes = {
   label: PropTypes.string.isRequired,
   inputId: PropTypes.string.isRequired,
-  onChange: PropTypes.func.isRequired,
-  value: PropTypes.string.isRequired,
+  onBlur: PropTypes.func.isRequired,
+  value: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.number,
+    PropTypes.instanceOf(Date),
+  ]).isRequired,
   className: PropTypes.string,
   inputClassName: PropTypes.string,
   placeholder: PropTypes.string,
