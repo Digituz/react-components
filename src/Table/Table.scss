@@ -1,0 +1,23 @@
+table.digituz-react-table {
+  width: 100%;
+  font-size: 14px;
+  border-collapse: collapse;
+
+  th {
+    font-weight: 700;
+    border-bottom: 1px solid #ccc;
+    background-color: #eee;
+  }
+
+  thead {
+    line-height: 35px;
+  }
+
+  tbody {
+    line-height: 40px;
+  }
+
+  td.center {
+    text-align: center;
+  }
+}

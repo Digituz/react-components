@@ -8,6 +8,7 @@ import Modal from './Modal/Modal';
 import Panel from './Panel/Panel';
 import PanelBody from './PanelBody/PanelBody';
 import PanelHeader from './PanelHeader/PanelHeader';
+import Table from './Table/Table';
 import VerticalMenu from './VerticalMenu/VerticalMenu';
 
 export {
@@ -21,5 +22,6 @@ export {
   Panel,
   PanelBody,
   PanelHeader,
+  Table,
   VerticalMenu,
 }
