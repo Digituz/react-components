@@ -4,6 +4,24 @@ import If from '../If/If';
 import './Table.scss';
 
 class Table extends Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      data: props.data,
+    }
+  }
+
+  componentDidMount() {
+    if (this.state.data.then) {
+      this.state.data.then((response) => {
+        this.setState({
+          data: response.data,
+        })
+      });
+    }
+  }
+
   render() {
     return (
       <table className="digituz-react-table">
@@ -17,7 +35,7 @@ class Table extends Component {
         </tr>
         </thead>
         <tbody>
-        { this.props.data.map((record, idx) => (
+        { this.state.data.map && this.state.data.map((record, idx) => (
           <tr key={idx}>
             { this.props.columns.map((column, idx) => (
                 <td className={column.columnClass} key={idx}>
@@ -45,11 +63,11 @@ Table.propTypes = {
     render: PropTypes.func,
   })).isRequired,
   data: PropTypes.oneOfType([
-    PropTypes.objectOf({
+    PropTypes.shape({
       then: PropTypes.func.isRequired,
       catch: PropTypes.func.isRequired,
     }),
-    PropTypes.array.isRequired,
+    PropTypes.array,
   ]).isRequired,
 };
 
