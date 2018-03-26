@@ -13,11 +13,12 @@ class Table extends Component {
   }
 
   componentDidMount() {
+    // when data is a promise
     if (this.state.data.then) {
-      this.state.data.then((response) => {
+      this.state.data.then((data) => {
         this.setState({
-          data: response.data,
-        })
+          data,
+        });
       });
     }
   }
