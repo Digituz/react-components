@@ -41,7 +41,14 @@ class Input extends Component {
   }
 
   static valueToDate(value) {
-    const newDate = new Date(`${value.substring(6, 10)}-${value.substring(3, 5)}-${value.substring(0, 2)}`);
+    const timezoneDiff = (new Date()).getTimezoneOffset() / 60;
+    const year = Number(value.substring(6, 10));
+    const month = Number(value.substring(3, 5));
+    const day = Number(value.substring(0, 2));
+    if (!year || !month || !day) {
+      return null;
+    }
+    const newDate = new Date(Date.UTC(year, month - 1, day, timezoneDiff, 0, 0));
     if (isNaN(newDate.getTime())) {
       return null;
     }
