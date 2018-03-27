@@ -7,23 +7,24 @@ class NotificationManager {
     return emitter;
   }
 
-  static success(message) {
-    addNotification('success', message);
+  static success(message, title) {
+    addNotification('success', message, title);
   }
 
-  static warning(message) {
-    addNotification('warning', message);
+  static warning(message, title) {
+    addNotification('warning', message, title);
   }
 
-  static danger(message) {
-    addNotification('danger', message);
+  static danger(message, title) {
+    addNotification('danger', message, title);
   }
 }
 
-const addNotification = (type, message) => {
+const addNotification = (type, message, title) => {
   emitter.emit('new-notification', {
     type,
     message,
+    title,
   });
 };
 
