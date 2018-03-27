@@ -24,7 +24,7 @@ class NotificationContainer extends Component {
 
     this.intervalSubscription = setInterval(() => {
       const now = (new Date()).getTime();
-      const notifications = this.state.notifications.filter((notification) => (now - notification.time < 5000));
+      const notifications = this.state.notifications.filter((notification) => (now - notification.time < 6000));
       this.setState({
         notifications,
       });
@@ -39,10 +39,10 @@ class NotificationContainer extends Component {
   render() {
     return (
       <div className="digituz-react-notification-container abc">
-        {this.state.notifications.map((notification, idx) => {
-          const className = 'digituz-react-notification ' + notification.type;
+        {this.state.notifications.map((notification) => {
+          const className = `digituz-react-notification ${notification.type}`;
           return (
-            <div key={idx} className={className}>
+            <div key={notification.time} className={className}>
               {notification.message}
             </div>
           );
