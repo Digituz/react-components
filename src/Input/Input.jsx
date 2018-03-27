@@ -58,7 +58,7 @@ class Input extends Component {
   removeSelection(event) {
     const node = event.target;
 
-    if (node.selectionStart !== node.selectionEnd) {
+    if (this.selectionStart !== this.selectionEnd) {
       node.selectionStart = event.target.value.length;
       node.selectionEnd = event.target.value.length;
     }
@@ -76,7 +76,8 @@ class Input extends Component {
 
     if (this.props.type === 'currency') {
       value = removeNonDigits(value);
-      value = `${value.substring(0, value.length - 2)}.${value.substring(value.length - 2)}`;
+      if (value === event.target.value) value = `${value}.00`;
+      else value = `${value.substring(0, value.length - 2)}.${value.substring(value.length - 2)}`;
       value = maskCurrency(value);
     }
 
@@ -91,6 +92,12 @@ class Input extends Component {
     this.setState({
       value,
     }, () => {
+      if (this.selectionStart !== this.selectionEnd) {
+        node.selectionStart = node.value.length;
+        node.selectionEnd = node.value.length;
+        return;
+      }
+
       let lengthDiff = node.value.length - this.oldLength;
       const inserting = lengthDiff >= 0;
 
@@ -122,6 +129,12 @@ class Input extends Component {
     this.props.onBlur(value);
   }
 
+  onSelect(event) {
+    const node = event.target;
+    this.selectionStart = node.selectionStart;
+    this.selectionEnd = node.selectionEnd;
+  }
+
   componentWillReceiveProps(nextProps) {
     this.setState({
       value: this.valueToString(nextProps.value),
@@ -136,8 +149,8 @@ class Input extends Component {
         className={className}
         value={this.state.value}
         onChange={this.onChange}
-        onKeyUp={this.removeSelection}
         onBlur={this.onBlur}
+        onSelect={(event) => {this.onSelect(event)}}
         placeholder={this.props.placeholder}
       />
     );
