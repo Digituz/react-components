@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import {maskJs, maskCurrency} from 'mask-js';
+import {maskJs, maskCurrency, removeNonDigits} from 'mask-js';
 import './Input.scss';
 
 class Input extends Component {
@@ -33,7 +33,7 @@ class Input extends Component {
       return value;
     }
     if (typeof value === 'number') {
-      return maskCurrency(value + '');
+      return maskCurrency(value);
     }
     if (this.props.type === 'date' && typeof value === 'object') {
       return Input.dateToString(value);
@@ -55,10 +55,28 @@ class Input extends Component {
     return newDate;
   }
 
+  removeSelection(event) {
+    const node = event.target;
+
+    if (node.selectionStart !== node.selectionEnd) {
+      node.selectionStart = event.target.value.length;
+      node.selectionEnd = event.target.value.length;
+    }
+  }
+
   onChange(event) {
     let value = event.target.value;
 
+    if (this.props.type === 'text') {
+      this.setState({
+        value,
+      });
+      return;
+    }
+
     if (this.props.type === 'currency') {
+      value = removeNonDigits(value);
+      value = `${value.substring(0, value.length - 2)}.${value.substring(value.length - 2)}`;
       value = maskCurrency(value);
     }
 
@@ -89,7 +107,8 @@ class Input extends Component {
     });
   }
 
-  onBlur() {
+  onBlur(event) {
+    this.removeSelection(event);
     let value = this.state.value;
 
     if (this.props.type === 'currency') {
@@ -117,6 +136,7 @@ class Input extends Component {
         className={className}
         value={this.state.value}
         onChange={this.onChange}
+        onKeyUp={this.removeSelection}
         onBlur={this.onBlur}
         placeholder={this.props.placeholder}
       />
