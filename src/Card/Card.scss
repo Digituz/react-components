@@ -1,8 +1,8 @@
 @import '../global-style';
 
 div.digituz-react-card {
-  border: 1px solid #ddd;
-  background-color: #fff;
+  border: 1px solid $very-light-gray;
+  background-color: $white;
   border-bottom: none;
   border-right: none;
   border-radius: 3px;
@@ -12,13 +12,13 @@ div.digituz-react-card {
     background-color: whitesmoke;
     border-top-left-radius: 3px;
     border-top-right-radius: 3px;
-    border-bottom: 1px solid #ddd;
+    border-bottom: 1px solid $very-light-gray;
     padding: 10px 15px 10px 15px;
 
     > h2 {
       font-size: 16px;
       letter-spacing: 1px;
-      color: #777777;
+      color: $default-color;
       margin: 0;
     }
   }

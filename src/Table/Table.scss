@@ -1,3 +1,5 @@
+@import '../global-style.scss';
+
 table.digituz-react-table {
   width: 100%;
   font-size: 14px;
@@ -5,8 +7,8 @@ table.digituz-react-table {
 
   th {
     font-weight: 700;
-    border-bottom: 1px solid #ccc;
-    background-color: #eee;
+    border-bottom: 1px solid $very-light-gray;
+    background-color: $super-light-gray;
   }
 
   thead {

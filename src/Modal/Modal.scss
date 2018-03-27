@@ -14,10 +14,10 @@ div.digituz-react-modal-overlay {
   div.digituz-react-modal {
     min-width: 300px;
     max-width: 550px;
-    background-color: #fff;
+    background-color: $white;
     display: grid;
     grid-template-rows: 5px 1fr 60px;
-    box-shadow: 2px 2px 2px #999;
+    box-shadow: 2px 2px 2px $lighter-color;
 
     > :first-child {
       background-image: $gradient;
@@ -33,8 +33,8 @@ div.digituz-react-modal-overlay {
 
     > :last-child {
       padding: 15px;
-      border-top: 1px solid #e5e5e5;
-      background-color: #f7f9fa;
+      border-top: 1px solid $very-light-gray;
+      background-color: $ultra-light-gray;
       text-align: right;
 
       .digituz-react-button {

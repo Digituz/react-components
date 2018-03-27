@@ -2,9 +2,19 @@ $default-radius: 3px;
 $darker-color: #555;
 $default-color: #777;
 $lighter-color: #999;
+
+$white: #fff;
+$green: #62cb31;
+$yellow: #ffb606;
+$blue: #3498db;
+$dark-blue: #34495e;
+$red: #ea6557;
+$ultra-light-gray: #f7f7f7;
+$super-light-gray: #eee;
+
 $very-light-gray: #ddd;
-$default-shadow: 2px 2px 2px #ccc;
-$gradient: linear-gradient(to right, #3498db 33%, #62cb31 33%, #62cb31 66%, #ffb606 66%, #ffb606 100%);
+$default-shadow: 2px 2px 2px $very-light-gray;
+$gradient: linear-gradient(to right, $blue 33%, $green 33%, $green 66%, $yellow 66%, $yellow 100%);
 
 * {
   -webkit-tap-highlight-color: transparent;

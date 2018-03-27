@@ -15,7 +15,7 @@ div.digituz-react-notification-container {
   > .digituz-react-notification {
     text-align: left;
     width: 250px;
-    background-color: #fff;
+    background-color: $white;
     border: 1px solid $very-light-gray;
     border-radius: $default-radius;
     box-shadow: $default-shadow;
@@ -59,15 +59,15 @@ div.digituz-react-notification-container {
     }
 
     &.success {
-      border-left: 4px solid #62cb31;
+      border-left: 4px solid $green;
     }
 
     &.warning {
-      border-left: 4px solid #ffb606;
+      border-left: 4px solid $yellow;
     }
 
     &.danger {
-      border-left: 4px solid #ea6557;
+      border-left: 4px solid $red;
     }
   }
 }

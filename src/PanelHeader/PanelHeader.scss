@@ -1,6 +1,8 @@
+@import '../global-style.scss';
+
 div.digituz-react-panel-header {
-  background-color: #fff;
-  box-shadow: 0 2px 2px #ddd;
+  background-color: $white;
+  box-shadow: 0 2px 2px $very-light-gray;
   padding-left: 10px;
   padding-right: 10px;
 
