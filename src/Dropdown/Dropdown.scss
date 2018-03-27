@@ -1,0 +1,40 @@
+@import '../global-style.scss';
+
+div.digituz-react-dropdown-container {
+  position: relative;
+  display: inline-block;
+
+  .main-button {
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+  }
+
+  .dropdown-button {
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+    border-left: 1px solid transparentize($white, 0.8);
+  }
+
+  ul.digituz-react-dropdown-options {
+    position: absolute;
+    top: 20px;
+    left: 0;
+    background-color: $white;
+    border: 1px solid black;
+    z-index: 20;
+    padding: 0;
+    display: none;
+    list-style-type: none;
+    min-width: 100%;
+
+    &.visible {
+      display: block;
+    }
+
+    li {
+      background-color: $dark-blue;
+      padding: 5px 15px 5px 15px;
+      color: $white;
+    }
+  }
+}

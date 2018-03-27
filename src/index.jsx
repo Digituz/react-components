@@ -1,5 +1,6 @@
 import Button from './Button/Button';
 import Card from './Card/Card';
+import Dropdown from './Dropdown/Dropdown';
 import Grid from './Grid/Grid';
 import If from './If/If';
 import Input from './Input/Input';
@@ -16,6 +17,7 @@ import VerticalMenu from './VerticalMenu/VerticalMenu';
 export {
   Button,
   Card,
+  Dropdown,
   Grid,
   If,
   Input,
