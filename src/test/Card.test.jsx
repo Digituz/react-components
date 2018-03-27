@@ -6,7 +6,7 @@ import Card from '../Card/Card';
 
 describe('Card test suite', function() {
   it('should render without throwing an error', function() {
-    const defaultClass = 'digituz-react-card';
+    const defaultClass = 'drc-card';
     const title = 'Some nice title!';
 
     const wrapper = mount(
@@ -22,7 +22,7 @@ describe('Card test suite', function() {
   });
 
   it('should enable devs to add classes', function() {
-    const defaultClass = 'digituz-react-card';
+    const defaultClass = 'drc-card';
     const customClass = 'i-like-pies';
     const title = 'I like pies!';
 

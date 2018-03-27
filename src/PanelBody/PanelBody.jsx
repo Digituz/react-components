@@ -5,7 +5,7 @@ import './PanelBody.scss';
 class PanelBody extends Component {
   render() {
     return (
-      <div className="digituz-react-panel-body">
+      <div className="drc-panel-body">
         <Grid>
           {this.props.children}
         </Grid>

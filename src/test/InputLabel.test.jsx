@@ -7,7 +7,7 @@ import InputLabel from '../InputLabel/InputLabel';
 describe('InputLabel Test Suite', function() {
   it('should render without throwing an error', function() {
     const label = 'Family Name';
-    const defaultClass = 'digituz-react-input-label';
+    const defaultClass = 'drc-input-label';
     const self = this;
     self.inputValue = 'oi';
 

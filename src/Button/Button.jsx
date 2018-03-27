@@ -4,7 +4,7 @@ import './Button.scss';
 
 class Button extends Component {
   render() {
-    const className = 'digituz-react-button ' + this.props.className;
+    const className = 'drc-button ' + this.props.className;
     return (
       <button
         className={className}

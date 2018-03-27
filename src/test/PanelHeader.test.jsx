@@ -7,7 +7,7 @@ import PanelHeader from '../PanelHeader/PanelHeader';
 describe('Header test suite', function() {
   it('should render without throwing an error', function() {
     const title = 'Some value!';
-    const defaultClass = 'digituz-react-panel-header';
+    const defaultClass = 'drc-panel-header';
 
     const wrapper = mount(
       <PanelHeader>

@@ -1,6 +1,6 @@
 @import '../global-style.scss';
 
-div.digituz-react-dropdown-container {
+div.drc-dropdown-container {
   position: relative;
   display: inline-block;
 
@@ -15,7 +15,7 @@ div.digituz-react-dropdown-container {
     border-left: 1px solid transparentize($white, 0.8);
   }
 
-  ul.digituz-react-dropdown-options {
+  ul.drc-dropdown-options {
     position: absolute;
     top: 20px;
     left: 0;

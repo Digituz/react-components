@@ -4,7 +4,7 @@ import './PanelHeader.scss';
 
 class PanelHeader extends Component {
   render() {
-    const className = this.props.className || 'digituz-react-panel-header';
+    const className = this.props.className || 'drc-panel-header';
     return (
       <div className={className}>
         {this.props.children}

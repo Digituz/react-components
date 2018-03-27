@@ -1,6 +1,6 @@
 @import '../global-style';
 
-div.digituz-react-notification-container {
+div.drc-notification-container {
   position: fixed;
   top: 0;
   left: 0;
@@ -12,7 +12,7 @@ div.digituz-react-notification-container {
   text-align: right;
   padding: 10px;
 
-  > .digituz-react-notification {
+  > .drc-notification {
     text-align: left;
     width: 250px;
     background-color: $white;

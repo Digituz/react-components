@@ -6,7 +6,7 @@ import Modal from '../Modal/Modal';
 
 describe('Modal test suite', function() {
   it('should render without throwing an error', function() {
-    const defaultClass = 'digituz-react-modal';
+    const defaultClass = 'drc-modal';
     const customClass = 'some-custom-class-for-modal';
 
     const wrapper = mount(<Modal className={customClass}/>);

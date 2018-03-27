@@ -6,7 +6,7 @@ import PanelBody from '../PanelBody/PanelBody';
 
 describe('PanelBody test suite', function() {
   it('should render without throwing an error', function() {
-    const defaultClass = 'digituz-react-panel-body';
+    const defaultClass = 'drc-panel-body';
     const title = 'Good to Go!';
 
     const wrapper = mount(

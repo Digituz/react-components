@@ -6,7 +6,7 @@ import VerticalMenu from '../VerticalMenu/VerticalMenu';
 
 describe('VerticalMenu test suite', () => {
   it('should render without throwing an error', function() {
-    const defaultClass = 'digituz-react-vertical-menu';
+    const defaultClass = 'drc-vertical-menu';
     const customClass = 'some-custom-class-for-vertical-menu';
 
     const wrapper = mount(<VerticalMenu submenus={[]} className={customClass}/>);
@@ -42,14 +42,14 @@ describe('VerticalMenu test suite', () => {
 
   it('it should switch between open and closed', () => {
     const wrapper = mount(<VerticalMenu submenus={[]} />);
-    const openButton = wrapper.find('div.digituz-react-vertical-menu-container > div').at(0);
+    const openButton = wrapper.find('div.drc-vertical-menu-container > div').at(0);
 
-    expect(wrapper.find('div.digituz-react-vertical-menu-overlay').exists()).toBe(false);
+    expect(wrapper.find('div.drc-vertical-menu-overlay').exists()).toBe(false);
     openButton.simulate('click');
-    const overlay = wrapper.find('div.digituz-react-vertical-menu-overlay');
+    const overlay = wrapper.find('div.drc-vertical-menu-overlay');
     expect(overlay.exists()).toBe(true);
 
     overlay.simulate('click');
-    expect(wrapper.find('div.digituz-react-vertical-menu-overlay').exists()).toBe(false);
+    expect(wrapper.find('div.drc-vertical-menu-overlay').exists()).toBe(false);
   });
 });

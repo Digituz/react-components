@@ -25,7 +25,7 @@ class Table extends Component {
 
   render() {
     return (
-      <table className="digituz-react-table">
+      <table className="drc-table">
         <thead>
         <tr>
         {

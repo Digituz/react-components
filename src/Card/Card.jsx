@@ -8,13 +8,13 @@ class Card extends Component {
   }
 
   render() {
-    const classes = `digituz-react-card ${this.props.className}`;
+    const classes = `drc-card ${this.props.className}`;
     return (
       <div className={classes}>
-        <div className="digituz-react-card-header">
+        <div className="drc-card-header">
           <h2>{this.props.title}</h2>
         </div>
-        <div className="digituz-react-card-body">
+        <div className="drc-card-body">
           {this.props.children}
         </div>
       </div>

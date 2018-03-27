@@ -1,13 +1,13 @@
 @import '../global-style';
 
-div.digituz-panel {
+div.drc-panel {
   display: grid;
   grid-template-rows: 6px 53px 1fr;
   color: $default-color;
   font-size: 15px;
 }
 
-div.digituz-panel-coloured-border {
+div.drc-panel-coloured-border {
   background-image: $gradient;
 }
 

@@ -31,9 +31,9 @@ class Dropdown extends Component {
   }
 
   render() {
-    const optionsClass = `digituz-react-dropdown-options ${this.state.optionsVisible ? 'visible' : ''}`;
+    const optionsClass = `drc-dropdown-options ${this.state.optionsVisible ? 'visible' : ''}`;
     return (
-      <div onBlur={(event) => { this.closeOptions(event) }} className="digituz-react-dropdown-container">
+      <div onBlur={(event) => { this.closeOptions(event) }} className="drc-dropdown-container">
         <Button className="main-button" text="Edit" onClick={() => {}} />
         <Button className="dropdown-button" text="v" onClick={() => {this.toggleOptions()}} />
         <ul className={optionsClass}>

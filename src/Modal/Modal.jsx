@@ -8,13 +8,13 @@ class Modal extends Component {
   render() {
     const cancelFunction = this.props.onCancel || (() => {});
     return (
-      <div className="digituz-react-modal-overlay">
-        <div className="digituz-react-modal">
-          <div className="digituz-react-modal-gradient" />
-          <div className="digituz-react-modal-body">
+      <div className="drc-modal-overlay">
+        <div className="drc-modal">
+          <div className="drc-modal-gradient" />
+          <div className="drc-modal-body">
             {this.props.children}
           </div>
-          <div className="digituz-react-modal-footer">
+          <div className="drc-modal-footer">
             <If condition={this.props.onCancel !== null}>
               <Button
                 className="default"

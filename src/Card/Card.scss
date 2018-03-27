@@ -1,6 +1,6 @@
 @import '../global-style';
 
-div.digituz-react-card {
+div.drc-card {
   border: 1px solid $very-light-gray;
   background-color: $white;
   border-bottom: none;
@@ -8,7 +8,7 @@ div.digituz-react-card {
   border-radius: 3px;
   box-shadow: $default-shadow;
 
-  .digituz-react-card-header {
+  .drc-card-header {
     background-color: whitesmoke;
     border-top-left-radius: 3px;
     border-top-right-radius: 3px;
@@ -23,10 +23,10 @@ div.digituz-react-card {
     }
   }
 
-  .digituz-react-card-body {
+  .drc-card-body {
     padding: 20px 15px 20px 15px;
 
-    > .digituz-react-grid {
+    > .drc-grid {
       margin: 0;
 
       > * {
@@ -35,7 +35,7 @@ div.digituz-react-card {
       }
     }
 
-    > button.digituz-react-button {
+    > button.drc-button {
       margin-bottom: 10px;
     }
   }

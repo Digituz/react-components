@@ -24,11 +24,11 @@ class VerticalMenu extends Component {
   }
 
   render() {
-    let classes = `digituz-react-vertical-menu ${this.props.className}`;
+    let classes = `drc-vertical-menu ${this.props.className}`;
     if (this.state.visible) classes += ' state-visible';
 
     return (
-      <div className="digituz-react-vertical-menu-container">
+      <div className="drc-vertical-menu-container">
         <div onClick={() => { this.openMenu() }}>
           <svg className="menu-svg-button">
             <line x1="13" y1="15" x2="27" y2="15" stroke="gray" strokeWidth="2" />
@@ -37,7 +37,7 @@ class VerticalMenu extends Component {
           </svg>
         </div>
         <If condition={this.state.visible}>
-          <div onClick={() => { this.closeMenu() }} className="digituz-react-vertical-menu-overlay" />
+          <div onClick={() => { this.closeMenu() }} className="drc-vertical-menu-overlay" />
         </If>
         <div className={classes}>
           <div className="menu-options-container">

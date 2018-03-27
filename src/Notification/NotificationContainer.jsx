@@ -50,9 +50,9 @@ class NotificationContainer extends Component {
 
   render() {
     return (
-      <div className="digituz-react-notification-container">
+      <div className="drc-notification-container">
         {this.state.notifications.map((notification) => {
-          const className = `digituz-react-notification ${notification.type}`;
+          const className = `drc-notification ${notification.type}`;
           return (
             <div key={notification.time} onClick={() => {this.removeNotification(notification.time)}} className={className}>
               <h3>{notification.title || notification.type}</h3>

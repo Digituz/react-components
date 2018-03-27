@@ -4,7 +4,7 @@ import './Grid.scss';
 class Grid extends Component {
   render() {
     return (
-      <div className="digituz-react-grid">
+      <div className="drc-grid">
         {this.props.children}
       </div>
     );

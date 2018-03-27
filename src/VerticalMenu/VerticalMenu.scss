@@ -1,6 +1,6 @@
 @import '../global-style';
 
-div.digituz-react-vertical-menu-container {
+div.drc-vertical-menu-container {
   width: 40px;
 
   svg.menu-svg-button {
@@ -64,7 +64,7 @@ div.digituz-react-vertical-menu-container {
   }
 }
 
-div.digituz-react-vertical-menu-overlay {
+div.drc-vertical-menu-overlay {
   position: fixed;
   top: 0;
   left: 0;
@@ -72,7 +72,7 @@ div.digituz-react-vertical-menu-overlay {
   height: 100%;
 }
 
-div.digituz-react-vertical-menu {
+div.drc-vertical-menu {
   position: fixed;
   top: 0;
   left: -250px;
@@ -84,6 +84,6 @@ div.digituz-react-vertical-menu {
   box-shadow: $default-shadow;
 }
 
-div.digituz-react-vertical-menu.state-visible {
+div.drc-vertical-menu.state-visible {
   left: 0;
 }

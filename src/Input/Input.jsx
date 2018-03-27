@@ -141,7 +141,7 @@ class Input extends Component {
   }
 
   render() {
-    const className = 'digituz-react-input ' + this.props.className;
+    const className = 'drc-input ' + this.props.className;
     return (
       <input
         id={this.props.id}
