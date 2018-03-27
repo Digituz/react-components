@@ -105,8 +105,7 @@ class Input extends Component {
       if (lengthDiff === 0) {
         newIdx = Math.max(0, node.value.length - this.oldLength + this.oldIndex);
       } else {
-        inserting && (lengthDiff = 1);
-        newIdx = Math.max(0, node.value.length - this.oldLength + this.oldIndex - lengthDiff);
+        newIdx = Math.max(0, node.value.length - this.oldLength + this.oldIndex - (inserting ? 1 : -1));
       }
 
       node.selectionStart = newIdx;
