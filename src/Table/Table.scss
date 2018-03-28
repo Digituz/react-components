@@ -22,4 +22,14 @@ table.drc-table {
   td.center {
     text-align: center;
   }
+
+  td {
+    overflow-x: scroll;
+    white-space: nowrap;
+    padding-left: 10px;
+
+    &:first-child {
+      padding: 0;
+    }
+  }
 }
