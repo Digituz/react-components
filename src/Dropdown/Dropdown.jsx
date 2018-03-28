@@ -18,27 +18,25 @@ class Dropdown extends Component {
     });
   }
 
-  closeOptions(event) {
-    console.log(event.target);
+  closeOptions() {
     if (!this.state.optionsVisible) return;
     this.setState({
       optionsVisible: false,
     });
   }
 
-  saySomething() {
-    console.log('something');
-  }
-
   render() {
     const optionsClass = `drc-dropdown-options ${this.state.optionsVisible ? 'visible' : ''}`;
+    const defaultOption = this.props.options.filter(option => (option.default))[0];
+    const otherOptions = this.props.options.filter(option => (!option.default));
     return (
       <div onBlur={(event) => { this.closeOptions(event) }} className="drc-dropdown-container">
-        <Button className="main-button" text="Edit" onClick={() => {}} />
+        <Button className="main-button" text={defaultOption.label} onClick={defaultOption.onClick} />
         <Button className="dropdown-button" text="▼" onClick={() => {this.toggleOptions()}} />
         <ul className={optionsClass}>
-          <li onClick={() => { this.saySomething() }}>Copy</li>
-          <li onClick={() => { this.saySomething() }}>Delete</li>
+          { otherOptions.map((option, idx) => (
+            <li key={idx} onMouseDown={(event) => {event.preventDefault()}} onClick={option.onClick}>{option.label}</li>
+          ))}
         </ul>
       </div>
     );
@@ -46,7 +44,11 @@ class Dropdown extends Component {
 }
 
 Dropdown.propTypes ={
-
+  options: PropTypes.arrayOf(PropTypes.shape({
+    label: PropTypes.string.isRequired,
+    onClick: PropTypes.func.isRequired,
+    default: PropTypes.bool
+  })).isRequired,
 };
 
 export default Dropdown;
