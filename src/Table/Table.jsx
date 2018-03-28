@@ -23,6 +23,22 @@ class Table extends Component {
     }
   }
 
+  componentWillReceiveProps(nextProps) {
+    if (this.props.data !== nextProps.data) {
+      if (nextProps.data.then) {
+        nextProps.data.then((data) => {
+          this.setState({
+            data,
+          });
+        });
+        return;
+      }
+      this.setState({
+        data: nextProps.data,
+      });
+    }
+  }
+
   render() {
     return (
       <table className="drc-table">
