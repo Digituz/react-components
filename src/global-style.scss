@@ -13,12 +13,13 @@ $ultra-light-gray: #f7f7f7;
 $super-light-gray: #eee;
 
 $very-light-gray: #ddd;
-$default-shadow: 2px 2px 2px $very-light-gray;
+$default-shadow: 2px 2px 2px rgba(0, 0, 0, 0.2);
 $gradient: linear-gradient(to right, $blue 33%, $green 33%, $green 66%, $yellow 66%, $yellow 100%);
 
 * {
   -webkit-tap-highlight-color: transparent;
   box-sizing: border-box;
+  outline: none;
 }
 
 @mixin sm {
