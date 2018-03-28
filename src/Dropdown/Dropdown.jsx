@@ -25,6 +25,11 @@ class Dropdown extends Component {
     });
   }
 
+  handleOptionClick(event, onClick) {
+    this.closeOptions();
+    onClick(event);
+  }
+
   render() {
     const optionsClass = `drc-dropdown-options ${this.state.optionsVisible ? 'visible' : ''}`;
     const defaultOption = this.props.options.filter(option => (option.default))[0];
@@ -35,7 +40,12 @@ class Dropdown extends Component {
         <Button className="dropdown-button" text="▼" onClick={() => {this.toggleOptions()}} />
         <ul className={optionsClass}>
           { otherOptions.map((option, idx) => (
-            <li key={idx} onMouseDown={(event) => {event.preventDefault()}} onClick={option.onClick}>{option.label}</li>
+            <li
+              key={idx}
+              onMouseDown={(event) => {event.preventDefault()}}
+              onClick={(event) => { this.handleOptionClick(event, option.onClick) }}>
+              {option.label}
+            </li>
           ))}
         </ul>
       </div>
