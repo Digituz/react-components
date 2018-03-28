@@ -3,6 +3,7 @@
 div.drc-dropdown-container {
   position: relative;
   display: inline-block;
+  white-space: nowrap;
 
   .main-button {
     border-top-right-radius: 0;
