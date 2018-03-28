@@ -36,4 +36,8 @@ button.drc-button {
     background-color: $blue;
     border-color: $blue;
   }
+
+  &.margin-right {
+    margin-right: 5px;
+  }
 }
