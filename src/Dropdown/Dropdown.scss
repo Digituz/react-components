@@ -13,28 +13,47 @@ div.drc-dropdown-container {
     border-top-left-radius: 0;
     border-bottom-left-radius: 0;
     border-left: 1px solid transparentize($white, 0.8);
+    position: relative;
+    color: transparent;
+    width: 30px;
+    height: 28px;
+
+    &:after {
+      content: '▼';
+      font-size: 10px;
+      float: left;
+      margin-top: -18px;
+      color: $white;
+    }
   }
 
   ul.drc-dropdown-options {
     position: absolute;
-    top: 20px;
-    left: 0;
+    top: 25px;
+    right: 0;
     background-color: $white;
-    border: 1px solid black;
+    border: 1px solid $lighter-color;
     z-index: 20;
-    padding: 0;
+    padding: 5px 0 5px 0;
     display: none;
     list-style-type: none;
     min-width: 100%;
+    box-shadow: $default-shadow;
+    border-radius: $default-radius;
 
     &.visible {
       display: block;
     }
 
     li {
-      background-color: $dark-blue;
-      padding: 5px 15px 5px 15px;
-      color: $white;
+      padding: 5px 20px 5px 20px;
+      cursor: pointer;
+      white-space: nowrap;
+      text-align: left;
+
+      &:hover {
+        background-color: darken($white, 5%);
+      }
     }
   }
 }

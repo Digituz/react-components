@@ -35,7 +35,7 @@ class Dropdown extends Component {
     return (
       <div onBlur={(event) => { this.closeOptions(event) }} className="drc-dropdown-container">
         <Button className="main-button" text="Edit" onClick={() => {}} />
-        <Button className="dropdown-button" text="v" onClick={() => {this.toggleOptions()}} />
+        <Button className="dropdown-button" text="▼" onClick={() => {this.toggleOptions()}} />
         <ul className={optionsClass}>
           <li onClick={() => { this.saySomething() }}>Copy</li>
           <li onClick={() => { this.saySomething() }}>Delete</li>
