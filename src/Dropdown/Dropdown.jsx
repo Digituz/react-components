@@ -37,8 +37,13 @@ class Dropdown extends Component {
     return (
       <div onBlur={(event) => { this.closeOptions(event) }} className="drc-dropdown-container">
         <Button className="main-button" text={defaultOption.label} onClick={defaultOption.onClick} />
-        <Button className="dropdown-button" text="▼" onClick={() => {this.toggleOptions()}} />
-        <ul className={optionsClass}>
+        <Button
+          className="dropdown-button"
+          text="▼"
+          onClick={() => {this.toggleOptions()}}
+          ref={(dropdownButton) => { this.dropdownButton = dropdownButton; }}
+        />
+        <ul className={optionsClass} ref={(optionsList) => { this.optionsList = optionsList; }}>
           { otherOptions.map((option, idx) => (
             <li
               key={idx}
@@ -50,6 +55,17 @@ class Dropdown extends Component {
         </ul>
       </div>
     );
+  }
+
+  componentDidUpdate() {
+    if (!this.state.optionsVisible) return;
+    console.log(this.dropdownButton);
+    console.log(this.dropdownButton.updater);
+    return;
+    const {bottom, right} = this.dropdownButton.getBoundingClientRect();
+    this.optionsList.style.bottom = `${bottom}px`;
+    this.optionsList.style.right = `${right}px`;
+
   }
 }
 
