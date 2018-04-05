@@ -1,9 +1,9 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import Button from '../Button/Button';
-import './Dropdown.scss';
+import './DropDown.scss';
 
-class Dropdown extends Component {
+class DropDown extends Component {
   constructor() {
     super();
 
@@ -22,7 +22,7 @@ class Dropdown extends Component {
     const now = (new Date()).getTime();
     if (this.then && now - this.then < 10) return;
     this.then = now;
-    this.setState(Dropdown.calcPosition(this.optionsOpener));
+    this.setState(DropDown.calcPosition(this.optionsOpener));
   }
 
   static calcPosition(target) {
@@ -37,7 +37,7 @@ class Dropdown extends Component {
   toggleOptions(event) {
     this.optionsOpener = event.target;
 
-    const optionsPosition = Dropdown.calcPosition(this.optionsOpener);
+    const optionsPosition = DropDown.calcPosition(this.optionsOpener);
 
     window.addEventListener('scroll', this.updateOptionsPosition);
 
@@ -93,7 +93,7 @@ class Dropdown extends Component {
   }
 }
 
-Dropdown.propTypes ={
+DropDown.propTypes ={
   options: PropTypes.arrayOf(PropTypes.shape({
     label: PropTypes.string.isRequired,
     onClick: PropTypes.func.isRequired,
@@ -101,4 +101,4 @@ Dropdown.propTypes ={
   })).isRequired,
 };
 
-export default Dropdown;
+export default DropDown;
