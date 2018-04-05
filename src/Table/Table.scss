@@ -27,9 +27,5 @@ table.drc-table {
     overflow-x: scroll;
     white-space: nowrap;
     padding-left: 10px;
-
-    &:first-child {
-      padding: 0;
-    }
   }
 }

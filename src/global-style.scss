@@ -22,6 +22,10 @@ $gradient: linear-gradient(to right, $blue 33%, $green 33%, $green 66%, $yellow 
   outline: none;
 }
 
+.full-width {
+  width: 100%;
+}
+
 @media (max-width: 479px) {
   .hidden-sm {
     display: none;
