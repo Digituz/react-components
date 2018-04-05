@@ -29,21 +29,18 @@ div.drc-dropdown-container {
   }
 
   ul.drc-dropdown-options {
-    position: absolute;
-    top: 25px;
-    right: 0;
+    position: fixed;
     background-color: $white;
     border: 1px solid $lighter-color;
     z-index: 20;
     padding: 5px 0 5px 0;
     display: none;
     list-style-type: none;
-    min-width: 100%;
     box-shadow: $default-shadow;
     border-radius: $default-radius;
 
     &.visible {
-      display: block;
+      display: inline-block;
     }
 
     li {

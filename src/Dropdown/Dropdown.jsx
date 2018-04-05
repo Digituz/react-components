@@ -9,17 +9,49 @@ class Dropdown extends Component {
 
     this.state = {
       optionsVisible: false,
-    }
+      optionsTop: 0,
+      optionsRight: 0,
+    };
+
+    this.updateOptionsPosition = this.updateOptionsPosition.bind(this);
   }
 
-  toggleOptions() {
+  updateOptionsPosition() {
+    if (!this.state.optionsVisible) return;
+
+    const now = (new Date()).getTime();
+    if (this.then && now - this.then < 10) return;
+    this.then = now;
+    this.setState(Dropdown.calcPosition(this.optionsOpener));
+  }
+
+  static calcPosition(target) {
+    const {bottom, right} = target.getBoundingClientRect();
+
+    return {
+      optionsTop: bottom - 10,
+      optionsRight: window.innerWidth - right,
+    };
+  }
+
+  toggleOptions(event) {
+    this.optionsOpener = event.target;
+
+    const optionsPosition = Dropdown.calcPosition(this.optionsOpener);
+
+    window.addEventListener('scroll', this.updateOptionsPosition);
+
     this.setState({
       optionsVisible: !this.state.optionsVisible,
+      ...optionsPosition,
     });
   }
 
   closeOptions() {
     if (!this.state.optionsVisible) return;
+
+    window.removeEventListener('scroll', this.updateOptionsPosition);
+
     this.setState({
       optionsVisible: false,
     });
@@ -32,6 +64,10 @@ class Dropdown extends Component {
 
   render() {
     const optionsClass = `drc-dropdown-options ${this.state.optionsVisible ? 'visible' : ''}`;
+    const optionsStyle = {
+      top: `${this.state.optionsTop}px`,
+      right: `${this.state.optionsRight}px`,
+    };
     const defaultOption = this.props.options.filter(option => (option.default))[0];
     const otherOptions = this.props.options.filter(option => (!option.default));
     return (
@@ -40,10 +76,9 @@ class Dropdown extends Component {
         <Button
           className="dropdown-button"
           text="▼"
-          onClick={() => {this.toggleOptions()}}
-          ref={(dropdownButton) => { this.dropdownButton = dropdownButton; }}
+          onClick={(event) => {this.toggleOptions(event)}}
         />
-        <ul className={optionsClass} ref={(optionsList) => { this.optionsList = optionsList; }}>
+        <ul style={optionsStyle} className={optionsClass}>
           { otherOptions.map((option, idx) => (
             <li
               key={idx}
@@ -55,17 +90,6 @@ class Dropdown extends Component {
         </ul>
       </div>
     );
-  }
-
-  componentDidUpdate() {
-    if (!this.state.optionsVisible) return;
-    console.log(this.dropdownButton);
-    console.log(this.dropdownButton.updater);
-    return;
-    const {bottom, right} = this.dropdownButton.getBoundingClientRect();
-    this.optionsList.style.bottom = `${bottom}px`;
-    this.optionsList.style.right = `${right}px`;
-
   }
 }
 
