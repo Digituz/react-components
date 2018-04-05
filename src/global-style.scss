@@ -22,6 +22,30 @@ $gradient: linear-gradient(to right, $blue 33%, $green 33%, $green 66%, $yellow 
   outline: none;
 }
 
+@media (max-width: 479px) {
+  .hidden-sm {
+    display: none;
+  }
+}
+
+@media (max-width: 839px) {
+  .hidden-md {
+    display: none;
+  }
+}
+
+@media (max-width: 1023px) {
+  .hidden-lg {
+    display: none;
+  }
+}
+
+@media (min-width: 1024px) {
+  .hidden-xl {
+    display: none;
+  }
+}
+
 @mixin sm {
   @media (max-width: 479px) {
     @content;

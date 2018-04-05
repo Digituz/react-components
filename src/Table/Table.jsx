@@ -46,7 +46,7 @@ class Table extends Component {
         <tr>
         {
           this.props.columns.map((column, idx) => (
-            <th key={idx}>{column.title}</th>
+            <th className={column.headerClass} key={idx}>{column.title}</th>
           ))
         }
         </tr>
@@ -76,6 +76,7 @@ Table.propTypes = {
   columns: PropTypes.arrayOf(PropTypes.shape({
     title: PropTypes.string.isRequired,
     property: PropTypes.string,
+    headerClass: PropTypes.string,
     columnClass: PropTypes.string,
     render: PropTypes.func,
   })).isRequired,
