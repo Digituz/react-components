@@ -9,4 +9,8 @@ input.drc-input {
   margin-bottom: 15px;
   border: 1px solid $very-light-gray;
   border-radius: 2px;
+
+  &:read-only {
+    cursor: pointer;
+  }
 }

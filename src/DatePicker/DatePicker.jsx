@@ -15,11 +15,12 @@ class DatePicker extends Component {
     this.state = {
       selectedDate: props.date,
       currentMonth: new Date(year, month, 1),
-    }
+    };
   }
 
   componentDidMount() {
     document.body.appendChild(this.el);
+    this.el.querySelectorAll('button.default.change-year')[0].focus();
   }
 
   static getDayOfWeek(day) {

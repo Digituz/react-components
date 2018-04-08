@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import {maskJs, maskCurrency, removeNonDigits} from 'mask-js';
+import DatePicker from '../DatePicker/DatePicker';
 import './Input.scss';
 
 class Input extends Component {
@@ -14,7 +15,10 @@ class Input extends Component {
 
     this.state = {
       value: this.valueToString(this.props.value),
-    }
+      showDatePicker: false,
+    };
+
+    this.toggleDatePicker = this.toggleDatePicker.bind(this);
   }
 
   static dateToString(date) {
@@ -140,10 +144,23 @@ class Input extends Component {
     });
   }
 
+  toggleDatePicker() {
+    this.setState({
+      showDatePicker: !this.state.showDatePicker,
+    });
+  }
+
   render() {
     const className = 'drc-input ' + this.props.className;
-    return (
+    const readOnly = this.props.type === 'date';
+
+    const showDatePicker = readOnly ?
+      this.toggleDatePicker :
+      () => {};
+
+    const items = [
       <input
+        key="input"
         id={this.props.id}
         className={className}
         value={this.state.value}
@@ -151,8 +168,24 @@ class Input extends Component {
         onBlur={this.onBlur}
         onSelect={(event) => {this.onSelect(event)}}
         placeholder={this.props.placeholder}
+        onClick={showDatePicker}
+        readOnly={readOnly}
+      />
+    ];
+
+    if (readOnly && this.state.showDatePicker) items.push(
+      <DatePicker
+        key="date-picker"
+        date={this.props.value}
+        onCancel={() => this.toggleDatePicker()}
+        onOk={(date) => {
+          this.toggleDatePicker();
+          this.props.onBlur(date)
+        }}
       />
     );
+
+    return items;
   }
 }
 
