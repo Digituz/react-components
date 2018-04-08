@@ -8,6 +8,13 @@ class DatePicker extends Component {
   constructor(props) {
     super(props);
     this.el = document.createElement('div');
+
+    const year = props.date.getFullYear();
+    const month = props.date.getMonth();
+
+    this.state = {
+      currentMonth: new Date(year, month, 1),
+    }
   }
 
   componentDidMount() {
@@ -62,12 +69,61 @@ class DatePicker extends Component {
     }
   }
 
+  static getFullMonth(month) {
+    switch (month) {
+      case 0:
+        return 'January';
+      case 1:
+        return 'February';
+      case 2:
+        return 'March';
+      case 3:
+        return 'April';
+      case 4:
+        return 'May';
+      case 5:
+        return 'June';
+      case 6:
+        return 'July';
+      case 7:
+        return 'August';
+      case 8:
+        return 'September';
+      case 9:
+        return 'October';
+      case 10:
+        return 'November';
+      case 11:
+        return 'December';
+    }
+  }
+
+  nextMonth() {
+    const year = this.state.currentMonth.getFullYear();
+    const month = this.state.currentMonth.getMonth();
+    const date = this.state.currentMonth.getDate();
+    const nextMonth = new Date(year, month + 1, date);
+    this.setState({
+      currentMonth: nextMonth,
+    });
+  }
+
+  previousMonth() {
+    const year = this.state.currentMonth.getFullYear();
+    const month = this.state.currentMonth.getMonth();
+    const date = this.state.currentMonth.getDate();
+    const nextMonth = new Date(year, month - 1, date);
+    this.setState({
+      currentMonth: nextMonth,
+    });
+  }
+
   render() {
-    const year = this.props.date.getFullYear();
-    const month = this.props.date.getMonth();
+    const year = this.state.currentMonth.getFullYear();
+    const month = this.state.currentMonth.getMonth();
     const monthLabel = DatePicker.getMonth(month);
-    const date = this.props.date.getDate();
-    const day = this.props.date.getDay();
+    const date = this.state.currentMonth.getDate();
+    const day = this.state.currentMonth.getDay();
     const dayOfWeek = DatePicker.getDayOfWeek(day);
 
     const firstDateOfMonth = new Date(year, month, 1);
@@ -84,7 +140,7 @@ class DatePicker extends Component {
 
     let dateIterator = firstDateShowed;
     const days = [];
-    while (dateIterator < lastDateShowed) {
+    while (days.length < 42) {
       days.push(new Date(dateIterator.getTime()));
       dateIterator.setDate(dateIterator.getDate() + 1);
     }
@@ -95,6 +151,15 @@ class DatePicker extends Component {
           <div className="selected-date">
             <span className="year">{year}</span><br/>
             <span>{dayOfWeek}, {monthLabel} {date}</span>
+          </div>
+          <div className="control">
+            <Button text="<" onClick={() => {this.previousMonth()}} className="default" />
+            <Button
+              text={`${DatePicker.getFullMonth(month)} ${year}`}
+              onClick={() => {this.previousMonth()}}
+              className="default year-selector"
+            />
+            <Button text=">" onClick={() => {this.nextMonth()}} className="default" />
           </div>
           <div className="calendar">
             <div className="header">
