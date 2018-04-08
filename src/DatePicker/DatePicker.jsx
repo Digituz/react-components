@@ -13,6 +13,7 @@ class DatePicker extends Component {
     const month = props.date.getMonth();
 
     this.state = {
+      selectedDate: props.date,
       currentMonth: new Date(year, month, 1),
     }
   }
@@ -109,12 +110,14 @@ class DatePicker extends Component {
   }
 
   render() {
+    const selectedMonth = this.state.selectedDate.getMonth();
+    const monthLabel = DatePicker.getMonth(selectedMonth);
+    const date = this.state.selectedDate.getDate();
+    const day = this.state.selectedDate.getDay();
+    const dayOfWeek = DatePicker.getDayOfWeek(day);
+
     const year = this.state.currentMonth.getFullYear();
     const month = this.state.currentMonth.getMonth();
-    const monthLabel = DatePicker.getMonth(month);
-    const date = this.state.currentMonth.getDate();
-    const day = this.state.currentMonth.getDay();
-    const dayOfWeek = DatePicker.getDayOfWeek(day);
 
     const firstDateOfMonth = new Date(year, month, 1);
     const firstDayOfMonth = firstDateOfMonth.getDay();
