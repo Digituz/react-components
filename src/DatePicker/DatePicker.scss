@@ -15,7 +15,23 @@ div.drc-date-picker-overlay {
   div.drc-date-picker-container {
     background-color: $white;
     box-shadow: rgba(0, 0, 0, 0.25) 0 14px 45px, rgba(0, 0, 0, 0.22) 0 10px 18px;
-    padding: 15px;
-    min-width: 300px;
+    min-width: 310px;
+
+    div.selected-date {
+      background-color: $blue;
+      padding: 5px 15px 15px 15px;
+      color: $blue-lightest;
+      font-size: 35px;
+
+      span.year {
+        color: $blue-lighter;
+        font-size: 16px;
+      }
+    }
+
+    div.calendar {
+      background-color: $white;
+      padding: 15px;
+    }
   }
 }

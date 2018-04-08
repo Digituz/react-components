@@ -7,6 +7,8 @@ $white: #fff;
 $green: #62cb31;
 $yellow: #ffb606;
 $blue: #3498db;
+$blue-lighter: lighten(#3498db, 20%);
+$blue-lightest: lighten(#3498db, 40%);
 $dark-blue: #34495e;
 $red: #ea6557;
 $ultra-light-gray: #f7f7f7;

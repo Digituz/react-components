@@ -17,19 +17,19 @@ class DatePicker extends Component {
     const day = date.getDay();
     switch (day) {
       case 0:
-        return 'Sunday';
+        return 'Sun';
       case 1:
-        return 'Monday';
+        return 'Mon';
       case 2:
-        return 'Tuesday';
+        return 'Tue';
       case 3:
-        return 'Wednesday';
+        return 'Wed';
       case 4:
-        return 'Thursday';
+        return 'Thu';
       case 5:
-        return 'Friday';
+        return 'Fri';
       case 6:
-        return 'Saturday';
+        return 'Sat';
     }
   }
 
@@ -73,8 +73,11 @@ class DatePicker extends Component {
       <div className="drc-date-picker-overlay">
         <div className="drc-date-picker-container">
           <div className="selected-date">
-            <span>{year}</span><br/>
+            <span className="year">{year}</span><br/>
             <span>{dayOfWeek}, {month} {date}</span>
+          </div>
+          <div className="calendar">
+
           </div>
         </div>
       </div>
