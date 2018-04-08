@@ -1,6 +1,7 @@
 import Button from './Button/Button';
 import Card from './Card/Card';
 import DropDown from './DropDown/DropDown';
+import DatePicker from './DatePicker/DatePicker';
 import Grid from './Grid/Grid';
 import If from './If/If';
 import Input from './Input/Input';
@@ -17,6 +18,7 @@ import VerticalMenu from './VerticalMenu/VerticalMenu';
 export {
   Button,
   Card,
+  DatePicker,
   DropDown,
   Grid,
   If,
