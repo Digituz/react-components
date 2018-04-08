@@ -109,6 +109,12 @@ class DatePicker extends Component {
     });
   }
 
+  changeDate(date) {
+    this.setState({
+      selectedDate: date,
+    });
+  }
+
   render() {
     const selectedMonth = this.state.selectedDate.getMonth();
     const monthLabel = DatePicker.getMonth(selectedMonth);
@@ -166,7 +172,7 @@ class DatePicker extends Component {
               let className = ``;
               if (date.getMonth() !== month) className = 'out-of-month';
               return (
-                <span key={date.getTime()} className={className}>{date.getDate()}</span>
+                <span onClick={() => (this.changeDate(date))} key={date.getTime()} className={className}>{date.getDate()}</span>
               );
             })}
           </div>
