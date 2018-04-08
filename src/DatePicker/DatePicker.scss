@@ -58,5 +58,16 @@ div.drc-date-picker-overlay {
         }
       }
     }
+
+    div.actions {
+      padding: 0 15px 15px 15px;
+      text-align: right;
+
+      .drc-button {
+        margin-left: 5px;
+        width: 85px;
+        line-height: 25px;
+      }
+    }
   }
 }

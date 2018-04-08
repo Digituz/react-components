@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
+import Button from '../Button/Button';
 import './DatePicker.scss';
 
 class DatePicker extends Component {
@@ -89,8 +90,8 @@ class DatePicker extends Component {
     }
 
     const modal = (
-      <div className="drc-date-picker-overlay">
-        <div className="drc-date-picker-container">
+      <div onClick={this.props.onCancel} className="drc-date-picker-overlay">
+        <div onClick={evt => (evt.stopPropagation())} className="drc-date-picker-container">
           <div className="selected-date">
             <span className="year">{year}</span><br/>
             <span>{dayOfWeek}, {monthLabel} {date}</span>
@@ -109,9 +110,13 @@ class DatePicker extends Component {
               let className = ``;
               if (date.getMonth() !== month) className = 'out-of-month';
               return (
-                <span className={className}>{date.getDate()}</span>
+                <span key={date.getTime()} className={className}>{date.getDate()}</span>
               );
             })}
+          </div>
+          <div className="actions">
+            <Button text="Cancel" onClick={this.props.onCancel} className="default" />
+            <Button text="Ok" onClick={this.props.onOk} className="info" />
           </div>
         </div>
       </div>
@@ -125,6 +130,8 @@ class DatePicker extends Component {
 }
 
 DatePicker.propTypes = {
+  onCancel: PropTypes.func.isRequired,
+  onOk: PropTypes.func.isRequired,
   date: PropTypes.instanceOf(Date),
 };
 
