@@ -13,8 +13,7 @@ class DatePicker extends Component {
     document.body.appendChild(this.el);
   }
 
-  static getDayOfWeek(date) {
-    const day = date.getDay();
+  static getDayOfWeek(day) {
     switch (day) {
       case 0:
         return 'Sun';
@@ -33,8 +32,7 @@ class DatePicker extends Component {
     }
   }
 
-  static getMonth(date) {
-    const month = date.getMonth();
+  static getMonth(month) {
     switch (month) {
       case 0:
         return 'Jan';
@@ -65,19 +63,55 @@ class DatePicker extends Component {
 
   render() {
     const year = this.props.date.getFullYear();
-    const month = DatePicker.getMonth(this.props.date);
+    const month = this.props.date.getMonth();
+    const monthLabel = DatePicker.getMonth(month);
     const date = this.props.date.getDate();
-    const dayOfWeek = DatePicker.getDayOfWeek(this.props.date);
+    const day = this.props.date.getDay();
+    const dayOfWeek = DatePicker.getDayOfWeek(day);
+
+    const firstDateOfMonth = new Date(year, month, 1);
+    const firstDayOfMonth = firstDateOfMonth.getDay();
+    const firstDateShowed = new Date(year, month, 1);
+    firstDateShowed.setDate(firstDateOfMonth.getDate() - firstDayOfMonth);
+
+    const lastDateOfMonth = new Date(year, month + 1);
+    lastDateOfMonth.setDate(lastDateOfMonth.getDate() - 1);
+    const lastDayOfMonth = lastDateOfMonth.getDay();
+    const lastDateShowed = new Date(year, month + 1);
+    lastDateShowed.setDate(lastDateShowed.getDate() - 1);
+    lastDateShowed.setDate(lastDateOfMonth.getDate() + 7 - lastDayOfMonth);
+
+    let dateIterator = firstDateShowed;
+    const days = [];
+    while (dateIterator < lastDateShowed) {
+      days.push(new Date(dateIterator.getTime()));
+      dateIterator.setDate(dateIterator.getDate() + 1);
+    }
 
     const modal = (
       <div className="drc-date-picker-overlay">
         <div className="drc-date-picker-container">
           <div className="selected-date">
             <span className="year">{year}</span><br/>
-            <span>{dayOfWeek}, {month} {date}</span>
+            <span>{dayOfWeek}, {monthLabel} {date}</span>
           </div>
           <div className="calendar">
-
+            <div className="header">
+              <span>S</span>
+              <span>M</span>
+              <span>T</span>
+              <span>W</span>
+              <span>T</span>
+              <span>F</span>
+              <span>S</span>
+            </div>
+            { days.map((date) => {
+              let className = ``;
+              if (date.getMonth() !== month) className = 'out-of-month';
+              return (
+                <span className={className}>{date.getDate()}</span>
+              );
+            })}
           </div>
         </div>
       </div>

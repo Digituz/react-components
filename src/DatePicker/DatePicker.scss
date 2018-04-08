@@ -15,7 +15,7 @@ div.drc-date-picker-overlay {
   div.drc-date-picker-container {
     background-color: $white;
     box-shadow: rgba(0, 0, 0, 0.25) 0 14px 45px, rgba(0, 0, 0, 0.22) 0 10px 18px;
-    min-width: 310px;
+    width: 310px;
 
     div.selected-date {
       background-color: $blue;
@@ -32,6 +32,31 @@ div.drc-date-picker-overlay {
     div.calendar {
       background-color: $white;
       padding: 15px;
+
+      span {
+        display: inline-block;
+        padding: 5px;
+        width: 40px;
+        height: 40px;
+        text-align: center;
+        line-height: 30px;
+        color: $default-color;
+
+        &:hover {
+          background-color: $super-light-gray;
+          cursor: pointer;
+        }
+
+        &.out-of-month {
+          color: $very-light-gray;
+        }
+      }
+
+      .header {
+        span {
+          color: $very-light-gray;
+        }
+      }
     }
   }
 }
