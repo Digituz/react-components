@@ -178,7 +178,7 @@ class DatePicker extends Component {
           </div>
           <div className="actions">
             <Button text="Cancel" onClick={this.props.onCancel} className="default" />
-            <Button text="Ok" onClick={this.props.onOk} className="info" />
+            <Button text="Ok" onClick={() => (this.props.onOk(this.state.selectedDate))} className="info" />
           </div>
         </div>
       </div>
