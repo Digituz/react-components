@@ -33,8 +33,31 @@ div.drc-date-picker-overlay {
       padding: 15px 15px 0 15px;
       display: flex;
 
-      .drc-button.year-selector {
+      .drc-button.change-month {
+        font-size: 18px;
+        width: 31px;
+      }
+
+      .drc-button.change-year {
+        font-size: 18px;
+        width: 31px;
+
+        &:last-child {
+          padding-left: 8px;
+        }
+
+        &:first-child {
+          padding-right: 8px;
+        }
+      }
+
+      span {
         flex-grow: 2;
+        text-align: center;
+        line-height: 30px;
+        color: $default-color;
+        position: relative;
+        top:2px;
       }
     }
 

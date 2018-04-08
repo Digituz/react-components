@@ -98,21 +98,11 @@ class DatePicker extends Component {
     }
   }
 
-  nextMonth() {
+  addMonths(months) {
     const year = this.state.currentMonth.getFullYear();
     const month = this.state.currentMonth.getMonth();
     const date = this.state.currentMonth.getDate();
-    const nextMonth = new Date(year, month + 1, date);
-    this.setState({
-      currentMonth: nextMonth,
-    });
-  }
-
-  previousMonth() {
-    const year = this.state.currentMonth.getFullYear();
-    const month = this.state.currentMonth.getMonth();
-    const date = this.state.currentMonth.getDate();
-    const nextMonth = new Date(year, month - 1, date);
+    const nextMonth = new Date(year, month + months, date);
     this.setState({
       currentMonth: nextMonth,
     });
@@ -153,13 +143,11 @@ class DatePicker extends Component {
             <span>{dayOfWeek}, {monthLabel} {date}</span>
           </div>
           <div className="control">
-            <Button text="<" onClick={() => {this.previousMonth()}} className="default" />
-            <Button
-              text={`${DatePicker.getFullMonth(month)} ${year}`}
-              onClick={() => {this.previousMonth()}}
-              className="default year-selector"
-            />
-            <Button text=">" onClick={() => {this.nextMonth()}} className="default" />
+            <Button text="«" onClick={() => {this.addMonths(-12)}} className="default change-year" />
+            <Button text="‹" onClick={() => {this.addMonths(-1)}} className="default change-month" />
+            <span>{DatePicker.getFullMonth(month)} {year}</span>
+            <Button text="›" onClick={() => {this.addMonths(1)}} className="default change-month" />
+            <Button text="»" onClick={() => {this.addMonths(12)}} className="default change-year" />
           </div>
           <div className="calendar">
             <div className="header">
