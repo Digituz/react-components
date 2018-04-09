@@ -5,13 +5,13 @@ div.drc-card {
   background-color: $white;
   border-bottom: none;
   border-right: none;
-  border-radius: 3px;
+  border-radius: $default-radius;
   box-shadow: $default-shadow;
 
   .drc-card-header {
     background-color: whitesmoke;
-    border-top-left-radius: 3px;
-    border-top-right-radius: 3px;
+    border-top-left-radius: $default-radius;
+    border-top-right-radius: $default-radius;
     border-bottom: 1px solid $very-light-gray;
     padding: 10px 15px 10px 15px;
 

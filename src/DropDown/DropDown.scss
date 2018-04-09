@@ -17,7 +17,8 @@ div.drc-dropdown-container {
     position: relative;
     color: transparent;
     width: 30px;
-    height: 28px;
+    height: 30px;
+    margin-left: -1px;
 
     &:after {
       content: '▼';
