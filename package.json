@@ -36,7 +36,7 @@
     "watch": "^1.0.2"
   },
   "files": [
-    "./dist/**/*",
+    "./dist",
     "README.md",
     "LICENSE",
     "package.json"
