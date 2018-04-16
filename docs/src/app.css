@@ -1,8 +1,0 @@
-div.showcase-root {
-  display: grid;
-  background-color: white;
-}
-
-div.showcase-root h1 {
-  font-size: 60px !important;
-}
