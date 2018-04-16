@@ -35,12 +35,6 @@
     "nodemon": "^1.15.1",
     "watch": "^1.0.2"
   },
-  "files": [
-    "./dist",
-    "README.md",
-    "LICENSE",
-    "package.json"
-  ],
   "scripts": {
     "babelify": "node ./scripts/babel",
     "processCss": "node ./scripts/sass",
