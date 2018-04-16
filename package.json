@@ -1,6 +1,6 @@
 {
   "name": "@digituz/react-components",
-  "version": "1.2.9",
+  "version": "1.2.10",
   "description": "Digituz React Components",
   "main": "./dist/index.js",
   "keywords": [
