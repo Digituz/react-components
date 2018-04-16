@@ -62,5 +62,4 @@ typings/
 *.iml
 
 # ignoring dist
-dist/
 .DS_Store
