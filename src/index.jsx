@@ -12,6 +12,7 @@ import NotificationManager from './Notification/NotificationManager';
 import Panel from './Panel/Panel';
 import PanelBody from './PanelBody/PanelBody';
 import PanelHeader from './PanelHeader/PanelHeader';
+import RestFlexRoute from './RestFlex/RestFlexRoute';
 import Table from './Table/Table';
 import VerticalMenu from './VerticalMenu/VerticalMenu';
 
@@ -30,6 +31,7 @@ export {
   Panel,
   PanelBody,
   PanelHeader,
+  RestFlexRoute,
   Table,
   VerticalMenu,
 }

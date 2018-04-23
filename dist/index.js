@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.VerticalMenu = exports.Table = exports.PanelHeader = exports.PanelBody = exports.Panel = exports.NotificationManager = exports.NotificationContainer = exports.Modal = exports.InputLabel = exports.Input = exports.If = exports.Grid = exports.DropDown = exports.DatePicker = exports.Card = exports.Button = undefined;
+exports.VerticalMenu = exports.Table = exports.RestFlexRoute = exports.PanelHeader = exports.PanelBody = exports.Panel = exports.NotificationManager = exports.NotificationContainer = exports.Modal = exports.InputLabel = exports.Input = exports.If = exports.Grid = exports.DropDown = exports.DatePicker = exports.Card = exports.Button = undefined;
 
 var _Button = require('./Button/Button');
 
@@ -61,6 +61,10 @@ var _PanelHeader = require('./PanelHeader/PanelHeader');
 
 var _PanelHeader2 = _interopRequireDefault(_PanelHeader);
 
+var _RestFlexRoute = require('./RestFlex/RestFlexRoute');
+
+var _RestFlexRoute2 = _interopRequireDefault(_RestFlexRoute);
+
 var _Table = require('./Table/Table');
 
 var _Table2 = _interopRequireDefault(_Table);
@@ -85,5 +89,6 @@ exports.NotificationManager = _NotificationManager2.default;
 exports.Panel = _Panel2.default;
 exports.PanelBody = _PanelBody2.default;
 exports.PanelHeader = _PanelHeader2.default;
+exports.RestFlexRoute = _RestFlexRoute2.default;
 exports.Table = _Table2.default;
 exports.VerticalMenu = _VerticalMenu2.default;

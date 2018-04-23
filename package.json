@@ -14,11 +14,13 @@
   },
   "license": "MIT",
   "dependencies": {
+    "@digituz/rest-flex-client": "^1.0.1",
     "fbemitter": "^2.1.1",
     "mask-js": "^2.1.0",
     "prop-types": "^15.6.1",
     "react": "^16.3.1",
-    "react-dom": "^16.3.1"
+    "react-dom": "^16.3.1",
+    "react-router-dom": "^4.2.2"
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",
