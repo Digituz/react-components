@@ -67,10 +67,6 @@ var EntityList = function (_Component) {
     value: function render() {
       var _this3 = this;
 
-      var component = this.props.match.params.id ? this.renderForm() : this.renderTable();
-
-      console.log(this.props.match.params);
-
       return _react2.default.createElement(
         _.Card,
         { className: 'sm-12 md-10 md-pad-1 lg-8 lg-pad-2', title: this.props.model.plural },
@@ -82,22 +78,8 @@ var EntityList = function (_Component) {
         _react2.default.createElement(_.Button, { onClick: function onClick() {
             _this3.newEntity();
           }, text: 'New ' + this.props.model.title }),
-        component
+        _react2.default.createElement(_.Table, { data: this.state.data, columns: this.props.columns })
       );
-    }
-  }, {
-    key: 'renderForm',
-    value: function renderForm() {
-      return _react2.default.createElement(
-        'div',
-        null,
-        'oi'
-      );
-    }
-  }, {
-    key: 'renderTable',
-    value: function renderTable() {
-      return _react2.default.createElement(_.Table, { data: this.state.data, columns: this.props.columns });
     }
   }]);
 

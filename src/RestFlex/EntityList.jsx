@@ -28,31 +28,13 @@ class EntityList extends Component {
   }
 
   render() {
-    const component = (
-      this.props.match.params.id ? this.renderForm() : this.renderTable()
-    );
-
-    console.log(this.props.match.params);
-
     return (
       <Card className="sm-12 md-10 md-pad-1 lg-8 lg-pad-2" title={this.props.model.plural}>
         <p>{this.props.model.description}</p>
         <Button onClick={() => { this.newEntity() }} text={`New ${this.props.model.title}`} />
-        {component}
+        <Table data={this.state.data} columns={this.props.columns} />
       </Card>
     );
-  }
-
-  renderForm() {
-    return (
-      <div>oi</div>
-    )
-  }
-
-  renderTable() {
-    return (
-      <Table data={this.state.data} columns={this.props.columns} />
-    )
   }
 }
 

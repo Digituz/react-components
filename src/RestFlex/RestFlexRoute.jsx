@@ -6,15 +6,12 @@ import EntityList from './EntityList';
 
 class RestFlexRoute extends Component {
   render() {
-    console.log(this.props.model.path);
     return (
       <Fragment key={this.props.model.path}>
         <Route exact path={this.props.model.path} render={() => {
-          console.log('rendering list');
           return <EntityList model={this.props.model} columns={this.props.columns}/>
         }}/>
         <Route exact path={`${this.props.model.path}/:id`} render={() => {
-          console.log('rendering form');
           return <EntityForm model={this.props.model} entity={{}}/>
         }}/>
       </Fragment>

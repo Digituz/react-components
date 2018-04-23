@@ -46,16 +46,13 @@ var RestFlexRoute = function (_Component) {
     value: function render() {
       var _this2 = this;
 
-      console.log(this.props.model.path);
       return _react2.default.createElement(
         _react.Fragment,
         { key: this.props.model.path },
         _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: this.props.model.path, render: function render() {
-            console.log('rendering list');
             return _react2.default.createElement(_EntityList2.default, { model: _this2.props.model, columns: _this2.props.columns });
           } }),
         _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: this.props.model.path + '/:id', render: function render() {
-            console.log('rendering form');
             return _react2.default.createElement(_EntityForm2.default, { model: _this2.props.model, entity: {} });
           } })
       );

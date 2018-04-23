@@ -4,6 +4,8 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 var _react = require('react');
@@ -14,7 +16,17 @@ var _propTypes = require('prop-types');
 
 var _propTypes2 = _interopRequireDefault(_propTypes);
 
+var _reactRouterDom = require('react-router-dom');
+
+var _restFlexClient = require('@digituz/rest-flex-client');
+
+var _restFlexClient2 = _interopRequireDefault(_restFlexClient);
+
+var _ = require('../');
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -30,20 +42,127 @@ var EntityForm = function (_Component) {
 
     var _this = _possibleConstructorReturn(this, (EntityForm.__proto__ || Object.getPrototypeOf(EntityForm)).call(this, props));
 
+    var entity = {};
+
+    Object.keys(props.model.properties).forEach(function (property) {
+      entity[property] = '';
+    });
+
     _this.state = {
-      entity: props.entity
+      id: null,
+      entity: entity
     };
+
+    _this.updateField = _this.updateField.bind(_this);
+
+    _this.client = new _restFlexClient2.default(_this.props.model.url);
     return _this;
   }
 
   _createClass(EntityForm, [{
+    key: 'componentDidMount',
+    value: function componentDidMount() {
+      var _this2 = this;
+
+      var id = this.props.match.params.id;
+      if (id.trim() === 'new') return;
+      this.client.get(id).then(function (entity) {
+        _this2.setState({
+          id: id,
+          entity: entity
+        });
+      });
+    }
+  }, {
+    key: 'updateField',
+    value: function updateField(property) {
+      var _this3 = this;
+
+      return function (value) {
+        _this3.setState({
+          entity: _extends({}, _this3.state.entity, _defineProperty({}, property, value))
+        });
+      };
+    }
+  }, {
+    key: 'getFieldFromProperty',
+    value: function getFieldFromProperty(propertyKey) {
+      var property = this.props.model.properties[propertyKey];
+      if (property.type === 'string') {
+        return _react2.default.createElement(
+          'div',
+          { className: 'sm-12', key: propertyKey },
+          _react2.default.createElement(_.InputLabel, {
+            inputId: propertyKey,
+            label: property.label,
+            placeholder: property.placeholder,
+            value: this.state.entity[propertyKey],
+            onBlur: this.updateField(propertyKey)
+          })
+        );
+      }
+      return null;
+    }
+  }, {
+    key: 'save',
+    value: function save() {
+      var _this4 = this;
+
+      if (this.state.id) {
+        this.client.update(this.state.id, this.state.entity).then(function () {
+          _this4.props.history.push(_this4.props.model.path);
+          _.NotificationManager.success(_this4.props.model.plural + ' updated successfully.');
+        }).catch(function (err) {
+          if (err.message && typeof err.message === 'string') return _.NotificationManager.danger(err.message);
+          _.NotificationManager.danger('Something went wrong.');
+        });
+        return;
+      }
+      this.client.insert(this.state.entity).then(function () {
+        _this4.props.history.push(_this4.props.model.path);
+        _.NotificationManager.success(_this4.props.model.plural + ' inserted successfully.');
+      }).catch(function (err) {
+        if (err.message && typeof err.message === 'string') return _.NotificationManager.danger(err.message);
+        _.NotificationManager.danger('Something went wrong.');
+      });
+    }
+  }, {
+    key: 'goBack',
+    value: function goBack() {
+      this.props.history.goBack();
+    }
+  }, {
     key: 'render',
     value: function render() {
-      console.log(this.state.entity);
+      var _this5 = this;
+
+      var properties = Object.keys(this.props.model.properties);
+      var fields = properties.map(function (property) {
+        return _this5.getFieldFromProperty(property);
+      });
+
       return _react2.default.createElement(
-        'p',
-        null,
-        'good to go'
+        _.Card,
+        {
+          className: 'sm-12 md-10 md-pad-1 lg-8 lg-pad-2',
+          title: this.props.model.title },
+        _react2.default.createElement(
+          _.Grid,
+          null,
+          fields.map(function (field) {
+            return field;
+          }),
+          _react2.default.createElement(
+            'div',
+            { className: 'sm-12' },
+            _react2.default.createElement(_.Button, { className: 'margin-right', onClick: function onClick() {
+                _this5.save();
+              }, text: 'Save' }),
+            _react2.default.createElement(_.Button, { className: 'default', onClick: function onClick() {
+                _this5.goBack();
+              }, text: 'Return' })
+          )
+        )
       );
     }
   }]);
@@ -52,7 +171,6 @@ var EntityForm = function (_Component) {
 }(_react.Component);
 
 EntityForm.propTypes = {
-  entity: _propTypes2.default.instanceOf(Object),
   model: _propTypes2.default.shape({
     url: _propTypes2.default.string.isRequired,
     path: _propTypes2.default.string.isRequired,
@@ -64,4 +182,4 @@ EntityForm.propTypes = {
   }).isRequired
 };
 
-exports.default = EntityForm;
+exports.default = (0, _reactRouterDom.withRouter)(EntityForm);

@@ -13,4 +13,9 @@ input.drc-input {
   &:read-only {
     cursor: pointer;
   }
+
+  &::placeholder {
+    color: $very-light-gray;
+    opacity: 1;
+  }
 }
