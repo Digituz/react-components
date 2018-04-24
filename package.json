@@ -34,13 +34,13 @@
     "jest": "^22.2.2",
     "jest-enzyme": "^4.2.0",
     "node-sass": "^4.7.2",
-    "nodemon": "^1.15.1",
     "watch": "^1.0.2"
   },
   "scripts": {
     "babelify": "node ./scripts/babel",
+    "dev": "watch 'npm run prepublish' ./src/",
     "processCss": "node ./scripts/sass",
-    "prepublishOnly": "npm run babelify && npm run processCss",
+    "prepublish": "npm run babelify && npm run processCss",
     "test": "jest"
   },
   "jest": {

@@ -33,10 +33,6 @@ table.drc-table {
     padding-left: 10px;
     border-right: 1px solid $very-light-gray;
 
-    &:first-child {
-      padding-left: 0;
-    }
-
     &:last-child {
       padding-right: 10px;
     }
