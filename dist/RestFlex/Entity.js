@@ -12,6 +12,8 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 exports.default = {
   url: _propTypes2.default.string.isRequired,
+  audience: _propTypes2.default.string.isRequired,
+  domain: _propTypes2.default.string.isRequired,
   path: _propTypes2.default.string.isRequired,
   title: _propTypes2.default.string.isRequired,
   plural: _propTypes2.default.string.isRequired,

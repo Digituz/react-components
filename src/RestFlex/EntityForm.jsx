@@ -26,7 +26,8 @@ class EntityForm extends Component {
 
     this.updateField = this.updateField.bind(this);
 
-    this.client = new RestFlexClient(this.props.model.url);
+    const {url, audience, domain} = this.props.model;
+    this.client = new RestFlexClient(url, audience, domain, props.auth0Config);
   }
 
   componentDidMount() {
@@ -124,6 +125,11 @@ class EntityForm extends Component {
 }
 
 EntityForm.propTypes = {
+  auth0Config: PropTypes.shape({
+    domain: PropTypes.string.isRequired,
+    clientID: PropTypes.string.isRequired,
+    redirectUri: PropTypes.string.isRequired
+  }).isRequired,
   model: PropTypes.shape(Entity).isRequired,
 };
 

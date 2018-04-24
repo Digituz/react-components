@@ -44,7 +44,12 @@ var EntityList = function (_Component) {
 
     var _this = _possibleConstructorReturn(this, (EntityList.__proto__ || Object.getPrototypeOf(EntityList)).call(this, props));
 
-    _this.client = new _restFlexClient2.default(_this.props.model.url);
+    var _this$props$model = _this.props.model,
+        url = _this$props$model.url,
+        audience = _this$props$model.audience,
+        domain = _this$props$model.domain;
+
+    _this.client = new _restFlexClient2.default(url, audience, domain, props.auth0Config);
 
     _this.state = {
       data: []
@@ -138,6 +143,11 @@ var EntityList = function (_Component) {
 }(_react.Component);
 
 EntityList.propTypes = {
+  auth0Config: _propTypes2.default.shape({
+    domain: _propTypes2.default.string.isRequired,
+    clientID: _propTypes2.default.string.isRequired,
+    redirectUri: _propTypes2.default.string.isRequired
+  }).isRequired,
   model: _propTypes2.default.shape(_Entity2.default).isRequired,
   tableColumns: _propTypes2.default.arrayOf(_propTypes2.default.string).isRequired
 };

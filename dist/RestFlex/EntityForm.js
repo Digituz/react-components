@@ -63,7 +63,12 @@ var EntityForm = function (_Component) {
 
     _this.updateField = _this.updateField.bind(_this);
 
-    _this.client = new _restFlexClient2.default(_this.props.model.url);
+    var _this$props$model = _this.props.model,
+        url = _this$props$model.url,
+        audience = _this$props$model.audience,
+        domain = _this$props$model.domain;
+
+    _this.client = new _restFlexClient2.default(url, audience, domain, props.auth0Config);
     return _this;
   }
 
@@ -186,6 +191,11 @@ var EntityForm = function (_Component) {
 }(_react.Component);
 
 EntityForm.propTypes = {
+  auth0Config: _propTypes2.default.shape({
+    domain: _propTypes2.default.string.isRequired,
+    clientID: _propTypes2.default.string.isRequired,
+    redirectUri: _propTypes2.default.string.isRequired
+  }).isRequired,
   model: _propTypes2.default.shape(_Entity2.default).isRequired
 };
 

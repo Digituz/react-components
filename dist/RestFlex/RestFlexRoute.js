@@ -54,10 +54,18 @@ var RestFlexRoute = function (_Component) {
         _react.Fragment,
         { key: this.props.model.path },
         _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: this.props.model.path, render: function render() {
-            return _react2.default.createElement(_EntityList2.default, { model: _this2.props.model, tableColumns: _this2.props.tableColumns });
+            return _react2.default.createElement(_EntityList2.default, {
+              auth0Config: _this2.props.auth0Config,
+              model: _this2.props.model,
+              tableColumns: _this2.props.tableColumns
+            });
           } }),
         _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: this.props.model.path + '/:id', render: function render() {
-            return _react2.default.createElement(_EntityForm2.default, { model: _this2.props.model, entity: {} });
+            return _react2.default.createElement(_EntityForm2.default, {
+              auth0Config: _this2.props.auth0Config,
+              model: _this2.props.model,
+              entity: {}
+            });
           } })
       );
     }
@@ -67,6 +75,11 @@ var RestFlexRoute = function (_Component) {
 }(_react.Component);
 
 RestFlexRoute.propTypes = {
+  auth0Config: _propTypes2.default.shape({
+    domain: _propTypes2.default.string.isRequired,
+    clientID: _propTypes2.default.string.isRequired,
+    redirectUri: _propTypes2.default.string.isRequired
+  }).isRequired,
   model: _propTypes2.default.shape(_Entity2.default).isRequired,
   tableColumns: _propTypes2.default.arrayOf(_propTypes2.default.string).isRequired
 };

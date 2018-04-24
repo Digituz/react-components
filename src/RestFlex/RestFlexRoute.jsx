@@ -10,10 +10,22 @@ class RestFlexRoute extends Component {
     return (
       <Fragment key={this.props.model.path}>
         <Route exact path={this.props.model.path} render={() => {
-          return <EntityList model={this.props.model} tableColumns={this.props.tableColumns}/>
+          return (
+            <EntityList
+              auth0Config={this.props.auth0Config}
+              model={this.props.model}
+              tableColumns={this.props.tableColumns}
+            />
+          );
         }}/>
         <Route exact path={`${this.props.model.path}/:id`} render={() => {
-          return <EntityForm model={this.props.model} entity={{}}/>
+          return (
+            <EntityForm
+              auth0Config={this.props.auth0Config}
+              model={this.props.model}
+              entity={{}}
+            />
+          )
         }}/>
       </Fragment>
     )
@@ -21,6 +33,11 @@ class RestFlexRoute extends Component {
 }
 
 RestFlexRoute.propTypes = {
+  auth0Config: PropTypes.shape({
+    domain: PropTypes.string.isRequired,
+    clientID: PropTypes.string.isRequired,
+    redirectUri: PropTypes.string.isRequired
+  }).isRequired,
   model: PropTypes.shape(Entity).isRequired,
   tableColumns: PropTypes.arrayOf(PropTypes.string).isRequired,
 };

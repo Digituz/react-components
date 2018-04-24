@@ -9,7 +9,8 @@ class EntityList extends Component {
   constructor(props) {
     super(props);
 
-    this.client = new RestFlexClient(this.props.model.url);
+    const {url, audience, domain} = this.props.model;
+    this.client = new RestFlexClient(url, audience, domain, props.auth0Config);
 
     this.state = {
       data: [],
@@ -84,6 +85,11 @@ class EntityList extends Component {
 }
 
 EntityList.propTypes = {
+  auth0Config: PropTypes.shape({
+    domain: PropTypes.string.isRequired,
+    clientID: PropTypes.string.isRequired,
+    redirectUri: PropTypes.string.isRequired
+  }).isRequired,
   model: PropTypes.shape(Entity).isRequired,
   tableColumns: PropTypes.arrayOf(PropTypes.string).isRequired,
 };

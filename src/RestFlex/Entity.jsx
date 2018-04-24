@@ -2,6 +2,8 @@ import PropTypes from 'prop-types';
 
 export default {
   url: PropTypes.string.isRequired,
+  audience: PropTypes.string.isRequired,
+  domain: PropTypes.string.isRequired,
   path: PropTypes.string.isRequired,
   title: PropTypes.string.isRequired,
   plural: PropTypes.string.isRequired,
