@@ -58,39 +58,76 @@ var EntityList = function (_Component) {
       this.props.history.push(this.props.model.path + '/new');
     }
   }, {
-    key: 'componentDidMount',
-    value: function componentDidMount() {
+    key: 'editEntity',
+    value: function editEntity(entity) {
+      this.props.history.push(this.props.model.path + '/' + entity._id);
+    }
+  }, {
+    key: 'deleteEntity',
+    value: function deleteEntity(entity) {
       var _this2 = this;
 
+      this.client.remove(entity._id).then(function () {
+        _this2.props.history.push(_this2.props.model.path);
+        _.NotificationManager.success(_this2.props.model.title + ' removed successfully.');
+        _this2.loadEntities();
+      }).catch(function (err) {
+        if (err.message && typeof err.message === 'string') return _.NotificationManager.danger(err.message);
+        _.NotificationManager.danger('Something went wrong.');
+      });
+    }
+  }, {
+    key: 'loadEntities',
+    value: function loadEntities() {
+      var _this3 = this;
+
       this.client.get().then(function (data) {
-        _this2.setState({
+        _this3.setState({
           data: data
         });
       });
     }
   }, {
+    key: 'componentDidMount',
+    value: function componentDidMount() {
+      this.loadEntities();
+    }
+  }, {
     key: 'render',
     value: function render() {
-      var _this3 = this;
+      var _this4 = this;
 
       var columns = this.props.tableColumns.map(function (col) {
-        var property = _this3.props.model.properties[col];
+        var property = _this4.props.model.properties[col];
         return _extends({}, property, {
           columnClass: property.format === 'date' ? 'date' : '',
           property: col
         });
       });
 
+      columns.push({
+        label: 'Actions',
+        columnClass: 'actions',
+        renderer: function renderer(entity) {
+          var dropDownOptions = [{ label: 'Edit', default: true, onClick: function onClick() {
+              _this4.editEntity(entity);
+            } }, { label: 'Delete', onClick: function onClick() {
+              _this4.deleteEntity(entity);
+            } }];
+          return _react2.default.createElement(_.DropDown, { options: dropDownOptions });
+        }
+      });
+
       return _react2.default.createElement(
         _.Card,
-        { className: 'sm-12 md-10 md-pad-1 lg-8 lg-pad-2', title: this.props.model.plural },
+        { className: 'sm-12 lg-10 lg-pad-1', title: this.props.model.plural },
         _react2.default.createElement(
           'p',
           null,
           this.props.model.description
         ),
         _react2.default.createElement(_.Button, { onClick: function onClick() {
-            _this3.newEntity();
+            _this4.newEntity();
           }, text: 'New ' + this.props.model.title }),
         _react2.default.createElement(_.Table, { data: this.state.data, columns: columns })
       );

@@ -79,8 +79,9 @@ var Table = function (_Component) {
     }
   }, {
     key: 'renderProperty',
-    value: function renderProperty(property, record) {
-      var propertyValue = record[property];
+    value: function renderProperty(column, record) {
+      if (column.renderer) return column.renderer(record);
+      var propertyValue = record[column.property];
       if (!propertyValue) return '';
       if (typeof propertyValue === 'string') return propertyValue;
       if (typeof propertyValue.getMonth === 'function') return (0, _maskJs.maskDate)(propertyValue, 'pt-BR');
@@ -120,7 +121,7 @@ var Table = function (_Component) {
                 return _react2.default.createElement(
                   'td',
                   { className: column.columnClass, key: idx },
-                  _this4.renderProperty(column.property, record)
+                  _this4.renderProperty(column, record)
                 );
               })
             );
@@ -134,7 +135,13 @@ var Table = function (_Component) {
 }(_react.Component);
 
 Table.propTypes = {
-  columns: _propTypes2.default.arrayOf(_Entity2.default.properties).isRequired,
+  columns: _propTypes2.default.arrayOf(_propTypes2.default.shape({
+    label: _propTypes2.default.string.isRequired,
+    property: _propTypes2.default.string,
+    renderer: _propTypes2.default.func,
+    headerClass: _propTypes2.default.string,
+    columnClass: _propTypes2.default.string
+  })).isRequired,
   data: _propTypes2.default.oneOfType([_propTypes2.default.shape({
     then: _propTypes2.default.func.isRequired,
     catch: _propTypes2.default.func.isRequired

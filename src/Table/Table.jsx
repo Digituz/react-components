@@ -40,8 +40,9 @@ class Table extends Component {
     }
   }
 
-  renderProperty(property, record) {
-    const propertyValue = record[property];
+  renderProperty(column, record) {
+    if (column.renderer) return column.renderer(record);
+    const propertyValue = record[column.property];
     if (!propertyValue) return '';
     if (typeof propertyValue === 'string') return propertyValue;
     if (typeof propertyValue.getMonth === 'function') return maskDate(propertyValue, 'pt-BR');
@@ -65,7 +66,7 @@ class Table extends Component {
           <tr key={idx}>
             { this.props.columns.map((column, idx) => (
               <td className={column.columnClass} key={idx}>
-                {this.renderProperty(column.property, record)}
+                {this.renderProperty(column, record)}
               </td>
             ))}
           </tr>
@@ -77,7 +78,13 @@ class Table extends Component {
 }
 
 Table.propTypes = {
-  columns: PropTypes.arrayOf(Entity.properties).isRequired,
+  columns: PropTypes.arrayOf(PropTypes.shape({
+    label: PropTypes.string.isRequired,
+    property: PropTypes.string,
+    renderer: PropTypes.func,
+    headerClass: PropTypes.string,
+    columnClass: PropTypes.string,
+  })).isRequired,
   data: PropTypes.oneOfType([
     PropTypes.shape({
       then: PropTypes.func.isRequired,

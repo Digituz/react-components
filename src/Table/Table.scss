@@ -27,19 +27,29 @@ table.drc-table {
     }
   }
 
-  td.center {
-    text-align: center;
-  }
-
-  td.date {
-    text-align: center;
-    width: 100px;
-  }
-
   td {
     overflow-x: scroll;
     white-space: nowrap;
     padding-left: 10px;
     border-right: 1px solid $very-light-gray;
+
+    &:first-child {
+      padding-left: 0;
+    }
+
+    &:last-child {
+      padding-right: 10px;
+    }
+
+    &.center {
+      padding-left: 0;
+      text-align: center;
+    }
+
+    &.actions,
+    &.date {
+      text-align: center;
+      width: 100px;
+    }
   }
 }
