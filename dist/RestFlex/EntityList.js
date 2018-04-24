@@ -100,7 +100,7 @@ var EntityList = function (_Component) {
       var columns = this.props.tableColumns.map(function (col) {
         var property = _this4.props.model.properties[col];
         return _extends({}, property, {
-          columnClass: property.format === 'date' ? 'date' : '',
+          columnClass: property.format || '',
           property: col
         });
       });

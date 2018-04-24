@@ -44,9 +44,10 @@ class Table extends Component {
     if (column.renderer) return column.renderer(record);
     const propertyValue = record[column.property];
     if (!propertyValue) return '';
-    if (typeof propertyValue === 'string') return propertyValue;
-    if (typeof propertyValue.getMonth === 'function') return maskDate(propertyValue, 'pt-BR');
-    throw new Error(`Unexpected state on '${property}' on this record: ${JSON.stringify(record)}`);
+    if (column.type === 'string' && !column.format) return propertyValue;
+    if (column.format === 'currency') return maskCurrency(propertyValue);
+    if (column.format === 'date') return maskDate(propertyValue, 'pt-BR');
+    throw new Error(`Unexpected state on '${column.property}' on this record: ${JSON.stringify(record)}`);
   }
 
   render() {

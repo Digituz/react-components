@@ -51,5 +51,11 @@ table.drc-table {
       text-align: center;
       width: 100px;
     }
+
+    &.currency {
+      text-align: right;
+      width: 120px;
+      padding-right: 10px;
+    }
   }
 }

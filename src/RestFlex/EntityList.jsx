@@ -54,7 +54,7 @@ class EntityList extends Component {
       const property = this.props.model.properties[col];
       return {
         ...property,
-        columnClass: property.format === 'date'? 'date' : '',
+        columnClass: property.format || '',
         property: col,
       }
     });
