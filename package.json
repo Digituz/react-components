@@ -38,7 +38,7 @@
   },
   "scripts": {
     "babelify": "node ./scripts/babel",
-    "dev": "watch 'npm run prepublish' ./src/",
+    "dev": "watch 'npm run prepublish' ./src/ --interval=0.5",
     "processCss": "node ./scripts/sass",
     "prepublish": "npm run babelify && npm run processCss",
     "test": "jest"

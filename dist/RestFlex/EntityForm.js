@@ -117,7 +117,8 @@ var EntityForm = function (_Component) {
             placeholder: property.placeholder,
             value: this.getValue(propertyKey, property.format),
             onBlur: this.updateField(propertyKey),
-            type: property.format || 'text'
+            type: property.format || 'text',
+            inputType: property.inputType
           })
         );
       }

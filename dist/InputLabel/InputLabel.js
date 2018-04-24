@@ -20,6 +20,10 @@ var _Input2 = _interopRequireDefault(_Input);
 
 require('./InputLabel.css');
 
+var _TextArea = require('../TextArea/TextArea');
+
+var _TextArea2 = _interopRequireDefault(_TextArea);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -38,6 +42,27 @@ var InputLabel = function (_Component) {
   }
 
   _createClass(InputLabel, [{
+    key: 'renderInput',
+    value: function renderInput() {
+      return _react2.default.createElement(_Input2.default, {
+        id: this.props.inputId,
+        value: this.props.value,
+        className: this.props.inputClassName,
+        onBlur: this.props.onBlur,
+        placeholder: this.props.placeholder,
+        type: this.props.type
+      });
+    }
+  }, {
+    key: 'renderTextArea',
+    value: function renderTextArea() {
+      return _react2.default.createElement(_TextArea2.default, {
+        onBlur: this.props.onBlur,
+        placeholder: this.props.placeholder,
+        value: this.props.value
+      });
+    }
+  }, {
     key: 'render',
     value: function render() {
       var className = 'drc-input-label ' + this.props.className;
@@ -49,14 +74,7 @@ var InputLabel = function (_Component) {
           { htmlFor: this.props.inputId },
           this.props.label
         ),
-        _react2.default.createElement(_Input2.default, {
-          id: this.props.inputId,
-          value: this.props.value,
-          className: this.props.inputClassName,
-          onBlur: this.props.onBlur,
-          placeholder: this.props.placeholder,
-          type: this.props.type
-        })
+        this.props.inputType === 'textarea' ? this.renderTextArea() : this.renderInput()
       );
     }
   }]);
@@ -72,7 +90,8 @@ InputLabel.propTypes = {
   className: _propTypes2.default.string,
   inputClassName: _propTypes2.default.string,
   placeholder: _propTypes2.default.string,
-  type: _propTypes2.default.string
+  type: _propTypes2.default.string,
+  inputType: _propTypes2.default.string
 };
 
 InputLabel.defaultProps = {

@@ -1,0 +1,17 @@
+@import '../global-style';
+
+textarea.drc-textarea {
+  border: 1px solid $very-light-gray;
+  border-radius: $default-radius;
+  width: 100%;
+  resize: vertical;
+  line-height: 30px;
+  padding-left: 7px;
+  font-size: 14px;
+  margin-bottom: 15px;
+
+  &::placeholder {
+    color: $very-light-gray;
+    opacity: 1;
+  }
+}
