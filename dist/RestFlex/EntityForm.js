@@ -93,10 +93,16 @@ var EntityForm = function (_Component) {
       };
     }
   }, {
+    key: 'getValue',
+    value: function getValue(propertyKey, format) {
+      if (format === 'number') return this.state.entity[propertyKey] || 0;
+      return this.state.entity[propertyKey] || '';
+    }
+  }, {
     key: 'getFieldFromProperty',
     value: function getFieldFromProperty(propertyKey) {
       var property = this.props.model.properties[propertyKey];
-      if (property.type === 'string') {
+      if (property.type === 'string' || property.type === 'number') {
         return _react2.default.createElement(
           'div',
           { className: 'sm-12', key: propertyKey },
@@ -104,7 +110,7 @@ var EntityForm = function (_Component) {
             inputId: propertyKey,
             label: property.label,
             placeholder: property.placeholder,
-            value: this.state.entity[propertyKey],
+            value: this.getValue(propertyKey, property.format),
             onBlur: this.updateField(propertyKey),
             type: property.format || 'text'
           })

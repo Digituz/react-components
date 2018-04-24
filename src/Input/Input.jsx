@@ -33,10 +33,10 @@ class Input extends Component {
   };
 
   valueToString(value) {
-    if (typeof value === 'string') {
+    if (this.props.type === 'text') {
       return value;
     }
-    if (typeof value === 'number') {
+    if (this.props.type === 'currency') {
       return maskCurrency(value);
     }
     if (this.props.type === 'date' && typeof value === 'object') {

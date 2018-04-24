@@ -51,16 +51,21 @@ class EntityForm extends Component {
     };
   }
 
+  getValue(propertyKey, format) {
+    if (format === 'number') return this.state.entity[propertyKey] || 0;
+    return this.state.entity[propertyKey] || '';
+  }
+
   getFieldFromProperty(propertyKey) {
     const property = this.props.model.properties[propertyKey];
-    if (property.type === 'string') {
+    if (property.type === 'string' || property.type === 'number') {
       return (
         <div className="sm-12" key={propertyKey}>
           <InputLabel
             inputId={propertyKey}
             label={property.label}
             placeholder={property.placeholder}
-            value={this.state.entity[propertyKey]}
+            value={this.getValue(propertyKey, property.format)}
             onBlur={this.updateField(propertyKey)}
             type={property.format || 'text'}
           />

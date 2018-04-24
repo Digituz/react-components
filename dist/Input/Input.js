@@ -58,10 +58,10 @@ var Input = function (_Component) {
   _createClass(Input, [{
     key: 'valueToString',
     value: function valueToString(value) {
-      if (typeof value === 'string') {
+      if (this.props.type === 'text') {
         return value;
       }
-      if (typeof value === 'number') {
+      if (this.props.type === 'currency') {
         return (0, _maskJs.maskCurrency)(value);
       }
       if (this.props.type === 'date' && (typeof value === 'undefined' ? 'undefined' : _typeof(value)) === 'object') {
