@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import {withRouter} from 'react-router-dom';
 import RestFlexClient from '@digituz/rest-flex-client';
 import {Button, Card, Grid, InputLabel, NotificationManager} from '../';
+import Entity from './Entity';
 
 class EntityForm extends Component {
   constructor(props) {
@@ -10,8 +11,12 @@ class EntityForm extends Component {
 
     const entity = {};
 
-    Object.keys(props.model.properties).forEach(property => {
-      entity[property] = '';
+    Object.keys(props.model.properties).forEach(propertyKey => {
+      const property = this.props.model.properties[propertyKey];
+      if (property.format === 'date') {
+        return entity[propertyKey] = new Date();
+      }
+      entity[propertyKey] = '';
     });
 
     this.state = {
@@ -57,6 +62,7 @@ class EntityForm extends Component {
             placeholder={property.placeholder}
             value={this.state.entity[propertyKey]}
             onBlur={this.updateField(propertyKey)}
+            type={property.format || 'text'}
           />
         </div>
       )
@@ -113,15 +119,7 @@ class EntityForm extends Component {
 }
 
 EntityForm.propTypes = {
-  model: PropTypes.shape({
-    url: PropTypes.string.isRequired,
-    path: PropTypes.string.isRequired,
-    title: PropTypes.string.isRequired,
-    plural: PropTypes.string.isRequired,
-    description: PropTypes.string.isRequired,
-    type: PropTypes.string.isRequired,
-    properties: PropTypes.object.isRequired,
-  }).isRequired,
+  model: PropTypes.shape(Entity).isRequired,
 };
 
 export default withRouter(EntityForm);

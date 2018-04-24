@@ -24,6 +24,10 @@ var _EntityList = require('./EntityList');
 
 var _EntityList2 = _interopRequireDefault(_EntityList);
 
+var _Entity = require('./Entity');
+
+var _Entity2 = _interopRequireDefault(_Entity);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -50,7 +54,7 @@ var RestFlexRoute = function (_Component) {
         _react.Fragment,
         { key: this.props.model.path },
         _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: this.props.model.path, render: function render() {
-            return _react2.default.createElement(_EntityList2.default, { model: _this2.props.model, columns: _this2.props.columns });
+            return _react2.default.createElement(_EntityList2.default, { model: _this2.props.model, tableColumns: _this2.props.tableColumns });
           } }),
         _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: this.props.model.path + '/:id', render: function render() {
             return _react2.default.createElement(_EntityForm2.default, { model: _this2.props.model, entity: {} });
@@ -63,16 +67,8 @@ var RestFlexRoute = function (_Component) {
 }(_react.Component);
 
 RestFlexRoute.propTypes = {
-  model: _propTypes2.default.shape({
-    url: _propTypes2.default.string.isRequired,
-    path: _propTypes2.default.string.isRequired,
-    title: _propTypes2.default.string.isRequired,
-    plural: _propTypes2.default.string.isRequired,
-    description: _propTypes2.default.string.isRequired,
-    type: _propTypes2.default.string.isRequired,
-    properties: _propTypes2.default.object.isRequired
-  }).isRequired,
-  columns: _propTypes2.default.array.isRequired
+  model: _propTypes2.default.shape(_Entity2.default).isRequired,
+  tableColumns: _propTypes2.default.arrayOf(_propTypes2.default.string).isRequired
 };
 
 exports.default = RestFlexRoute;

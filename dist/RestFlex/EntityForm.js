@@ -24,6 +24,10 @@ var _restFlexClient2 = _interopRequireDefault(_restFlexClient);
 
 var _ = require('../');
 
+var _Entity = require('./Entity');
+
+var _Entity2 = _interopRequireDefault(_Entity);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
@@ -44,8 +48,12 @@ var EntityForm = function (_Component) {
 
     var entity = {};
 
-    Object.keys(props.model.properties).forEach(function (property) {
-      entity[property] = '';
+    Object.keys(props.model.properties).forEach(function (propertyKey) {
+      var property = _this.props.model.properties[propertyKey];
+      if (property.format === 'date') {
+        return entity[propertyKey] = new Date();
+      }
+      entity[propertyKey] = '';
     });
 
     _this.state = {
@@ -97,7 +105,8 @@ var EntityForm = function (_Component) {
             label: property.label,
             placeholder: property.placeholder,
             value: this.state.entity[propertyKey],
-            onBlur: this.updateField(propertyKey)
+            onBlur: this.updateField(propertyKey),
+            type: property.format || 'text'
           })
         );
       }
@@ -171,15 +180,7 @@ var EntityForm = function (_Component) {
 }(_react.Component);
 
 EntityForm.propTypes = {
-  model: _propTypes2.default.shape({
-    url: _propTypes2.default.string.isRequired,
-    path: _propTypes2.default.string.isRequired,
-    title: _propTypes2.default.string.isRequired,
-    plural: _propTypes2.default.string.isRequired,
-    description: _propTypes2.default.string.isRequired,
-    type: _propTypes2.default.string.isRequired,
-    properties: _propTypes2.default.object.isRequired
-  }).isRequired
+  model: _propTypes2.default.shape(_Entity2.default).isRequired
 };
 
 exports.default = (0, _reactRouterDom.withRouter)(EntityForm);

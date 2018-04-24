@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import {withRouter} from 'react-router-dom';
 import RestFlexClient from '@digituz/rest-flex-client';
 import {Button, Card, Table} from '../';
+import Entity from './Entity';
 
 class EntityList extends Component {
   constructor(props) {
@@ -28,27 +29,28 @@ class EntityList extends Component {
   }
 
   render() {
+    const columns = this.props.tableColumns.map(col => {
+      const property = this.props.model.properties[col];
+      return {
+        ...property,
+        columnClass: property.format === 'date'? 'date' : '',
+        property: col,
+      }
+    });
+
     return (
       <Card className="sm-12 md-10 md-pad-1 lg-8 lg-pad-2" title={this.props.model.plural}>
         <p>{this.props.model.description}</p>
         <Button onClick={() => { this.newEntity() }} text={`New ${this.props.model.title}`} />
-        <Table data={this.state.data} columns={this.props.columns} />
+        <Table data={this.state.data} columns={columns} />
       </Card>
     );
   }
 }
 
 EntityList.propTypes = {
-  model: PropTypes.shape({
-    url: PropTypes.string.isRequired,
-    path: PropTypes.string.isRequired,
-    title: PropTypes.string.isRequired,
-    plural: PropTypes.string.isRequired,
-    description: PropTypes.string.isRequired,
-    type: PropTypes.string.isRequired,
-    properties: PropTypes.object.isRequired,
-  }).isRequired,
-  columns: PropTypes.array.isRequired,
+  model: PropTypes.shape(Entity).isRequired,
+  tableColumns: PropTypes.arrayOf(PropTypes.string).isRequired,
 };
 
 export default withRouter(EntityList);

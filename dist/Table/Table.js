@@ -14,11 +14,13 @@ var _propTypes = require('prop-types');
 
 var _propTypes2 = _interopRequireDefault(_propTypes);
 
-var _If = require('../If/If');
-
-var _If2 = _interopRequireDefault(_If);
+var _maskJs = require('mask-js');
 
 require('./Table.css');
+
+var _Entity = require('../RestFlex/Entity');
+
+var _Entity2 = _interopRequireDefault(_Entity);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -76,6 +78,15 @@ var Table = function (_Component) {
       }
     }
   }, {
+    key: 'renderProperty',
+    value: function renderProperty(property, record) {
+      var propertyValue = record[property];
+      if (!propertyValue) return '';
+      if (typeof propertyValue === 'string') return propertyValue;
+      if (typeof propertyValue.getMonth === 'function') return (0, _maskJs.maskDate)(propertyValue, 'pt-BR');
+      throw new Error('Unexpected state on \'' + property + '\' on this record: ' + JSON.stringify(record));
+    }
+  }, {
     key: 'render',
     value: function render() {
       var _this4 = this;
@@ -93,7 +104,7 @@ var Table = function (_Component) {
               return _react2.default.createElement(
                 'th',
                 { className: column.headerClass, key: idx },
-                column.title
+                column.label
               );
             })
           )
@@ -109,16 +120,7 @@ var Table = function (_Component) {
                 return _react2.default.createElement(
                   'td',
                   { className: column.columnClass, key: idx },
-                  _react2.default.createElement(
-                    _If2.default,
-                    { condition: column.render === undefined },
-                    record[column.property]
-                  ),
-                  _react2.default.createElement(
-                    _If2.default,
-                    { condition: column.render !== undefined },
-                    column.render && column.render(record)
-                  )
+                  _this4.renderProperty(column.property, record)
                 );
               })
             );
@@ -132,13 +134,7 @@ var Table = function (_Component) {
 }(_react.Component);
 
 Table.propTypes = {
-  columns: _propTypes2.default.arrayOf(_propTypes2.default.shape({
-    title: _propTypes2.default.string.isRequired,
-    property: _propTypes2.default.string,
-    headerClass: _propTypes2.default.string,
-    columnClass: _propTypes2.default.string,
-    render: _propTypes2.default.func
-  })).isRequired,
+  columns: _propTypes2.default.arrayOf(_Entity2.default.properties).isRequired,
   data: _propTypes2.default.oneOfType([_propTypes2.default.shape({
     then: _propTypes2.default.func.isRequired,
     catch: _propTypes2.default.func.isRequired

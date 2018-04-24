@@ -4,6 +4,8 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 var _react = require('react');
@@ -21,6 +23,10 @@ var _restFlexClient = require('@digituz/rest-flex-client');
 var _restFlexClient2 = _interopRequireDefault(_restFlexClient);
 
 var _ = require('../');
+
+var _Entity = require('./Entity');
+
+var _Entity2 = _interopRequireDefault(_Entity);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -67,6 +73,14 @@ var EntityList = function (_Component) {
     value: function render() {
       var _this3 = this;
 
+      var columns = this.props.tableColumns.map(function (col) {
+        var property = _this3.props.model.properties[col];
+        return _extends({}, property, {
+          columnClass: property.format === 'date' ? 'date' : '',
+          property: col
+        });
+      });
+
       return _react2.default.createElement(
         _.Card,
         { className: 'sm-12 md-10 md-pad-1 lg-8 lg-pad-2', title: this.props.model.plural },
@@ -78,7 +92,7 @@ var EntityList = function (_Component) {
         _react2.default.createElement(_.Button, { onClick: function onClick() {
             _this3.newEntity();
           }, text: 'New ' + this.props.model.title }),
-        _react2.default.createElement(_.Table, { data: this.state.data, columns: this.props.columns })
+        _react2.default.createElement(_.Table, { data: this.state.data, columns: columns })
       );
     }
   }]);
@@ -87,16 +101,8 @@ var EntityList = function (_Component) {
 }(_react.Component);
 
 EntityList.propTypes = {
-  model: _propTypes2.default.shape({
-    url: _propTypes2.default.string.isRequired,
-    path: _propTypes2.default.string.isRequired,
-    title: _propTypes2.default.string.isRequired,
-    plural: _propTypes2.default.string.isRequired,
-    description: _propTypes2.default.string.isRequired,
-    type: _propTypes2.default.string.isRequired,
-    properties: _propTypes2.default.object.isRequired
-  }).isRequired,
-  columns: _propTypes2.default.array.isRequired
+  model: _propTypes2.default.shape(_Entity2.default).isRequired,
+  tableColumns: _propTypes2.default.arrayOf(_propTypes2.default.string).isRequired
 };
 
 exports.default = (0, _reactRouterDom.withRouter)(EntityList);

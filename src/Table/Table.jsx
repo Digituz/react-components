@@ -1,7 +1,8 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
-import If from '../If/If';
+import {maskCurrency, maskDate} from 'mask-js';
 import './Table.scss';
+import Entity from "../RestFlex/Entity";
 
 class Table extends Component {
   constructor(props) {
@@ -39,6 +40,14 @@ class Table extends Component {
     }
   }
 
+  renderProperty(property, record) {
+    const propertyValue = record[property];
+    if (!propertyValue) return '';
+    if (typeof propertyValue === 'string') return propertyValue;
+    if (typeof propertyValue.getMonth === 'function') return maskDate(propertyValue, 'pt-BR');
+    throw new Error(`Unexpected state on '${property}' on this record: ${JSON.stringify(record)}`);
+  }
+
   render() {
     return (
       <table className="drc-table">
@@ -46,7 +55,7 @@ class Table extends Component {
         <tr>
         {
           this.props.columns.map((column, idx) => (
-            <th className={column.headerClass} key={idx}>{column.title}</th>
+            <th className={column.headerClass} key={idx}>{column.label}</th>
           ))
         }
         </tr>
@@ -55,14 +64,9 @@ class Table extends Component {
         { this.state.data.map && this.state.data.map((record, idx) => (
           <tr key={idx}>
             { this.props.columns.map((column, idx) => (
-                <td className={column.columnClass} key={idx}>
-                  <If condition={column.render === undefined}>
-                    {record[column.property]}
-                  </If>
-                  <If condition={column.render !== undefined}>
-                    {column.render && column.render(record)}
-                  </If>
-                </td>
+              <td className={column.columnClass} key={idx}>
+                {this.renderProperty(column.property, record)}
+              </td>
             ))}
           </tr>
         ))}
@@ -73,13 +77,7 @@ class Table extends Component {
 }
 
 Table.propTypes = {
-  columns: PropTypes.arrayOf(PropTypes.shape({
-    title: PropTypes.string.isRequired,
-    property: PropTypes.string,
-    headerClass: PropTypes.string,
-    columnClass: PropTypes.string,
-    render: PropTypes.func,
-  })).isRequired,
+  columns: PropTypes.arrayOf(Entity.properties).isRequired,
   data: PropTypes.oneOfType([
     PropTypes.shape({
       then: PropTypes.func.isRequired,

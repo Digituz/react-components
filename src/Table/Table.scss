@@ -4,11 +4,13 @@ table.drc-table {
   width: 100%;
   font-size: 14px;
   border-collapse: collapse;
+  border: 1px solid $very-light-gray;
 
   th {
     font-weight: 700;
     border-bottom: 1px solid $very-light-gray;
     background-color: $super-light-gray;
+    border-right: 1px solid $very-light-gray;
   }
 
   thead {
@@ -19,13 +21,25 @@ table.drc-table {
     line-height: 40px;
   }
 
+  tr {
+    &:nth-child(even) {
+      background-color: $ultra-light-gray;
+    }
+  }
+
   td.center {
     text-align: center;
+  }
+
+  td.date {
+    text-align: center;
+    width: 100px;
   }
 
   td {
     overflow-x: scroll;
     white-space: nowrap;
     padding-left: 10px;
+    border-right: 1px solid $very-light-gray;
   }
 }
