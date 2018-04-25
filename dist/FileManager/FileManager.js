@@ -52,7 +52,13 @@ var FileManager = function (_Component) {
     _this.fileManager = _react2.default.createRef();
 
     _this.state = {
-      files: []
+      files: [],
+      snapshot: {
+        visible: false,
+        y: 0,
+        x: 0,
+        url: ''
+      }
     };
 
     _this.doSpaces = new AWS.S3({
@@ -148,18 +154,43 @@ var FileManager = function (_Component) {
 
       this.fileManager.current.value = '';
 
+      this.props.onComplete(files);
+    }
+  }, {
+    key: 'showSnapshot',
+    value: function showSnapshot(event, file) {
       this.setState({
-        files: files
+        snapshot: {
+          visible: true,
+          url: 'https://' + bucketName + '.' + endpoint + '/' + file.spacesName
+        }
+      });
+    }
+  }, {
+    key: 'closeSnapshot',
+    value: function closeSnapshot() {
+      this.setState({
+        snapshot: {
+          visible: false,
+          url: ''
+        }
       });
     }
   }, {
     key: 'renderFileName',
     value: function renderFileName(file) {
+      var _this3 = this;
+
       var fileName = file.name;
       if (file.uploaded) {
         fileName = _react2.default.createElement(
           'a',
-          { target: '_blank', href: 'https://' + bucketName + '.' + endpoint + '/' + file.spacesName },
+          {
+            target: '_blank',
+            onClick: function onClick(event) {
+              return _this3.showSnapshot(event, file);
+            }
+          },
           file.name
         );
       }
@@ -187,8 +218,9 @@ var FileManager = function (_Component) {
   }, {
     key: 'render',
     value: function render() {
-      var _this3 = this;
+      var _this4 = this;
 
+      var totalSize = 0;
       return _react2.default.createElement(
         'div',
         { className: 'drc-file-upload' },
@@ -196,17 +228,36 @@ var FileManager = function (_Component) {
           type: 'file',
           ref: this.fileManager,
           onChange: function onChange() {
-            return _this3.fileChosen();
+            return _this4.fileChosen();
           },
           id: this.props.id,
           multiple: true
         }),
         _react2.default.createElement(_.Button, {
           onClick: function onClick() {
-            return _this3.openFileChooser();
+            return _this4.openFileChooser();
           },
           text: 'Choose Files'
         }),
+        this.state.snapshot.visible && _react2.default.createElement(
+          _.Modal,
+          { onSuccess: function onSuccess() {
+              return _this4.closeSnapshot();
+            } },
+          _react2.default.createElement('img', { src: this.state.snapshot.url }),
+          _react2.default.createElement(
+            'p',
+            null,
+            _react2.default.createElement(
+              'a',
+              {
+                href: this.state.snapshot.url,
+                target: '_blank'
+              },
+              'Download'
+            )
+          )
+        ),
         _react2.default.createElement(
           'table',
           null,
@@ -246,13 +297,14 @@ var FileManager = function (_Component) {
             'tbody',
             null,
             this.state.files.map(function (file) {
+              totalSize = totalSize + file.size;
               return _react2.default.createElement(
                 'tr',
                 { key: file.spacesName },
                 _react2.default.createElement(
                   'td',
                   null,
-                  _this3.renderFileName(file)
+                  _this4.renderFileName(file)
                 ),
                 _react2.default.createElement(
                   'td',
@@ -266,7 +318,7 @@ var FileManager = function (_Component) {
                   _react2.default.createElement(
                     'a',
                     { onClick: function onClick() {
-                        return _this3.removeFile(file);
+                        return _this4.removeFile(file);
                       } },
                     'Remove'
                   )
@@ -291,7 +343,7 @@ var FileManager = function (_Component) {
                 _react2.default.createElement(
                   'a',
                   { onClick: function onClick() {
-                      return _this3.uploadFiles();
+                      return _this4.uploadFiles();
                     } },
                   'Upload'
                 )
@@ -299,10 +351,16 @@ var FileManager = function (_Component) {
               _react2.default.createElement(
                 'td',
                 null,
+                (0, _maskJs.maskCurrency)(totalSize / 1024),
+                ' KB'
+              ),
+              _react2.default.createElement(
+                'td',
+                null,
                 _react2.default.createElement(
                   'a',
                   { onClick: function onClick() {
-                      return _this3.clearList();
+                      return _this4.clearList();
                     } },
                   'Clear'
                 )

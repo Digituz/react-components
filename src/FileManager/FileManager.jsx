@@ -2,7 +2,7 @@ import * as AWS from 'aws-sdk';
 import React, {Component} from 'react';
 import {maskCurrency} from 'mask-js';
 import PropType from 'prop-types';
-import {Button} from '../';
+import {Button, Modal} from '../';
 import './FileManager.scss';
 
 const accessKeyId = 'TKPLAKLR23UMLNYEVV24';
@@ -17,6 +17,12 @@ class FileManager extends Component {
 
     this.state = {
       files: [],
+      snapshot: {
+        visible: false,
+        y: 0,
+        x: 0,
+        url: '',
+      },
     };
 
     this.doSpaces = new AWS.S3({
@@ -112,8 +118,24 @@ class FileManager extends Component {
 
     this.fileManager.current.value = '';
 
+    this.props.onComplete(files);
+  }
+
+  showSnapshot(event, file) {
     this.setState({
-      files,
+      snapshot: {
+        visible: true,
+        url: `https://${bucketName}.${endpoint}/${file.spacesName}`
+      },
+    });
+  }
+
+  closeSnapshot() {
+    this.setState({
+      snapshot: {
+        visible: false,
+        url: '',
+      },
     });
   }
 
@@ -121,7 +143,10 @@ class FileManager extends Component {
     let fileName = file.name;
     if (file.uploaded) {
       fileName = (
-        <a target="_blank" href={`https://${bucketName}.${endpoint}/${file.spacesName}`}>
+        <a
+          target="_blank"
+          onClick={(event) => this.showSnapshot(event, file)}
+        >
           {file.name}
         </a>
       );
@@ -143,6 +168,7 @@ class FileManager extends Component {
   }
 
   render() {
+    let totalSize = 0;
     return (
       <div className="drc-file-upload">
         <input
@@ -156,6 +182,21 @@ class FileManager extends Component {
           onClick={() => (this.openFileChooser())}
           text="Choose Files"
         />
+        {
+          this.state.snapshot.visible && (
+            <Modal onSuccess={() => (this.closeSnapshot())}>
+              <img src={this.state.snapshot.url} />
+              <p>
+                <a
+                  href={this.state.snapshot.url}
+                  target="_blank"
+                >
+                  Download
+                </a>
+              </p>
+            </Modal>
+          )
+        }
         <table>
           <thead>
           <tr>
@@ -168,17 +209,20 @@ class FileManager extends Component {
           </tr>
           </thead>
           <tbody>
-          {this.state.files.map(file => (
-            <tr key={file.spacesName}>
-              <td>
-                { this.renderFileName(file) }
-              </td>
-              <td>{maskCurrency(file.size / 1024)} KB</td>
-              <td>
-                <a onClick={() => this.removeFile(file)}>Remove</a>
-              </td>
-            </tr>
-          ))}
+          {this.state.files.map(file => {
+            totalSize = totalSize + file.size;
+            return (
+              <tr key={file.spacesName}>
+                <td>
+                  { this.renderFileName(file) }
+                </td>
+                <td>{maskCurrency(file.size / 1024)} KB</td>
+                <td>
+                  <a onClick={() => this.removeFile(file)}>Remove</a>
+                </td>
+              </tr>
+            )
+          })}
           {this.state.files.length < 1 &&
           <tr>
             <td colSpan={3}>No files chosen.</td>
@@ -186,6 +230,7 @@ class FileManager extends Component {
           }
           <tr>
             <td><a onClick={() => this.uploadFiles()}>Upload</a></td>
+            <td>{maskCurrency(totalSize / 1024)} KB</td>
             <td><a onClick={() => this.clearList()}>Clear</a></td>
           </tr>
           </tbody>
