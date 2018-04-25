@@ -22,7 +22,7 @@ var _propTypes2 = _interopRequireDefault(_propTypes);
 
 var _ = require('../');
 
-require('./FileUpload.css');
+require('./FileManager.css');
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -41,15 +41,15 @@ var secretAccessKey = 'Wbt7tJSEPwytAHZ2dnS4YbSPS1TbDBGBNQ78xlFKtWo';
 var endpoint = 'nyc3.digitaloceanspaces.com';
 var bucketName = 'brand-house';
 
-var FileUpload = function (_Component) {
-  _inherits(FileUpload, _Component);
+var FileManager = function (_Component) {
+  _inherits(FileManager, _Component);
 
-  function FileUpload() {
-    _classCallCheck(this, FileUpload);
+  function FileManager() {
+    _classCallCheck(this, FileManager);
 
-    var _this = _possibleConstructorReturn(this, (FileUpload.__proto__ || Object.getPrototypeOf(FileUpload)).call(this));
+    var _this = _possibleConstructorReturn(this, (FileManager.__proto__ || Object.getPrototypeOf(FileManager)).call(this));
 
-    _this.fileUpload = _react2.default.createRef();
+    _this.fileManager = _react2.default.createRef();
 
     _this.state = {
       files: []
@@ -63,15 +63,15 @@ var FileUpload = function (_Component) {
     return _this;
   }
 
-  _createClass(FileUpload, [{
+  _createClass(FileManager, [{
     key: 'openFileChooser',
     value: function openFileChooser() {
-      this.fileUpload.current.click();
+      this.fileManager.current.click();
     }
   }, {
     key: 'fileChosen',
     value: function fileChosen() {
-      var files = [].concat(_toConsumableArray(this.fileUpload.current.files));
+      var files = [].concat(_toConsumableArray(this.fileManager.current.files));
       this.setState({
         files: files
       });
@@ -142,7 +142,7 @@ var FileUpload = function (_Component) {
         return null;
       });
 
-      this.fileUpload.current.value = '';
+      this.fileManager.current.value = '';
 
       this.setState({
         files: files
@@ -182,7 +182,7 @@ var FileUpload = function (_Component) {
         { className: 'drc-file-upload' },
         _react2.default.createElement('input', {
           type: 'file',
-          ref: this.fileUpload,
+          ref: this.fileManager,
           onChange: function onChange() {
             return _this3.fileChosen();
           },
@@ -286,12 +286,12 @@ var FileUpload = function (_Component) {
     }
   }]);
 
-  return FileUpload;
+  return FileManager;
 }(_react.Component);
 
-FileUpload.propTypes = {
+FileManager.propTypes = {
   id: _propTypes2.default.string.isRequired,
   onComplete: _propTypes2.default.func
 };
 
-exports.default = FileUpload;
+exports.default = FileManager;

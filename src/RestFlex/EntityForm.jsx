@@ -4,7 +4,7 @@ import {withRouter} from 'react-router-dom';
 import RestFlexClient from '@digituz/rest-flex-client';
 import {Button, Card, Grid, InputLabel, NotificationManager} from '../';
 import Entity from './Entity';
-import FileUpload from '../FileUpload/FileUpload';
+import FileManager from '../FileManager/FileManager';
 
 class EntityForm extends Component {
   constructor(props) {
@@ -78,7 +78,7 @@ class EntityForm extends Component {
     if (property.type === 'file') {
       return (
         <div className="sm-12" key={propertyKey}>
-          <FileUpload
+          <FileManager
             id={propertyKey}
             onComplete={this.updateField(propertyKey)}
           />

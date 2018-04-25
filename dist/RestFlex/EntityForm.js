@@ -28,9 +28,9 @@ var _Entity = require('./Entity');
 
 var _Entity2 = _interopRequireDefault(_Entity);
 
-var _FileUpload = require('../FileUpload/FileUpload');
+var _FileManager = require('../FileManager/FileManager');
 
-var _FileUpload2 = _interopRequireDefault(_FileUpload);
+var _FileManager2 = _interopRequireDefault(_FileManager);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -130,7 +130,7 @@ var EntityForm = function (_Component) {
         return _react2.default.createElement(
           'div',
           { className: 'sm-12', key: propertyKey },
-          _react2.default.createElement(_FileUpload2.default, {
+          _react2.default.createElement(_FileManager2.default, {
             id: propertyKey,
             onComplete: this.updateField(propertyKey)
           })

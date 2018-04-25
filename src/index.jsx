@@ -2,7 +2,7 @@ import Button from './Button/Button';
 import Card from './Card/Card';
 import DropDown from './DropDown/DropDown';
 import DatePicker from './DatePicker/DatePicker';
-import FileUpload from './FileUpload/FileUpload';
+import FileManager from './FileManager/FileManager';
 import Grid from './Grid/Grid';
 import If from './If/If';
 import Input from './Input/Input';
@@ -22,7 +22,7 @@ export {
   Card,
   DatePicker,
   DropDown,
-  FileUpload,
+  FileManager,
   Grid,
   If,
   Input,

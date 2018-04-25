@@ -3,17 +3,17 @@ import React, {Component} from 'react';
 import {maskCurrency} from 'mask-js';
 import PropType from 'prop-types';
 import {Button} from '../';
-import './FileUpload.scss';
+import './FileManager.scss';
 
 const accessKeyId = 'TKPLAKLR23UMLNYEVV24';
 const secretAccessKey = 'Wbt7tJSEPwytAHZ2dnS4YbSPS1TbDBGBNQ78xlFKtWo';
 const endpoint = 'nyc3.digitaloceanspaces.com';
 const bucketName = 'brand-house';
 
-class FileUpload extends Component {
+class FileManager extends Component {
   constructor() {
     super();
-    this.fileUpload = React.createRef();
+    this.fileManager = React.createRef();
 
     this.state = {
       files: [],
@@ -27,11 +27,11 @@ class FileUpload extends Component {
   }
 
   openFileChooser() {
-    this.fileUpload.current.click();
+    this.fileManager.current.click();
   }
 
   fileChosen() {
-    const files = [...this.fileUpload.current.files];
+    const files = [...this.fileManager.current.files];
     this.setState({
       files,
     });
@@ -101,7 +101,7 @@ class FileUpload extends Component {
       return null;
     });
 
-    this.fileUpload.current.value = '';
+    this.fileManager.current.value = '';
 
     this.setState({
       files,
@@ -133,7 +133,7 @@ class FileUpload extends Component {
       <div className="drc-file-upload">
         <input
           type="file"
-          ref={this.fileUpload}
+          ref={this.fileManager}
           onChange={() => (this.fileChosen())}
           id={this.props.id}
           multiple={true}
@@ -177,9 +177,9 @@ class FileUpload extends Component {
   }
 }
 
-FileUpload.propTypes = {
+FileManager.propTypes = {
   id: PropType.string.isRequired,
   onComplete: PropType.func,
 };
 
-export default FileUpload;
+export default FileManager;

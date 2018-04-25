@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.VerticalMenu = exports.Table = exports.RestFlexRoute = exports.PanelHeader = exports.PanelBody = exports.Panel = exports.NotificationManager = exports.NotificationContainer = exports.Modal = exports.InputLabel = exports.Input = exports.If = exports.Grid = exports.FileUpload = exports.DropDown = exports.DatePicker = exports.Card = exports.Button = undefined;
+exports.VerticalMenu = exports.Table = exports.RestFlexRoute = exports.PanelHeader = exports.PanelBody = exports.Panel = exports.NotificationManager = exports.NotificationContainer = exports.Modal = exports.InputLabel = exports.Input = exports.If = exports.Grid = exports.FileManager = exports.DropDown = exports.DatePicker = exports.Card = exports.Button = undefined;
 
 var _Button = require('./Button/Button');
 
@@ -21,9 +21,9 @@ var _DatePicker = require('./DatePicker/DatePicker');
 
 var _DatePicker2 = _interopRequireDefault(_DatePicker);
 
-var _FileUpload = require('./FileUpload/FileUpload');
+var _FileManager = require('./FileManager/FileManager');
 
-var _FileUpload2 = _interopRequireDefault(_FileUpload);
+var _FileManager2 = _interopRequireDefault(_FileManager);
 
 var _Grid = require('./Grid/Grid');
 
@@ -83,7 +83,7 @@ exports.Button = _Button2.default;
 exports.Card = _Card2.default;
 exports.DatePicker = _DatePicker2.default;
 exports.DropDown = _DropDown2.default;
-exports.FileUpload = _FileUpload2.default;
+exports.FileManager = _FileManager2.default;
 exports.Grid = _Grid2.default;
 exports.If = _If2.default;
 exports.Input = _Input2.default;
