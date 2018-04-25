@@ -2,6 +2,7 @@ import Button from './Button/Button';
 import Card from './Card/Card';
 import DropDown from './DropDown/DropDown';
 import DatePicker from './DatePicker/DatePicker';
+import FileUpload from './FileUpload/FileUpload';
 import Grid from './Grid/Grid';
 import If from './If/If';
 import Input from './Input/Input';
@@ -14,7 +15,6 @@ import PanelBody from './PanelBody/PanelBody';
 import PanelHeader from './PanelHeader/PanelHeader';
 import RestFlexRoute from './RestFlex/RestFlexRoute';
 import Table from './Table/Table';
-import UploadInput from './FileUpload/UploadInput';
 import VerticalMenu from './VerticalMenu/VerticalMenu';
 
 export {
@@ -22,6 +22,7 @@ export {
   Card,
   DatePicker,
   DropDown,
+  FileUpload,
   Grid,
   If,
   Input,
@@ -34,6 +35,5 @@ export {
   PanelHeader,
   RestFlexRoute,
   Table,
-  UploadInput,
   VerticalMenu,
 }
