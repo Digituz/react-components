@@ -5,6 +5,11 @@ import PropType from 'prop-types';
 import {Button} from '../';
 import './FileUpload.scss';
 
+const accessKeyId = 'TKPLAKLR23UMLNYEVV24';
+const secretAccessKey = 'Wbt7tJSEPwytAHZ2dnS4YbSPS1TbDBGBNQ78xlFKtWo';
+const endpoint = 'nyc3.digitaloceanspaces.com';
+const bucketName = 'brand-house';
+
 class FileUpload extends Component {
   constructor() {
     super();
@@ -12,11 +17,16 @@ class FileUpload extends Component {
 
     this.state = {
       files: [],
-    }
+    };
+
+    this.doSpaces = new AWS.S3({
+      endpoint: new AWS.Endpoint(endpoint),
+      accessKeyId: accessKeyId,
+      secretAccessKey: secretAccessKey
+    });
   }
 
   openFileChooser() {
-    console.log(this.fileUpload);
     this.fileUpload.current.click();
   }
 
@@ -28,36 +38,59 @@ class FileUpload extends Component {
   }
 
   uploadFiles() {
-    const accessKeyId = 'TKPLAKLR23UMLNYEVV24';
-    const secretAccessKey = 'Wbt7tJSEPwytAHZ2dnS4YbSPS1TbDBGBNQ78xlFKtWo';
-    const region = 'nyc3';  // New York region by default
-
-    const spacesEndpoint = new AWS.Endpoint(region + '.digitaloceanspaces.com');
-    const s3 = new AWS.S3({
-      endpoint: spacesEndpoint,
-      accessKeyId: accessKeyId,
-      secretAccessKey: secretAccessKey
-    });
-
     const options = {
       partSize: 10 * 1024 * 1024, // 10 MB
       queueSize: 10
     };
 
     const uploadEvents = this.state.files.map((file) => {
+      const randomDir = (new Date()).getTime();
       const params = {
         ACL: 'public-read',
-        Bucket: 'brand-house',
-        Key: file.name,
+        Bucket: bucketName,
+        Key: `${randomDir}/${file.name}`,
         Body: file,
       };
-      return s3.upload(params, options).promise();
+      const uploadManager = this.doSpaces.upload(params, options);
+
+      file.spacesName = params.Key;
+
+      uploadManager.on('httpUploadProgress', (progress) => {
+        const files = this.state.files.map(fileIter => {
+          if (
+            file.name === fileIter.name &&
+            file.size === fileIter.size
+          ) {
+            return {
+              name: file.name,
+              spacesName: file.spacesName,
+              type: file.type,
+              size: file.size,
+              lastModified: file.lastModified,
+              lastModifiedDate: file.lastModifiedDate,
+              progress: progress.loaded / progress.total * 100,
+            };
+          }
+          return file;
+        });
+
+        this.setState({
+          files: [...files],
+        });
+      });
+
+      return uploadManager.promise();
     });
 
-    console.log(uploadEvents);
+    Promise.all(uploadEvents).then(() => {
+      const files = this.state.files.map(file => {
+        delete file.progress;
+        return file;
+      });
 
-    Promise.all(uploadEvents).then(values => {
-      console.log('good to go');
+      this.setState({
+        files,
+      });
     });
   }
 
@@ -70,7 +103,27 @@ class FileUpload extends Component {
 
     this.setState({
       files,
-    })
+    });
+  }
+
+  renderFileName(file) {
+    let fileName = file.name;
+    if (file.spacesName) {
+      fileName = (
+        <a target="_blank" href={`https://${bucketName}.${endpoint}/${file.spacesName}`}>
+          {file.name}
+        </a>
+      );
+    }
+    return (
+      <React.Fragment>
+        {fileName}
+        {
+          file.progress &&
+          <span> ({maskCurrency(file.progress)} %)</span>
+        }
+      </React.Fragment>
+    )
   }
 
   render() {
@@ -100,7 +153,9 @@ class FileUpload extends Component {
           <tbody>
           {this.state.files.map(file => (
             <tr key={file.name}>
-              <td>{file.name}</td>
+              <td>
+                { this.renderFileName(file) }
+              </td>
               <td>{maskCurrency(file.size / 1024)} KB</td>
             </tr>
           ))}

@@ -36,6 +36,11 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
+var accessKeyId = 'TKPLAKLR23UMLNYEVV24';
+var secretAccessKey = 'Wbt7tJSEPwytAHZ2dnS4YbSPS1TbDBGBNQ78xlFKtWo';
+var endpoint = 'nyc3.digitaloceanspaces.com';
+var bucketName = 'brand-house';
+
 var FileUpload = function (_Component) {
   _inherits(FileUpload, _Component);
 
@@ -49,13 +54,18 @@ var FileUpload = function (_Component) {
     _this.state = {
       files: []
     };
+
+    _this.doSpaces = new AWS.S3({
+      endpoint: new AWS.Endpoint(endpoint),
+      accessKeyId: accessKeyId,
+      secretAccessKey: secretAccessKey
+    });
     return _this;
   }
 
   _createClass(FileUpload, [{
     key: 'openFileChooser',
     value: function openFileChooser() {
-      console.log(this.fileUpload);
       this.fileUpload.current.click();
     }
   }, {
@@ -69,16 +79,7 @@ var FileUpload = function (_Component) {
   }, {
     key: 'uploadFiles',
     value: function uploadFiles() {
-      var accessKeyId = 'TKPLAKLR23UMLNYEVV24';
-      var secretAccessKey = 'Wbt7tJSEPwytAHZ2dnS4YbSPS1TbDBGBNQ78xlFKtWo';
-      var region = 'nyc3'; // New York region by default
-
-      var spacesEndpoint = new AWS.Endpoint(region + '.digitaloceanspaces.com');
-      var s3 = new AWS.S3({
-        endpoint: spacesEndpoint,
-        accessKeyId: accessKeyId,
-        secretAccessKey: secretAccessKey
-      });
+      var _this2 = this;
 
       var options = {
         partSize: 10 * 1024 * 1024, // 10 MB
@@ -86,19 +87,50 @@ var FileUpload = function (_Component) {
       };
 
       var uploadEvents = this.state.files.map(function (file) {
+        var randomDir = new Date().getTime();
         var params = {
           ACL: 'public-read',
-          Bucket: 'brand-house',
-          Key: file.name,
+          Bucket: bucketName,
+          Key: randomDir + '/' + file.name,
           Body: file
         };
-        return s3.upload(params, options).promise();
+        var uploadManager = _this2.doSpaces.upload(params, options);
+
+        file.spacesName = params.Key;
+
+        uploadManager.on('httpUploadProgress', function (progress) {
+          var files = _this2.state.files.map(function (fileIter) {
+            if (file.name === fileIter.name && file.size === fileIter.size) {
+              return {
+                name: file.name,
+                spacesName: file.spacesName,
+                type: file.type,
+                size: file.size,
+                lastModified: file.lastModified,
+                lastModifiedDate: file.lastModifiedDate,
+                progress: progress.loaded / progress.total * 100
+              };
+            }
+            return file;
+          });
+
+          _this2.setState({
+            files: [].concat(_toConsumableArray(files))
+          });
+        });
+
+        return uploadManager.promise();
       });
 
-      console.log(uploadEvents);
+      Promise.all(uploadEvents).then(function () {
+        var files = _this2.state.files.map(function (file) {
+          delete file.progress;
+          return file;
+        });
 
-      Promise.all(uploadEvents).then(function (values) {
-        console.log('good to go');
+        _this2.setState({
+          files: files
+        });
       });
     }
   }, {
@@ -115,9 +147,33 @@ var FileUpload = function (_Component) {
       });
     }
   }, {
+    key: 'renderFileName',
+    value: function renderFileName(file) {
+      var fileName = file.name;
+      if (file.spacesName) {
+        fileName = _react2.default.createElement(
+          'a',
+          { target: '_blank', href: 'https://' + bucketName + '.' + endpoint + '/' + file.spacesName },
+          file.name
+        );
+      }
+      return _react2.default.createElement(
+        _react2.default.Fragment,
+        null,
+        fileName,
+        file.progress && _react2.default.createElement(
+          'span',
+          null,
+          ' (',
+          (0, _maskJs.maskCurrency)(file.progress),
+          ' %)'
+        )
+      );
+    }
+  }, {
     key: 'render',
     value: function render() {
-      var _this2 = this;
+      var _this3 = this;
 
       return _react2.default.createElement(
         'div',
@@ -126,14 +182,14 @@ var FileUpload = function (_Component) {
           type: 'file',
           ref: this.fileUpload,
           onChange: function onChange() {
-            return _this2.fileChosen();
+            return _this3.fileChosen();
           },
           id: this.props.id,
           multiple: true
         }),
         _react2.default.createElement(_.Button, {
           onClick: function onClick() {
-            return _this2.openFileChooser();
+            return _this3.openFileChooser();
           },
           text: 'Choose Files'
         }),
@@ -177,7 +233,7 @@ var FileUpload = function (_Component) {
                 _react2.default.createElement(
                   'td',
                   null,
-                  file.name
+                  _this3.renderFileName(file)
                 ),
                 _react2.default.createElement(
                   'td',
@@ -205,7 +261,7 @@ var FileUpload = function (_Component) {
                 _react2.default.createElement(
                   'a',
                   { onClick: function onClick() {
-                      return _this2.uploadFiles();
+                      return _this3.uploadFiles();
                     } },
                   'Upload'
                 )
@@ -216,7 +272,7 @@ var FileUpload = function (_Component) {
                 _react2.default.createElement(
                   'a',
                   { onClick: function onClick() {
-                      return _this2.clearList();
+                      return _this3.clearList();
                     } },
                   'Clear'
                 )
