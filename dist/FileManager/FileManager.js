@@ -57,8 +57,10 @@ var FileManager = function (_Component) {
         visible: false,
         y: 0,
         x: 0,
-        url: ''
-      }
+        url: '',
+        mimeType: ''
+      },
+      showUploadButton: false
     };
 
     _this.doSpaces = new AWS.S3({
@@ -87,7 +89,8 @@ var FileManager = function (_Component) {
       });
 
       this.setState({
-        files: [].concat(_toConsumableArray(filesUploaded), _toConsumableArray(newFiles))
+        files: [].concat(_toConsumableArray(filesUploaded), _toConsumableArray(newFiles)),
+        showUploadButton: filesUploaded.length + newFiles.length > 0
       });
     }
   }, {
@@ -162,7 +165,8 @@ var FileManager = function (_Component) {
       this.setState({
         snapshot: {
           visible: true,
-          url: 'https://' + bucketName + '.' + endpoint + '/' + file.spacesName
+          url: 'https://' + bucketName + '.' + endpoint + '/' + file.spacesName,
+          mimeType: file.type
         }
       });
     }
@@ -172,7 +176,8 @@ var FileManager = function (_Component) {
       this.setState({
         snapshot: {
           visible: false,
-          url: ''
+          url: '',
+          mimeType: ''
         }
       });
     }
@@ -239,22 +244,41 @@ var FileManager = function (_Component) {
           },
           text: 'Choose Files'
         }),
-        this.state.snapshot.visible && _react2.default.createElement(
-          _.Modal,
-          { onSuccess: function onSuccess() {
-              return _this4.closeSnapshot();
-            } },
-          _react2.default.createElement('img', { src: this.state.snapshot.url }),
+        _react2.default.createElement(
+          _.If,
+          { condition: this.state.showUploadButton },
+          _react2.default.createElement(_.Button, {
+            className: 'upload-button',
+            onClick: function onClick() {
+              return _this4.uploadFiles();
+            },
+            text: 'Upload Files'
+          })
+        ),
+        _react2.default.createElement(
+          _.If,
+          { condition: this.state.snapshot.visible },
           _react2.default.createElement(
-            'p',
-            null,
+            _.Modal,
+            { onSuccess: function onSuccess() {
+                return _this4.closeSnapshot();
+              } },
             _react2.default.createElement(
-              'a',
-              {
-                href: this.state.snapshot.url,
-                target: '_blank'
-              },
-              'Download'
+              _.If,
+              { condition: this.state.snapshot.mimeType.indexOf('image/') === 0 },
+              _react2.default.createElement('img', { src: this.state.snapshot.url })
+            ),
+            _react2.default.createElement(
+              'p',
+              null,
+              _react2.default.createElement(
+                'a',
+                {
+                  href: this.state.snapshot.url,
+                  target: '_blank'
+                },
+                'Download'
+              )
             )
           )
         ),
@@ -340,13 +364,7 @@ var FileManager = function (_Component) {
               _react2.default.createElement(
                 'td',
                 null,
-                _react2.default.createElement(
-                  'a',
-                  { onClick: function onClick() {
-                      return _this4.uploadFiles();
-                    } },
-                  'Upload'
-                )
+                'Summary:'
               ),
               _react2.default.createElement(
                 'td',
@@ -374,8 +392,13 @@ var FileManager = function (_Component) {
     key: 'getDerivedStateFromProps',
     value: function getDerivedStateFromProps(nextProps, prevState) {
       if (nextProps.files === prevState.files) return null;
+      var files = nextProps.files || [];
+      var showUploadButton = files.filter(function (file) {
+        return !file.uploaded;
+      }).length > 0;
       return {
-        files: nextProps.files || []
+        files: files,
+        showUploadButton: showUploadButton
       };
     }
   }]);

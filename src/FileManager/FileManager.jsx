@@ -2,7 +2,7 @@ import * as AWS from 'aws-sdk';
 import React, {Component} from 'react';
 import {maskCurrency} from 'mask-js';
 import PropType from 'prop-types';
-import {Button, Modal} from '../';
+import {Button, If, Modal} from '../';
 import './FileManager.scss';
 
 const accessKeyId = 'TKPLAKLR23UMLNYEVV24';
@@ -22,7 +22,9 @@ class FileManager extends Component {
         y: 0,
         x: 0,
         url: '',
+        mimeType: '',
       },
+      showUploadButton: false,
     };
 
     this.doSpaces = new AWS.S3({
@@ -34,8 +36,11 @@ class FileManager extends Component {
 
   static getDerivedStateFromProps(nextProps, prevState) {
     if (nextProps.files === prevState.files) return null;
+    const files = nextProps.files || [];
+    const showUploadButton = files.filter((file) => (!file.uploaded)).length > 0;
     return {
-      files: nextProps.files || []
+      files,
+      showUploadButton,
     };
   }
 
@@ -53,6 +58,7 @@ class FileManager extends Component {
 
     this.setState({
       files: [...filesUploaded, ...newFiles],
+      showUploadButton: filesUploaded.length + newFiles.length > 0,
     });
   }
 
@@ -125,7 +131,8 @@ class FileManager extends Component {
     this.setState({
       snapshot: {
         visible: true,
-        url: `https://${bucketName}.${endpoint}/${file.spacesName}`
+        url: `https://${bucketName}.${endpoint}/${file.spacesName}`,
+        mimeType: file.type,
       },
     });
   }
@@ -135,6 +142,7 @@ class FileManager extends Component {
       snapshot: {
         visible: false,
         url: '',
+        mimeType: '',
       },
     });
   }
@@ -182,21 +190,28 @@ class FileManager extends Component {
           onClick={() => (this.openFileChooser())}
           text="Choose Files"
         />
-        {
-          this.state.snapshot.visible && (
-            <Modal onSuccess={() => (this.closeSnapshot())}>
+        <If condition={this.state.showUploadButton}>
+          <Button
+            className="upload-button"
+            onClick={() => this.uploadFiles()}
+            text="Upload Files"
+          />
+        </If>
+        <If condition={this.state.snapshot.visible}>
+          <Modal onSuccess={() => (this.closeSnapshot())}>
+            <If condition={this.state.snapshot.mimeType.indexOf('image/') === 0}>
               <img src={this.state.snapshot.url} />
-              <p>
-                <a
-                  href={this.state.snapshot.url}
-                  target="_blank"
-                >
-                  Download
-                </a>
-              </p>
-            </Modal>
-          )
-        }
+            </If>
+            <p>
+              <a
+                href={this.state.snapshot.url}
+                target="_blank"
+              >
+                Download
+              </a>
+            </p>
+          </Modal>
+        </If>
         <table>
           <thead>
           <tr>
@@ -229,7 +244,7 @@ class FileManager extends Component {
           </tr>
           }
           <tr>
-            <td><a onClick={() => this.uploadFiles()}>Upload</a></td>
+            <td>Summary:</td>
             <td>{maskCurrency(totalSize / 1024)} KB</td>
             <td><a onClick={() => this.clearList()}>Clear</a></td>
           </tr>
