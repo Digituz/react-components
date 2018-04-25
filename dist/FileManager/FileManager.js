@@ -44,10 +44,10 @@ var bucketName = 'brand-house';
 var FileManager = function (_Component) {
   _inherits(FileManager, _Component);
 
-  function FileManager() {
+  function FileManager(props) {
     _classCallCheck(this, FileManager);
 
-    var _this = _possibleConstructorReturn(this, (FileManager.__proto__ || Object.getPrototypeOf(FileManager)).call(this));
+    var _this = _possibleConstructorReturn(this, (FileManager.__proto__ || Object.getPrototypeOf(FileManager)).call(this, props));
 
     _this.fileManager = _react2.default.createRef();
 
@@ -71,9 +71,17 @@ var FileManager = function (_Component) {
   }, {
     key: 'fileChosen',
     value: function fileChosen() {
-      var files = [].concat(_toConsumableArray(this.fileManager.current.files));
+      var filesUploaded = this.state.files.filter(function (file) {
+        return file.uploaded;
+      });
+      var newFiles = [].concat(_toConsumableArray(this.fileManager.current.files)).map(function (file) {
+        var randomDir = new Date().getTime();
+        file.spacesName = randomDir + '/' + file.name;
+        return file;
+      });
+
       this.setState({
-        files: files
+        files: [].concat(_toConsumableArray(filesUploaded), _toConsumableArray(newFiles))
       });
     }
   }, {
@@ -87,16 +95,15 @@ var FileManager = function (_Component) {
       };
 
       var uploadEvents = this.state.files.map(function (file) {
-        var randomDir = new Date().getTime();
+        if (file.uploaded) return null;
+
         var params = {
           ACL: 'public-read',
           Bucket: bucketName,
-          Key: randomDir + '/' + file.name,
+          Key: file.spacesName,
           Body: file
         };
         var uploadManager = _this2.doSpaces.upload(params, options);
-
-        file.spacesName = params.Key;
 
         uploadManager.on('httpUploadProgress', function (progress) {
           var files = _this2.state.files.map(function (fileIter) {
@@ -111,7 +118,7 @@ var FileManager = function (_Component) {
                 progress: progress.loaded / progress.total * 100
               };
             }
-            return file;
+            return fileIter;
           });
 
           _this2.setState({
@@ -125,6 +132,7 @@ var FileManager = function (_Component) {
       Promise.all(uploadEvents).then(function () {
         var files = _this2.state.files.map(function (file) {
           delete file.progress;
+          file.uploaded = true;
           return file;
         });
 
@@ -152,7 +160,7 @@ var FileManager = function (_Component) {
     key: 'renderFileName',
     value: function renderFileName(file) {
       var fileName = file.name;
-      if (file.spacesName) {
+      if (file.uploaded) {
         fileName = _react2.default.createElement(
           'a',
           { target: '_blank', href: 'https://' + bucketName + '.' + endpoint + '/' + file.spacesName },
@@ -231,7 +239,7 @@ var FileManager = function (_Component) {
             this.state.files.map(function (file) {
               return _react2.default.createElement(
                 'tr',
-                { key: file.name },
+                { key: file.spacesName },
                 _react2.default.createElement(
                   'td',
                   null,
@@ -283,6 +291,14 @@ var FileManager = function (_Component) {
           )
         )
       );
+    }
+  }], [{
+    key: 'getDerivedStateFromProps',
+    value: function getDerivedStateFromProps(nextProps, prevState) {
+      if (nextProps.files === prevState.files) return null;
+      return {
+        files: nextProps.files || []
+      };
     }
   }]);
 

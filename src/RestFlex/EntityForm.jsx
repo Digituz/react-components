@@ -80,6 +80,7 @@ class EntityForm extends Component {
         <div className="sm-12" key={propertyKey}>
           <FileManager
             id={propertyKey}
+            files={this.getValue(propertyKey)}
             onComplete={this.updateField(propertyKey)}
           />
         </div>

@@ -132,6 +132,7 @@ var EntityForm = function (_Component) {
           { className: 'sm-12', key: propertyKey },
           _react2.default.createElement(_FileManager2.default, {
             id: propertyKey,
+            files: this.getValue(propertyKey),
             onComplete: this.updateField(propertyKey)
           })
         );

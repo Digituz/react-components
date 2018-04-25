@@ -11,8 +11,8 @@ const endpoint = 'nyc3.digitaloceanspaces.com';
 const bucketName = 'brand-house';
 
 class FileManager extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.fileManager = React.createRef();
 
     this.state = {
@@ -26,14 +26,27 @@ class FileManager extends Component {
     });
   }
 
+  static getDerivedStateFromProps(nextProps, prevState) {
+    if (nextProps.files === prevState.files) return null;
+    return {
+      files: nextProps.files || []
+    };
+  }
+
   openFileChooser() {
     this.fileManager.current.click();
   }
 
   fileChosen() {
-    const files = [...this.fileManager.current.files];
+    const filesUploaded = this.state.files.filter(file => (file.uploaded));
+    const newFiles = [...this.fileManager.current.files].map(file => {
+      const randomDir = (new Date()).getTime();
+      file.spacesName = `${randomDir}/${file.name}`;
+      return file;
+    });
+
     this.setState({
-      files,
+      files: [...filesUploaded, ...newFiles],
     });
   }
 
@@ -44,16 +57,15 @@ class FileManager extends Component {
     };
 
     const uploadEvents = this.state.files.map((file) => {
-      const randomDir = (new Date()).getTime();
+      if (file.uploaded) return null;
+
       const params = {
         ACL: 'public-read',
         Bucket: bucketName,
-        Key: `${randomDir}/${file.name}`,
+        Key: file.spacesName,
         Body: file,
       };
       const uploadManager = this.doSpaces.upload(params, options);
-
-      file.spacesName = params.Key;
 
       uploadManager.on('httpUploadProgress', (progress) => {
         const files = this.state.files.map(fileIter => {
@@ -71,7 +83,7 @@ class FileManager extends Component {
               progress: progress.loaded / progress.total * 100,
             };
           }
-          return file;
+          return fileIter;
         });
 
         this.setState({
@@ -85,6 +97,7 @@ class FileManager extends Component {
     Promise.all(uploadEvents).then(() => {
       const files = this.state.files.map(file => {
         delete file.progress;
+        file.uploaded = true;
         return file;
       });
 
@@ -110,7 +123,7 @@ class FileManager extends Component {
 
   renderFileName(file) {
     let fileName = file.name;
-    if (file.spacesName) {
+    if (file.uploaded) {
       fileName = (
         <a target="_blank" href={`https://${bucketName}.${endpoint}/${file.spacesName}`}>
           {file.name}
@@ -154,7 +167,7 @@ class FileManager extends Component {
           </thead>
           <tbody>
           {this.state.files.map(file => (
-            <tr key={file.name}>
+            <tr key={file.spacesName}>
               <td>
                 { this.renderFileName(file) }
               </td>
