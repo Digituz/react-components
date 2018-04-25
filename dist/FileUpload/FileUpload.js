@@ -131,6 +131,8 @@ var FileUpload = function (_Component) {
         _this2.setState({
           files: files
         });
+
+        _this2.props.onComplete(files);
       });
     }
   }, {
@@ -289,9 +291,7 @@ var FileUpload = function (_Component) {
 
 FileUpload.propTypes = {
   id: _propTypes2.default.string.isRequired,
-  onStart: _propTypes2.default.func,
-  onComplete: _propTypes2.default.func,
-  onError: _propTypes2.default.func
+  onComplete: _propTypes2.default.func
 };
 
 exports.default = FileUpload;

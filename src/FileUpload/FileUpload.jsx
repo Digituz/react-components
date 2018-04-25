@@ -91,6 +91,8 @@ class FileUpload extends Component {
       this.setState({
         files,
       });
+
+      this.props.onComplete(files);
     });
   }
 
@@ -177,9 +179,7 @@ class FileUpload extends Component {
 
 FileUpload.propTypes = {
   id: PropType.string.isRequired,
-  onStart: PropType.func,
   onComplete: PropType.func,
-  onError: PropType.func,
 };
 
 export default FileUpload;

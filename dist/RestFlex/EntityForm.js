@@ -131,7 +131,8 @@ var EntityForm = function (_Component) {
           'div',
           { className: 'sm-12', key: propertyKey },
           _react2.default.createElement(_FileUpload2.default, {
-            id: propertyKey
+            id: propertyKey,
+            onComplete: this.updateField(propertyKey)
           })
         );
       }

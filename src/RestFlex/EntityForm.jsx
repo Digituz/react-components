@@ -80,9 +80,10 @@ class EntityForm extends Component {
         <div className="sm-12" key={propertyKey}>
           <FileUpload
             id={propertyKey}
+            onComplete={this.updateField(propertyKey)}
           />
         </div>
-      )
+      );
     }
     return null;
   }
