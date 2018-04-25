@@ -15,6 +15,7 @@
   "license": "MIT",
   "dependencies": {
     "@digituz/rest-flex-client": "^1.0.6",
+    "aws-sdk": "^2.228.1",
     "fbemitter": "^2.1.1",
     "mask-js": "^2.1.0",
     "prop-types": "^15.6.1",

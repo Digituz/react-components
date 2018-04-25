@@ -14,6 +14,7 @@ import PanelBody from './PanelBody/PanelBody';
 import PanelHeader from './PanelHeader/PanelHeader';
 import RestFlexRoute from './RestFlex/RestFlexRoute';
 import Table from './Table/Table';
+import UploadInput from './FileUpload/UploadInput';
 import VerticalMenu from './VerticalMenu/VerticalMenu';
 
 export {
@@ -33,5 +34,6 @@ export {
   PanelHeader,
   RestFlexRoute,
   Table,
+  UploadInput,
   VerticalMenu,
 }

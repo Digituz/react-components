@@ -28,6 +28,10 @@ var _Entity = require('./Entity');
 
 var _Entity2 = _interopRequireDefault(_Entity);
 
+var _FileUpload = require('../FileUpload/FileUpload');
+
+var _FileUpload2 = _interopRequireDefault(_FileUpload);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
@@ -119,6 +123,15 @@ var EntityForm = function (_Component) {
             onBlur: this.updateField(propertyKey),
             type: property.format || 'text',
             inputType: property.inputType
+          })
+        );
+      }
+      if (property.type === 'file') {
+        return _react2.default.createElement(
+          'div',
+          { className: 'sm-12', key: propertyKey },
+          _react2.default.createElement(_FileUpload2.default, {
+            id: propertyKey
           })
         );
       }

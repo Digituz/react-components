@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.VerticalMenu = exports.Table = exports.RestFlexRoute = exports.PanelHeader = exports.PanelBody = exports.Panel = exports.NotificationManager = exports.NotificationContainer = exports.Modal = exports.InputLabel = exports.Input = exports.If = exports.Grid = exports.DropDown = exports.DatePicker = exports.Card = exports.Button = undefined;
+exports.VerticalMenu = exports.UploadInput = exports.Table = exports.RestFlexRoute = exports.PanelHeader = exports.PanelBody = exports.Panel = exports.NotificationManager = exports.NotificationContainer = exports.Modal = exports.InputLabel = exports.Input = exports.If = exports.Grid = exports.DropDown = exports.DatePicker = exports.Card = exports.Button = undefined;
 
 var _Button = require('./Button/Button');
 
@@ -69,6 +69,10 @@ var _Table = require('./Table/Table');
 
 var _Table2 = _interopRequireDefault(_Table);
 
+var _UploadInput = require('./FileUpload/UploadInput');
+
+var _UploadInput2 = _interopRequireDefault(_UploadInput);
+
 var _VerticalMenu = require('./VerticalMenu/VerticalMenu');
 
 var _VerticalMenu2 = _interopRequireDefault(_VerticalMenu);
@@ -91,4 +95,5 @@ exports.PanelBody = _PanelBody2.default;
 exports.PanelHeader = _PanelHeader2.default;
 exports.RestFlexRoute = _RestFlexRoute2.default;
 exports.Table = _Table2.default;
+exports.UploadInput = _UploadInput2.default;
 exports.VerticalMenu = _VerticalMenu2.default;

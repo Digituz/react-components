@@ -1,0 +1,48 @@
+@import '../global-style.scss';
+
+div.drc-file-upload {
+
+  input {
+    display: none;
+  }
+
+  table {
+    width: 100%;
+    margin-top: 15px;
+    border-collapse: collapse;
+    border: 1px solid $very-light-gray;
+    font-size: 14px;
+
+    th, td {
+      border: 1px solid $very-light-gray;
+      padding: 5px;
+
+      a {
+        cursor: pointer;
+        text-decoration: underline;
+      }
+    }
+
+    th {
+      background-color: $super-light-gray;
+    }
+
+    th:only-child {
+      background-color: $very-light-gray;
+    }
+
+    td:first-child {
+      text-align: left;
+      width: 50%;
+    }
+
+    td:last-child {
+      text-align: right;
+      width: 50%;
+    }
+
+    td:only-child {
+      text-align: center;
+    }
+  }
+}
