@@ -90,6 +90,16 @@ class EntityForm extends Component {
   }
 
   save() {
+    // removing files that were not uploaded
+    const propertyKeys = Object.keys(this.props.model.properties);
+    propertyKeys.forEach((propertyKey) => {
+      const property = this.props.model.properties[propertyKey];
+      if (property.type === "file") {
+        const files = this.state.entity[propertyKey];
+        this.state.entity[propertyKey] = files.filter(file => (file.uploaded));
+      }
+    });
+
     if (this.state.id) {
       this.client.update(this.state.id, this.state.entity)
         .then(() => {

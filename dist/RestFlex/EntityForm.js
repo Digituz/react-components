@@ -144,6 +144,18 @@ var EntityForm = function (_Component) {
     value: function save() {
       var _this4 = this;
 
+      // removing files that were not uploaded
+      var propertyKeys = Object.keys(this.props.model.properties);
+      propertyKeys.forEach(function (propertyKey) {
+        var property = _this4.props.model.properties[propertyKey];
+        if (property.type === "file") {
+          var files = _this4.state.entity[propertyKey];
+          _this4.state.entity[propertyKey] = files.filter(function (file) {
+            return file.uploaded;
+          });
+        }
+      });
+
       if (this.state.id) {
         this.client.update(this.state.id, this.state.entity).then(function () {
           _this4.props.history.push(_this4.props.model.path);

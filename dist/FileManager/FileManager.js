@@ -136,10 +136,6 @@ var FileManager = function (_Component) {
           return file;
         });
 
-        _this2.setState({
-          files: files
-        });
-
         _this2.props.onComplete(files);
       });
     }
@@ -181,6 +177,14 @@ var FileManager = function (_Component) {
       );
     }
   }, {
+    key: 'removeFile',
+    value: function removeFile(removedFile) {
+      var files = this.state.files.filter(function (file) {
+        return file.spacesName !== removedFile.spacesName;
+      });
+      this.props.onComplete(files);
+    }
+  }, {
     key: 'render',
     value: function render() {
       var _this3 = this;
@@ -214,7 +218,7 @@ var FileManager = function (_Component) {
               null,
               _react2.default.createElement(
                 'th',
-                { colSpan: 2 },
+                { colSpan: 3 },
                 'Files Chosen'
               )
             ),
@@ -230,6 +234,11 @@ var FileManager = function (_Component) {
                 'th',
                 null,
                 'Size'
+              ),
+              _react2.default.createElement(
+                'th',
+                null,
+                'Actions'
               )
             )
           ),
@@ -250,6 +259,17 @@ var FileManager = function (_Component) {
                   null,
                   (0, _maskJs.maskCurrency)(file.size / 1024),
                   ' KB'
+                ),
+                _react2.default.createElement(
+                  'td',
+                  null,
+                  _react2.default.createElement(
+                    'a',
+                    { onClick: function onClick() {
+                        return _this3.removeFile(file);
+                      } },
+                    'Remove'
+                  )
                 )
               );
             }),
@@ -258,7 +278,7 @@ var FileManager = function (_Component) {
               null,
               _react2.default.createElement(
                 'td',
-                { colSpan: 2 },
+                { colSpan: 3 },
                 'No files chosen.'
               )
             ),

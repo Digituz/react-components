@@ -101,10 +101,6 @@ class FileManager extends Component {
         return file;
       });
 
-      this.setState({
-        files,
-      });
-
       this.props.onComplete(files);
     });
   }
@@ -141,6 +137,11 @@ class FileManager extends Component {
     )
   }
 
+  removeFile(removedFile) {
+    const files = this.state.files.filter(file => (file.spacesName !== removedFile.spacesName));
+    this.props.onComplete(files);
+  }
+
   render() {
     return (
       <div className="drc-file-upload">
@@ -158,11 +159,12 @@ class FileManager extends Component {
         <table>
           <thead>
           <tr>
-            <th colSpan={2}>Files Chosen</th>
+            <th colSpan={3}>Files Chosen</th>
           </tr>
           <tr>
             <th>Name</th>
             <th>Size</th>
+            <th>Actions</th>
           </tr>
           </thead>
           <tbody>
@@ -172,11 +174,14 @@ class FileManager extends Component {
                 { this.renderFileName(file) }
               </td>
               <td>{maskCurrency(file.size / 1024)} KB</td>
+              <td>
+                <a onClick={() => this.removeFile(file)}>Remove</a>
+              </td>
             </tr>
           ))}
           {this.state.files.length < 1 &&
           <tr>
-            <td colSpan={2}>No files chosen.</td>
+            <td colSpan={3}>No files chosen.</td>
           </tr>
           }
           <tr>

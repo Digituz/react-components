@@ -31,14 +31,14 @@ div.drc-file-upload {
       background-color: $very-light-gray;
     }
 
-    td:first-child {
+    td {
       text-align: left;
-      width: 50%;
+      width: 33%;
     }
 
-    td:last-child {
-      text-align: right;
-      width: 50%;
+    td:first-child {
+      text-align: left;
+      width: 34%;
     }
 
     td:only-child {
