@@ -55,3 +55,42 @@ table.drc-table {
     }
   }
 }
+
+div.drc-no-data,
+div.drc-loading-data {
+  border: 1px solid $very-light-gray;
+  border-top: none;
+  text-align: center;
+  position: relative;
+  height: 100px;
+  padding-top: 5px;
+
+  > span {
+    font-size: 50px;
+    position: relative;
+    top: 20px;
+    animation: ease-in-out infinite alternate;
+    animation-name: ani-loading-data;
+    animation-duration: 1.2s;
+  }
+
+  @keyframes ani-loading-data {
+    0% {
+      left: -170px;
+      color: #eee;
+    }
+
+    50% {
+      color: #666;
+    }
+
+    100% {
+      left: 90px;
+      color: #eee;
+    }
+  }
+}
+
+div.drc-no-data {
+  line-height: 90px;
+}

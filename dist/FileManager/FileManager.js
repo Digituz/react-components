@@ -72,6 +72,16 @@ var FileManager = function (_Component) {
   }
 
   _createClass(FileManager, [{
+    key: 'componentDidMount',
+    value: function componentDidMount() {
+      this.unmounted = false;
+    }
+  }, {
+    key: 'componentWillUnmount',
+    value: function componentWillUnmount() {
+      this.unmounted = true;
+    }
+  }, {
     key: 'openFileChooser',
     value: function openFileChooser() {
       this.fileManager.current.click();
@@ -115,6 +125,8 @@ var FileManager = function (_Component) {
         var uploadManager = _this2.doSpaces.upload(params, options);
 
         uploadManager.on('httpUploadProgress', function (progress) {
+          if (_this2.unmounted) return;
+
           var files = _this2.state.files.map(function (fileIter) {
             if (file.name === fileIter.name && file.size === fileIter.size) {
               return {
@@ -138,7 +150,9 @@ var FileManager = function (_Component) {
         return uploadManager.promise();
       });
 
-      Promise.all(uploadEvents).then(function () {
+      var a = Promise.all(uploadEvents).then(function () {
+        if (_this2.unmounted) return;
+
         var files = _this2.state.files.map(function (file) {
           delete file.progress;
           file.uploaded = true;
@@ -147,6 +161,7 @@ var FileManager = function (_Component) {
 
         _this2.props.onComplete(files);
       });
+      console.log(a.reject);
     }
   }, {
     key: 'clearList',

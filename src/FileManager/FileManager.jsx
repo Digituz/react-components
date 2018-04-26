@@ -44,6 +44,14 @@ class FileManager extends Component {
     };
   }
 
+  componentDidMount() {
+    this.unmounted = false;
+  }
+
+  componentWillUnmount() {
+    this.unmounted = true;
+  }
+
   openFileChooser() {
     this.fileManager.current.click();
   }
@@ -80,6 +88,8 @@ class FileManager extends Component {
       const uploadManager = this.doSpaces.upload(params, options);
 
       uploadManager.on('httpUploadProgress', (progress) => {
+        if (this.unmounted) return;
+
         const files = this.state.files.map(fileIter => {
           if (
             file.name === fileIter.name &&
@@ -106,7 +116,9 @@ class FileManager extends Component {
       return uploadManager.promise();
     });
 
-    Promise.all(uploadEvents).then(() => {
+    const a = Promise.all(uploadEvents).then(() => {
+      if (this.unmounted) return;
+
       const files = this.state.files.map(file => {
         delete file.progress;
         file.uploaded = true;
@@ -115,6 +127,7 @@ class FileManager extends Component {
 
       this.props.onComplete(files);
     });
+    console.log(a.reject);
   }
 
   clearList() {

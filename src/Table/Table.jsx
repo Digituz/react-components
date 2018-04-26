@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import {maskCurrency, maskDate} from 'mask-js';
 import './Table.scss';
-import Entity from "../RestFlex/Entity";
+import {If} from '../';
 
 class Table extends Component {
   constructor(props) {
@@ -10,6 +10,7 @@ class Table extends Component {
 
     this.state = {
       data: props.data,
+      showLoading: false,
     }
   }
 
@@ -19,6 +20,7 @@ class Table extends Component {
       this.state.data.then((data) => {
         this.setState({
           data,
+          showLoading: false,
         });
       });
     }
@@ -27,15 +29,21 @@ class Table extends Component {
   componentWillReceiveProps(nextProps) {
     if (this.props.data !== nextProps.data) {
       if (nextProps.data.then) {
+        this.setState({
+          data: nextProps.data,
+          showLoading: true,
+        });
         nextProps.data.then((data) => {
           this.setState({
             data,
+            showLoading: false,
           });
         });
         return;
       }
       this.setState({
         data: nextProps.data,
+        showLoading: false,
       });
     }
   }
@@ -52,28 +60,41 @@ class Table extends Component {
 
   render() {
     return (
-      <table className="drc-table">
-        <thead>
-        <tr>
-        {
-          this.props.columns.map((column, idx) => (
-            <th className={column.headerClass} key={idx}>{column.label}</th>
-          ))
-        }
-        </tr>
-        </thead>
-        <tbody>
-        { this.state.data.map && this.state.data.map((record, idx) => (
-          <tr key={idx}>
-            { this.props.columns.map((column, idx) => (
-              <td className={column.columnClass} key={idx}>
-                {this.renderProperty(column, record)}
-              </td>
-            ))}
+      <React.Fragment>
+        <table className="drc-table">
+          <thead>
+          <tr>
+            {
+              this.props.columns.map((column, idx) => (
+                <th className={column.headerClass} key={idx}>{column.label}</th>
+              ))
+            }
           </tr>
-        ))}
-        </tbody>
-      </table>
+          </thead>
+          <tbody>
+          { this.state.data.map && this.state.data.map((record, idx) => (
+            <tr key={idx}>
+              { this.props.columns.map((column, idx) => (
+                <td className={column.columnClass} key={idx}>
+                  {this.renderProperty(column, record)}
+                </td>
+              ))}
+            </tr>
+          ))}
+          </tbody>
+        </table>
+        <If condition={this.state.showLoading}>
+          <div className="drc-loading-data">
+            Loading Data
+            <span>.</span>
+          </div>
+        </If>
+        <If condition={!this.state.showLoading && this.state.data.length ===0}>
+          <div className="drc-no-data">
+            No Data
+          </div>
+        </If>
+      </React.Fragment>
     );
   }
 }

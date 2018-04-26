@@ -84,12 +84,9 @@ var EntityList = function (_Component) {
   }, {
     key: 'loadEntities',
     value: function loadEntities() {
-      var _this3 = this;
-
-      this.client.get().then(function (data) {
-        _this3.setState({
-          data: data
-        });
+      var data = this.client.get();
+      this.setState({
+        data: data
       });
     }
   }, {
@@ -100,10 +97,10 @@ var EntityList = function (_Component) {
   }, {
     key: 'render',
     value: function render() {
-      var _this4 = this;
+      var _this3 = this;
 
       var columns = this.props.tableColumns.map(function (col) {
-        var property = _this4.props.model.properties[col];
+        var property = _this3.props.model.properties[col];
         return _extends({}, property, {
           columnClass: property.format || '',
           property: col
@@ -115,9 +112,9 @@ var EntityList = function (_Component) {
         columnClass: 'actions',
         renderer: function renderer(entity) {
           var dropDownOptions = [{ label: 'Edit', default: true, onClick: function onClick() {
-              _this4.editEntity(entity);
+              _this3.editEntity(entity);
             } }, { label: 'Delete', onClick: function onClick() {
-              _this4.deleteEntity(entity);
+              _this3.deleteEntity(entity);
             } }];
           return _react2.default.createElement(_.DropDown, { options: dropDownOptions });
         }
@@ -132,7 +129,7 @@ var EntityList = function (_Component) {
           this.props.model.description
         ),
         _react2.default.createElement(_.Button, { onClick: function onClick() {
-            _this4.newEntity();
+            _this3.newEntity();
           }, text: 'New ' + this.props.model.title }),
         _react2.default.createElement(_.Table, { data: this.state.data, columns: columns })
       );

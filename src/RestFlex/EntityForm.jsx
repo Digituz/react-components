@@ -17,6 +17,9 @@ class EntityForm extends Component {
       if (property.format === 'date') {
         return entity[propertyKey] = new Date();
       }
+      if (property.type === 'file') {
+        return entity[propertyKey] = [];
+      }
       entity[propertyKey] = '';
     });
 

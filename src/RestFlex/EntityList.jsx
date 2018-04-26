@@ -39,10 +39,9 @@ class EntityList extends Component {
   }
 
   loadEntities() {
-    this.client.get().then((data) => {
-      this.setState({
-        data,
-      });
+    const data = this.client.get();
+    this.setState({
+      data,
     });
   }
 

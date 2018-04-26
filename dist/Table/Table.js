@@ -18,9 +18,7 @@ var _maskJs = require('mask-js');
 
 require('./Table.css');
 
-var _Entity = require('../RestFlex/Entity');
-
-var _Entity2 = _interopRequireDefault(_Entity);
+var _ = require('../');
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -39,7 +37,8 @@ var Table = function (_Component) {
     var _this = _possibleConstructorReturn(this, (Table.__proto__ || Object.getPrototypeOf(Table)).call(this, props));
 
     _this.state = {
-      data: props.data
+      data: props.data,
+      showLoading: false
     };
     return _this;
   }
@@ -53,7 +52,8 @@ var Table = function (_Component) {
       if (this.state.data.then) {
         this.state.data.then(function (data) {
           _this2.setState({
-            data: data
+            data: data,
+            showLoading: false
           });
         });
       }
@@ -65,15 +65,21 @@ var Table = function (_Component) {
 
       if (this.props.data !== nextProps.data) {
         if (nextProps.data.then) {
+          this.setState({
+            data: nextProps.data,
+            showLoading: true
+          });
           nextProps.data.then(function (data) {
             _this3.setState({
-              data: data
+              data: data,
+              showLoading: false
             });
           });
           return;
         }
         this.setState({
-          data: nextProps.data
+          data: nextProps.data,
+          showLoading: false
         });
       }
     }
@@ -94,39 +100,66 @@ var Table = function (_Component) {
       var _this4 = this;
 
       return _react2.default.createElement(
-        'table',
-        { className: 'drc-table' },
+        _react2.default.Fragment,
+        null,
         _react2.default.createElement(
-          'thead',
-          null,
+          'table',
+          { className: 'drc-table' },
           _react2.default.createElement(
-            'tr',
+            'thead',
             null,
-            this.props.columns.map(function (column, idx) {
+            _react2.default.createElement(
+              'tr',
+              null,
+              this.props.columns.map(function (column, idx) {
+                return _react2.default.createElement(
+                  'th',
+                  { className: column.headerClass, key: idx },
+                  column.label
+                );
+              })
+            )
+          ),
+          _react2.default.createElement(
+            'tbody',
+            null,
+            this.state.data.map && this.state.data.map(function (record, idx) {
               return _react2.default.createElement(
-                'th',
-                { className: column.headerClass, key: idx },
-                column.label
+                'tr',
+                { key: idx },
+                _this4.props.columns.map(function (column, idx) {
+                  return _react2.default.createElement(
+                    'td',
+                    { className: column.columnClass, key: idx },
+                    _this4.renderProperty(column, record)
+                  );
+                })
               );
             })
           )
         ),
         _react2.default.createElement(
-          'tbody',
-          null,
-          this.state.data.map && this.state.data.map(function (record, idx) {
-            return _react2.default.createElement(
-              'tr',
-              { key: idx },
-              _this4.props.columns.map(function (column, idx) {
-                return _react2.default.createElement(
-                  'td',
-                  { className: column.columnClass, key: idx },
-                  _this4.renderProperty(column, record)
-                );
-              })
-            );
-          })
+          _.If,
+          { condition: this.state.showLoading },
+          _react2.default.createElement(
+            'div',
+            { className: 'drc-loading-data' },
+            'Loading Data',
+            _react2.default.createElement(
+              'span',
+              null,
+              '.'
+            )
+          )
+        ),
+        _react2.default.createElement(
+          _.If,
+          { condition: !this.state.showLoading && this.state.data.length === 0 },
+          _react2.default.createElement(
+            'div',
+            { className: 'drc-no-data' },
+            'No Data'
+          )
         )
       );
     }
