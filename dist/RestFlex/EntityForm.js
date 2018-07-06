@@ -155,6 +155,10 @@ var EntityForm = function (_Component) {
     value: function save() {
       var _this4 = this;
 
+      console.log('----------');
+      console.log(this.state.entity);
+      console.log('----------');
+
       // removing files that were not uploaded
       var propertyKeys = Object.keys(this.props.model.properties);
       propertyKeys.forEach(function (propertyKey) {
@@ -177,7 +181,7 @@ var EntityForm = function (_Component) {
             console.log(res);
             return _.NotificationManager.danger('Something went wrong.');
           }
-          _this4.props.pushUrl(_this4.props.model.path);
+          _this4.props.navigate(_this4.props.model.path);
           _.NotificationManager.success(_this4.props.model.plural + ' updated successfully.');
         }).catch(function (err) {
           if (err.message && typeof err.message === 'string') return _.NotificationManager.danger(err.message);
@@ -193,7 +197,7 @@ var EntityForm = function (_Component) {
           console.log(res);
           return _.NotificationManager.danger('Something went wrong.');
         }
-        _this4.props.pushUrl(_this4.props.model.path);
+        _this4.props.navigate(_this4.props.model.path);
         _.NotificationManager.success(_this4.props.model.plural + ' inserted successfully.');
       }).catch(function (err) {
         if (err.message && typeof err.message === 'string') return _.NotificationManager.danger(err.message);

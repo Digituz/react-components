@@ -114,7 +114,7 @@ class EntityForm extends Component {
             console.log(res);
             return NotificationManager.danger('Something went wrong.');
           }
-          this.props.pushUrl(this.props.model.path);
+          this.props.navigate(this.props.model.path);
           NotificationManager.success(`${this.props.model.plural} updated successfully.`);
         })
         .catch((err) => {
@@ -132,7 +132,7 @@ class EntityForm extends Component {
           console.log(res);
           return NotificationManager.danger('Something went wrong.');
         }
-        this.props.pushUrl(this.props.model.path);
+        this.props.navigate(this.props.model.path);
         NotificationManager.success(`${this.props.model.plural} inserted successfully.`);
       })
       .catch((err) => {
