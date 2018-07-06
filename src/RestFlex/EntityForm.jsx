@@ -1,6 +1,5 @@
 import React, {Component} from  'react';
 import PropTypes from 'prop-types';
-import {withRouter} from 'react-router-dom';
 import RestFlexClient from '@digituz/rest-flex-client';
 import {Button, Card, Grid, InputLabel, NotificationManager} from '../';
 import Entity from './Entity';
@@ -30,12 +29,13 @@ class EntityForm extends Component {
 
     this.updateField = this.updateField.bind(this);
 
-    const {url, audience, domain} = this.props.model;
-    this.client = new RestFlexClient(url, audience, domain, props.auth0Config);
+    const {url} = this.props.model;
+
+    this.client = new RestFlexClient(url, this.props.accessToken);
   }
 
   componentDidMount() {
-    const id = this.props.match.params.id;
+    const id = this.props.entityId;
     if (id.trim() === 'new') return;
     this.client.get(id).then((entity) => {
       this.setState({
@@ -97,16 +97,24 @@ class EntityForm extends Component {
     const propertyKeys = Object.keys(this.props.model.properties);
     propertyKeys.forEach((propertyKey) => {
       const property = this.props.model.properties[propertyKey];
-      if (property.type === "file") {
+      if (property.type === 'file') {
         const files = this.state.entity[propertyKey];
+        if (!files) return delete this.state.entity[propertyKey];
         this.state.entity[propertyKey] = files.filter(file => (file.uploaded));
       }
     });
 
     if (this.state.id) {
       this.client.update(this.state.id, this.state.entity)
-        .then(() => {
-          this.props.history.push(this.props.model.path);
+        .then((res) => {
+          if (res.status === 401) {
+            return NotificationManager.danger('You are not authorized to update this entity.');
+          }
+          if (res.status > 400) {
+            console.log(res);
+            return NotificationManager.danger('Something went wrong.');
+          }
+          this.props.pushUrl(this.props.model.path);
           NotificationManager.success(`${this.props.model.plural} updated successfully.`);
         })
         .catch((err) => {
@@ -116,18 +124,21 @@ class EntityForm extends Component {
       return;
     }
     this.client.insert(this.state.entity)
-      .then(() => {
-        this.props.history.push(this.props.model.path);
+      .then((res) => {
+        if (res.status === 401) {
+          return NotificationManager.danger('You are not authorized to insert a new entity.');
+        }
+        if (res.status > 400) {
+          console.log(res);
+          return NotificationManager.danger('Something went wrong.');
+        }
+        this.props.pushUrl(this.props.model.path);
         NotificationManager.success(`${this.props.model.plural} inserted successfully.`);
       })
       .catch((err) => {
         if (err.message && typeof err.message === 'string') return NotificationManager.danger(err.message);
         NotificationManager.danger('Something went wrong.');
       });
-  }
-
-  goBack() {
-    this.props.history.goBack();
   }
 
   render() {
@@ -142,7 +153,7 @@ class EntityForm extends Component {
           {fields.map(field => (field))}
           <div className="sm-12">
             <Button className="margin-right" onClick={() => { this.save() }} text="Save" />
-            <Button className="default" onClick={() => { this.goBack() }} text="Return" />
+            <Button className="default" onClick={this.props.goBack} text="Return" />
           </div>
         </Grid>
       </Card>
@@ -151,12 +162,11 @@ class EntityForm extends Component {
 }
 
 EntityForm.propTypes = {
-  auth0Config: PropTypes.shape({
-    domain: PropTypes.string.isRequired,
-    clientID: PropTypes.string.isRequired,
-    redirectUri: PropTypes.string.isRequired
-  }).isRequired,
+  accessToken: PropTypes.string.isRequired,
+  entityId: PropTypes.string.isRequired,
+  goBack: PropTypes.func.isRequired,
   model: PropTypes.shape(Entity).isRequired,
+  navigate: PropTypes.func.isRequired,
 };
 
-export default withRouter(EntityForm);
+export default EntityForm;

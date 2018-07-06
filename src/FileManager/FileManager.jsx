@@ -127,7 +127,6 @@ class FileManager extends Component {
 
       this.props.onComplete(files);
     });
-    console.log(a.reject);
   }
 
   clearList() {

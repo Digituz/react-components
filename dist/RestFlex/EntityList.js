@@ -4,9 +4,33 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+var _extends2 = require('babel-runtime/helpers/extends');
 
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+var _extends3 = _interopRequireDefault(_extends2);
+
+var _regenerator = require('babel-runtime/regenerator');
+
+var _regenerator2 = _interopRequireDefault(_regenerator);
+
+var _asyncToGenerator2 = require('babel-runtime/helpers/asyncToGenerator');
+
+var _asyncToGenerator3 = _interopRequireDefault(_asyncToGenerator2);
+
+var _classCallCheck2 = require('babel-runtime/helpers/classCallCheck');
+
+var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
+
+var _createClass2 = require('babel-runtime/helpers/createClass');
+
+var _createClass3 = _interopRequireDefault(_createClass2);
+
+var _possibleConstructorReturn2 = require('babel-runtime/helpers/possibleConstructorReturn');
+
+var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
+
+var _inherits2 = require('babel-runtime/helpers/inherits');
+
+var _inherits3 = _interopRequireDefault(_inherits2);
 
 var _react = require('react');
 
@@ -15,8 +39,6 @@ var _react2 = _interopRequireDefault(_react);
 var _propTypes = require('prop-types');
 
 var _propTypes2 = _interopRequireDefault(_propTypes);
-
-var _reactRouterDom = require('react-router-dom');
 
 var _restFlexClient = require('@digituz/rest-flex-client');
 
@@ -30,50 +52,47 @@ var _Entity2 = _interopRequireDefault(_Entity);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
 var EntityList = function (_Component) {
-  _inherits(EntityList, _Component);
+  (0, _inherits3.default)(EntityList, _Component);
 
   function EntityList(props) {
-    _classCallCheck(this, EntityList);
+    (0, _classCallCheck3.default)(this, EntityList);
 
-    var _this = _possibleConstructorReturn(this, (EntityList.__proto__ || Object.getPrototypeOf(EntityList)).call(this, props));
+    var _this = (0, _possibleConstructorReturn3.default)(this, (EntityList.__proto__ || Object.getPrototypeOf(EntityList)).call(this, props));
 
-    var _this$props$model = _this.props.model,
-        url = _this$props$model.url,
-        audience = _this$props$model.audience,
-        domain = _this$props$model.domain;
+    var url = _this.props.model.url;
 
-    _this.client = new _restFlexClient2.default(url, audience, domain, props.auth0Config);
+    _this.client = new _restFlexClient2.default(url, _this.props.accessToken);
 
     _this.state = {
-      data: []
+      data: null
     };
     return _this;
   }
 
-  _createClass(EntityList, [{
+  (0, _createClass3.default)(EntityList, [{
     key: 'newEntity',
     value: function newEntity() {
-      this.props.history.push(this.props.model.path + '/new');
+      this.props.navigate(this.props.model.path, 'new');
     }
   }, {
     key: 'editEntity',
     value: function editEntity(entity) {
-      this.props.history.push(this.props.model.path + '/' + entity._id);
+      this.props.navigate(this.props.model.path, entity._id);
     }
   }, {
     key: 'deleteEntity',
     value: function deleteEntity(entity) {
       var _this2 = this;
 
-      this.client.remove(entity._id).then(function () {
-        _this2.props.history.push(_this2.props.model.path);
+      this.client.remove(entity._id).then(function (res) {
+        if (res.status === 401) {
+          return _.NotificationManager.danger('You are not authorized to remove this entity.');
+        }
+        if (res.status > 400) {
+          console.log(res);
+          return _.NotificationManager.danger('Something went wrong.');
+        }
         _.NotificationManager.success(_this2.props.model.title + ' removed successfully.');
         _this2.loadEntities();
       }).catch(function (err) {
@@ -83,12 +102,37 @@ var EntityList = function (_Component) {
     }
   }, {
     key: 'loadEntities',
-    value: function loadEntities() {
-      var data = this.client.get();
-      this.setState({
-        data: data
-      });
-    }
+    value: function () {
+      var _ref = (0, _asyncToGenerator3.default)( /*#__PURE__*/_regenerator2.default.mark(function _callee() {
+        var data;
+        return _regenerator2.default.wrap(function _callee$(_context) {
+          while (1) {
+            switch (_context.prev = _context.next) {
+              case 0:
+                _context.next = 2;
+                return this.client.get();
+
+              case 2:
+                data = _context.sent;
+
+                this.setState({
+                  data: data
+                });
+
+              case 4:
+              case 'end':
+                return _context.stop();
+            }
+          }
+        }, _callee, this);
+      }));
+
+      function loadEntities() {
+        return _ref.apply(this, arguments);
+      }
+
+      return loadEntities;
+    }()
   }, {
     key: 'componentDidMount',
     value: function componentDidMount() {
@@ -101,7 +145,7 @@ var EntityList = function (_Component) {
 
       var columns = this.props.tableColumns.map(function (col) {
         var property = _this3.props.model.properties[col];
-        return _extends({}, property, {
+        return (0, _extends3.default)({}, property, {
           columnClass: property.format || '',
           property: col
         });
@@ -135,18 +179,14 @@ var EntityList = function (_Component) {
       );
     }
   }]);
-
   return EntityList;
 }(_react.Component);
 
 EntityList.propTypes = {
-  auth0Config: _propTypes2.default.shape({
-    domain: _propTypes2.default.string.isRequired,
-    clientID: _propTypes2.default.string.isRequired,
-    redirectUri: _propTypes2.default.string.isRequired
-  }).isRequired,
+  accessToken: _propTypes2.default.string.isRequired,
   model: _propTypes2.default.shape(_Entity2.default).isRequired,
+  navigate: _propTypes2.default.func.isRequired,
   tableColumns: _propTypes2.default.arrayOf(_propTypes2.default.string).isRequired
 };
 
-exports.default = (0, _reactRouterDom.withRouter)(EntityList);
+exports.default = EntityList;

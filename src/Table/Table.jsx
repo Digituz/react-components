@@ -8,15 +8,16 @@ class Table extends Component {
   constructor(props) {
     super(props);
 
+    const showLoading = props.data === null || !!props.data.then;
     this.state = {
       data: props.data,
-      showLoading: false,
-    }
+      showLoading,
+    };
   }
 
   componentDidMount() {
     // when data is a promise
-    if (this.state.data.then) {
+    if (this.state.data && this.state.data.then) {
       this.state.data.then((data) => {
         this.setState({
           data,
@@ -26,26 +27,15 @@ class Table extends Component {
     }
   }
 
-  componentWillReceiveProps(nextProps) {
-    if (this.props.data !== nextProps.data) {
-      if (nextProps.data.then) {
-        this.setState({
-          data: nextProps.data,
-          showLoading: true,
-        });
-        nextProps.data.then((data) => {
-          this.setState({
-            data,
-            showLoading: false,
-          });
-        });
-        return;
-      }
-      this.setState({
-        data: nextProps.data,
-        showLoading: false,
-      });
-    }
+  static getDerivedStateFromProps(props, state) {
+    if (props.data && props.data.then) return null;
+    if (state.data === props.data) return null;
+
+    const showLoading = !!props.data.then;
+    return {
+      data: props.data,
+      showLoading,
+    };
   }
 
   renderProperty(column, record) {
@@ -72,7 +62,7 @@ class Table extends Component {
           </tr>
           </thead>
           <tbody>
-          { this.state.data.map && this.state.data.map((record, idx) => (
+          { this.state.data && this.state.data.map && this.state.data.map((record, idx) => (
             <tr key={idx}>
               { this.props.columns.map((column, idx) => (
                 <td className={column.columnClass} key={idx}>
@@ -89,7 +79,7 @@ class Table extends Component {
             <span>.</span>
           </div>
         </If>
-        <If condition={!this.state.showLoading && this.state.data.length ===0}>
+        <If condition={!this.state.showLoading && this.state.data && this.state.data.length === 0}>
           <div className="drc-no-data">
             No Data
           </div>
@@ -113,7 +103,7 @@ Table.propTypes = {
       catch: PropTypes.func.isRequired,
     }),
     PropTypes.array,
-  ]).isRequired,
+  ]),
 };
 
 export default Table;

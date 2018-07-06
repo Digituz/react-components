@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
-import {withRouter} from 'react-router-dom';
 import RestFlexClient from '@digituz/rest-flex-client';
 import {Button, Card, DropDown, NotificationManager, Table} from '../';
 import Entity from './Entity';
@@ -9,26 +8,32 @@ class EntityList extends Component {
   constructor(props) {
     super(props);
 
-    const {url, audience, domain} = this.props.model;
-    this.client = new RestFlexClient(url, audience, domain, props.auth0Config);
+    const {url} = this.props.model;
+    this.client = new RestFlexClient(url, this.props.accessToken);
 
     this.state = {
-      data: [],
+      data: null,
     };
   }
 
   newEntity() {
-    this.props.history.push(`${this.props.model.path}/new`);
+    this.props.navigate(this.props.model.path, 'new');
   }
 
   editEntity(entity) {
-    this.props.history.push(`${this.props.model.path}/${entity._id}`);
+    this.props.navigate(this.props.model.path, entity._id);
   }
 
   deleteEntity(entity) {
     this.client.remove(entity._id)
-      .then(() => {
-        this.props.history.push(this.props.model.path);
+      .then((res) => {
+        if (res.status === 401) {
+          return NotificationManager.danger('You are not authorized to remove this entity.');
+        }
+        if (res.status > 400) {
+          console.log(res);
+          return NotificationManager.danger('Something went wrong.');
+        }
         NotificationManager.success(`${this.props.model.title} removed successfully.`);
         this.loadEntities();
       })
@@ -38,8 +43,8 @@ class EntityList extends Component {
       });
   }
 
-  loadEntities() {
-    const data = this.client.get();
+  async loadEntities() {
+    const data = await this.client.get();
     this.setState({
       data,
     });
@@ -84,13 +89,10 @@ class EntityList extends Component {
 }
 
 EntityList.propTypes = {
-  auth0Config: PropTypes.shape({
-    domain: PropTypes.string.isRequired,
-    clientID: PropTypes.string.isRequired,
-    redirectUri: PropTypes.string.isRequired
-  }).isRequired,
+  accessToken: PropTypes.string.isRequired,
   model: PropTypes.shape(Entity).isRequired,
+  navigate: PropTypes.func.isRequired,
   tableColumns: PropTypes.arrayOf(PropTypes.string).isRequired,
 };
 
-export default withRouter(EntityList);
+export default EntityList;

@@ -4,7 +4,21 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+var _classCallCheck2 = require('babel-runtime/helpers/classCallCheck');
+
+var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
+
+var _createClass2 = require('babel-runtime/helpers/createClass');
+
+var _createClass3 = _interopRequireDefault(_createClass2);
+
+var _possibleConstructorReturn2 = require('babel-runtime/helpers/possibleConstructorReturn');
+
+var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
+
+var _inherits2 = require('babel-runtime/helpers/inherits');
+
+var _inherits3 = _interopRequireDefault(_inherits2);
 
 var _react = require('react');
 
@@ -22,64 +36,34 @@ var _ = require('../');
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
 var Table = function (_Component) {
-  _inherits(Table, _Component);
+  (0, _inherits3.default)(Table, _Component);
 
   function Table(props) {
-    _classCallCheck(this, Table);
+    (0, _classCallCheck3.default)(this, Table);
 
-    var _this = _possibleConstructorReturn(this, (Table.__proto__ || Object.getPrototypeOf(Table)).call(this, props));
+    var _this = (0, _possibleConstructorReturn3.default)(this, (Table.__proto__ || Object.getPrototypeOf(Table)).call(this, props));
 
+    var showLoading = props.data === null || !!props.data.then;
     _this.state = {
       data: props.data,
-      showLoading: false
+      showLoading: showLoading
     };
     return _this;
   }
 
-  _createClass(Table, [{
+  (0, _createClass3.default)(Table, [{
     key: 'componentDidMount',
     value: function componentDidMount() {
       var _this2 = this;
 
       // when data is a promise
-      if (this.state.data.then) {
+      if (this.state.data && this.state.data.then) {
         this.state.data.then(function (data) {
           _this2.setState({
             data: data,
             showLoading: false
           });
-        });
-      }
-    }
-  }, {
-    key: 'componentWillReceiveProps',
-    value: function componentWillReceiveProps(nextProps) {
-      var _this3 = this;
-
-      if (this.props.data !== nextProps.data) {
-        if (nextProps.data.then) {
-          this.setState({
-            data: nextProps.data,
-            showLoading: true
-          });
-          nextProps.data.then(function (data) {
-            _this3.setState({
-              data: data,
-              showLoading: false
-            });
-          });
-          return;
-        }
-        this.setState({
-          data: nextProps.data,
-          showLoading: false
         });
       }
     }
@@ -97,7 +81,7 @@ var Table = function (_Component) {
   }, {
     key: 'render',
     value: function render() {
-      var _this4 = this;
+      var _this3 = this;
 
       return _react2.default.createElement(
         _react2.default.Fragment,
@@ -123,15 +107,15 @@ var Table = function (_Component) {
           _react2.default.createElement(
             'tbody',
             null,
-            this.state.data.map && this.state.data.map(function (record, idx) {
+            this.state.data && this.state.data.map && this.state.data.map(function (record, idx) {
               return _react2.default.createElement(
                 'tr',
                 { key: idx },
-                _this4.props.columns.map(function (column, idx) {
+                _this3.props.columns.map(function (column, idx) {
                   return _react2.default.createElement(
                     'td',
                     { className: column.columnClass, key: idx },
-                    _this4.renderProperty(column, record)
+                    _this3.renderProperty(column, record)
                   );
                 })
               );
@@ -154,7 +138,7 @@ var Table = function (_Component) {
         ),
         _react2.default.createElement(
           _.If,
-          { condition: !this.state.showLoading && this.state.data.length === 0 },
+          { condition: !this.state.showLoading && this.state.data && this.state.data.length === 0 },
           _react2.default.createElement(
             'div',
             { className: 'drc-no-data' },
@@ -163,8 +147,19 @@ var Table = function (_Component) {
         )
       );
     }
-  }]);
+  }], [{
+    key: 'getDerivedStateFromProps',
+    value: function getDerivedStateFromProps(props, state) {
+      if (props.data && props.data.then) return null;
+      if (state.data === props.data) return null;
 
+      var showLoading = !!props.data.then;
+      return {
+        data: props.data,
+        showLoading: showLoading
+      };
+    }
+  }]);
   return Table;
 }(_react.Component);
 
@@ -179,7 +174,7 @@ Table.propTypes = {
   data: _propTypes2.default.oneOfType([_propTypes2.default.shape({
     then: _propTypes2.default.func.isRequired,
     catch: _propTypes2.default.func.isRequired
-  }), _propTypes2.default.array]).isRequired
+  }), _propTypes2.default.array])
 };
 
 exports.default = Table;
