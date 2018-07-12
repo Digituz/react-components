@@ -46,11 +46,6 @@ function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj;
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var accessKeyId = 'TKPLAKLR23UMLNYEVV24';
-var secretAccessKey = 'Wbt7tJSEPwytAHZ2dnS4YbSPS1TbDBGBNQ78xlFKtWo';
-var endpoint = 'nyc3.digitaloceanspaces.com';
-var bucketName = 'brand-house';
-
 var FileManager = function (_Component) {
   (0, _inherits3.default)(FileManager, _Component);
 
@@ -74,9 +69,9 @@ var FileManager = function (_Component) {
     };
 
     _this.doSpaces = new AWS.S3({
-      endpoint: new AWS.Endpoint(endpoint),
-      accessKeyId: accessKeyId,
-      secretAccessKey: secretAccessKey
+      endpoint: new AWS.Endpoint(props.endpoint),
+      accessKeyId: props.accessKeyId,
+      secretAccessKey: props.secretAccessKey
     });
     return _this;
   }
@@ -128,7 +123,7 @@ var FileManager = function (_Component) {
 
         var params = {
           ACL: 'public-read',
-          Bucket: bucketName,
+          Bucket: _this2.props.bucketName,
           Key: file.spacesName,
           Body: file
         };
@@ -170,6 +165,9 @@ var FileManager = function (_Component) {
         });
 
         _this2.props.onComplete(files);
+      }).catch(function (err) {
+        debugger;
+        console.log(err.message);
       });
     }
   }, {
@@ -186,6 +184,10 @@ var FileManager = function (_Component) {
   }, {
     key: 'showSnapshot',
     value: function showSnapshot(event, file) {
+      var _props = this.props,
+          bucketName = _props.bucketName,
+          endpoint = _props.endpoint;
+
       this.setState({
         snapshot: {
           visible: true,
@@ -416,7 +418,7 @@ var FileManager = function (_Component) {
     key: 'getDerivedStateFromProps',
     value: function getDerivedStateFromProps(nextProps, prevState) {
       if (nextProps.files === prevState.files) return null;
-      var files = nextProps.files || [];
+      var files = prevState.files || [];
       var showUploadButton = files.filter(function (file) {
         return !file.uploaded;
       }).length > 0;
@@ -431,7 +433,11 @@ var FileManager = function (_Component) {
 
 FileManager.propTypes = {
   id: _propTypes2.default.string.isRequired,
-  onComplete: _propTypes2.default.func
+  onComplete: _propTypes2.default.func,
+  accessKeyId: _propTypes2.default.string.isRequired,
+  bucketName: _propTypes2.default.string.isRequired,
+  endpoint: _propTypes2.default.string.isRequired,
+  secretAccessKey: _propTypes2.default.string.isRequired
 };
 
 exports.default = FileManager;

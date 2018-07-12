@@ -144,7 +144,11 @@ var EntityForm = function (_Component) {
           _react2.default.createElement(_FileManager2.default, {
             id: propertyKey,
             files: this.getValue(propertyKey),
-            onComplete: this.updateField(propertyKey)
+            onComplete: this.updateField(propertyKey),
+            accessKeyId: this.props.fileManagerConfig.accessKeyId,
+            bucketName: this.props.fileManagerConfig.bucketName,
+            endpoint: this.props.fileManagerConfig.endpoint,
+            secretAccessKey: this.props.fileManagerConfig.secretAccessKey
           })
         );
       }
@@ -241,7 +245,13 @@ EntityForm.propTypes = {
   entityId: _propTypes2.default.string.isRequired,
   goBack: _propTypes2.default.func.isRequired,
   model: _propTypes2.default.shape(_Entity2.default).isRequired,
-  navigate: _propTypes2.default.func.isRequired
+  navigate: _propTypes2.default.func.isRequired,
+  fileManagerConfig: _propTypes2.default.shape({
+    accessKeyId: _propTypes2.default.string.isRequired,
+    bucketName: _propTypes2.default.string.isRequired,
+    endpoint: _propTypes2.default.string.isRequired,
+    secretAccessKey: _propTypes2.default.string.isRequired
+  })
 };
 
 exports.default = EntityForm;

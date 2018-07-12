@@ -1,14 +1,9 @@
 import * as AWS from 'aws-sdk';
 import React, {Component} from 'react';
 import {maskCurrency} from 'mask-js';
-import PropType from 'prop-types';
+import PropTypes from 'prop-types';
 import {Button, If, Modal} from '../';
 import './FileManager.scss';
-
-const accessKeyId = 'TKPLAKLR23UMLNYEVV24';
-const secretAccessKey = 'Wbt7tJSEPwytAHZ2dnS4YbSPS1TbDBGBNQ78xlFKtWo';
-const endpoint = 'nyc3.digitaloceanspaces.com';
-const bucketName = 'brand-house';
 
 class FileManager extends Component {
   constructor(props) {
@@ -28,15 +23,15 @@ class FileManager extends Component {
     };
 
     this.doSpaces = new AWS.S3({
-      endpoint: new AWS.Endpoint(endpoint),
-      accessKeyId: accessKeyId,
-      secretAccessKey: secretAccessKey
+      endpoint: new AWS.Endpoint(props.endpoint),
+      accessKeyId: props.accessKeyId,
+      secretAccessKey: props.secretAccessKey
     });
   }
 
   static getDerivedStateFromProps(nextProps, prevState) {
     if (nextProps.files === prevState.files) return null;
-    const files = nextProps.files || [];
+    const files = prevState.files || [];
     const showUploadButton = files.filter((file) => (!file.uploaded)).length > 0;
     return {
       files,
@@ -81,7 +76,7 @@ class FileManager extends Component {
 
       const params = {
         ACL: 'public-read',
-        Bucket: bucketName,
+        Bucket: this.props.bucketName,
         Key: file.spacesName,
         Body: file,
       };
@@ -126,6 +121,9 @@ class FileManager extends Component {
       });
 
       this.props.onComplete(files);
+    }).catch(function(err) {
+      debugger;
+      console.log(err.message);
     });
   }
 
@@ -140,6 +138,7 @@ class FileManager extends Component {
   }
 
   showSnapshot(event, file) {
+    const {bucketName, endpoint} = this.props;
     this.setState({
       snapshot: {
         visible: true,
@@ -268,8 +267,12 @@ class FileManager extends Component {
 }
 
 FileManager.propTypes = {
-  id: PropType.string.isRequired,
-  onComplete: PropType.func,
+  id: PropTypes.string.isRequired,
+  onComplete: PropTypes.func,
+  accessKeyId: PropTypes.string.isRequired,
+  bucketName: PropTypes.string.isRequired,
+  endpoint: PropTypes.string.isRequired,
+  secretAccessKey: PropTypes.string.isRequired,
 };
 
 export default FileManager;

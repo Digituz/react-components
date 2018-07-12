@@ -69,7 +69,7 @@ var RestFlexRoute = function (_Component) {
         goBack: this.props.goBack,
         model: this.props.model,
         navigate: this.props.navigate,
-        entity: {}
+        fileManagerConfig: this.props.fileManagerConfig
       });
     }
   }, {
@@ -88,7 +88,13 @@ RestFlexRoute.propTypes = {
   goBack: _propTypes2.default.func.isRequired,
   model: _propTypes2.default.shape(_Entity2.default).isRequired,
   navigate: _propTypes2.default.func.isRequired,
-  tableColumns: _propTypes2.default.arrayOf(_propTypes2.default.string).isRequired
+  tableColumns: _propTypes2.default.arrayOf(_propTypes2.default.string).isRequired,
+  fileManagerConfig: _propTypes2.default.shape({
+    accessKeyId: _propTypes2.default.string.isRequired,
+    bucketName: _propTypes2.default.string.isRequired,
+    endpoint: _propTypes2.default.string.isRequired,
+    secretAccessKey: _propTypes2.default.string.isRequired
+  })
 };
 
 exports.default = RestFlexRoute;

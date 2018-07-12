@@ -85,6 +85,10 @@ class EntityForm extends Component {
             id={propertyKey}
             files={this.getValue(propertyKey)}
             onComplete={this.updateField(propertyKey)}
+            accessKeyId={this.props.fileManagerConfig.accessKeyId}
+            bucketName={this.props.fileManagerConfig.bucketName}
+            endpoint={this.props.fileManagerConfig.endpoint}
+            secretAccessKey={this.props.fileManagerConfig.secretAccessKey}
           />
         </div>
       );
@@ -167,6 +171,12 @@ EntityForm.propTypes = {
   goBack: PropTypes.func.isRequired,
   model: PropTypes.shape(Entity).isRequired,
   navigate: PropTypes.func.isRequired,
+  fileManagerConfig: PropTypes.shape({
+    accessKeyId: PropTypes.string.isRequired,
+    bucketName: PropTypes.string.isRequired,
+    endpoint: PropTypes.string.isRequired,
+    secretAccessKey: PropTypes.string.isRequired,
+  }),
 };
 
 export default EntityForm;

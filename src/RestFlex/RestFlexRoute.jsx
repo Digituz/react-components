@@ -24,7 +24,7 @@ class RestFlexRoute extends Component {
         goBack={this.props.goBack}
         model={this.props.model}
         navigate={this.props.navigate}
-        entity={{}}
+        fileManagerConfig={this.props.fileManagerConfig}
       />
     )
   }
@@ -42,6 +42,12 @@ RestFlexRoute.propTypes = {
   model: PropTypes.shape(Entity).isRequired,
   navigate: PropTypes.func.isRequired,
   tableColumns: PropTypes.arrayOf(PropTypes.string).isRequired,
+  fileManagerConfig: PropTypes.shape({
+    accessKeyId: PropTypes.string.isRequired,
+    bucketName: PropTypes.string.isRequired,
+    endpoint: PropTypes.string.isRequired,
+    secretAccessKey: PropTypes.string.isRequired,
+  }),
 };
 
 export default RestFlexRoute;
