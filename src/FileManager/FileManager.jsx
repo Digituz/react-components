@@ -31,7 +31,7 @@ class FileManager extends Component {
 
   static getDerivedStateFromProps(nextProps, prevState) {
     if (nextProps.files === prevState.files) return null;
-    const files = prevState.files || [];
+    const files = nextProps.files || [];
     const showUploadButton = files.filter((file) => (!file.uploaded)).length > 0;
     return {
       files,
@@ -59,10 +59,7 @@ class FileManager extends Component {
       return file;
     });
 
-    this.setState({
-      files: [...filesUploaded, ...newFiles],
-      showUploadButton: filesUploaded.length + newFiles.length > 0,
-    });
+    this.props.onComplete([...filesUploaded, ...newFiles]);
   }
 
   uploadFiles() {
@@ -103,15 +100,13 @@ class FileManager extends Component {
           return fileIter;
         });
 
-        this.setState({
-          files: [...files],
-        });
+        this.props.onComplete(files);
       });
 
       return uploadManager.promise();
     });
 
-    const a = Promise.all(uploadEvents).then(() => {
+    Promise.all(uploadEvents).then(() => {
       if (this.unmounted) return;
 
       const files = this.state.files.map(file => {
@@ -121,9 +116,6 @@ class FileManager extends Component {
       });
 
       this.props.onComplete(files);
-    }).catch(function(err) {
-      debugger;
-      console.log(err.message);
     });
   }
 

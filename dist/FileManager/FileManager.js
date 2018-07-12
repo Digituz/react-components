@@ -103,10 +103,7 @@ var FileManager = function (_Component) {
         return file;
       });
 
-      this.setState({
-        files: [].concat((0, _toConsumableArray3.default)(filesUploaded), (0, _toConsumableArray3.default)(newFiles)),
-        showUploadButton: filesUploaded.length + newFiles.length > 0
-      });
+      this.props.onComplete([].concat((0, _toConsumableArray3.default)(filesUploaded), (0, _toConsumableArray3.default)(newFiles)));
     }
   }, {
     key: 'uploadFiles',
@@ -147,15 +144,13 @@ var FileManager = function (_Component) {
             return fileIter;
           });
 
-          _this2.setState({
-            files: [].concat((0, _toConsumableArray3.default)(files))
-          });
+          _this2.props.onComplete(files);
         });
 
         return uploadManager.promise();
       });
 
-      var a = Promise.all(uploadEvents).then(function () {
+      Promise.all(uploadEvents).then(function () {
         if (_this2.unmounted) return;
 
         var files = _this2.state.files.map(function (file) {
@@ -165,9 +160,6 @@ var FileManager = function (_Component) {
         });
 
         _this2.props.onComplete(files);
-      }).catch(function (err) {
-        debugger;
-        console.log(err.message);
       });
     }
   }, {
@@ -418,7 +410,7 @@ var FileManager = function (_Component) {
     key: 'getDerivedStateFromProps',
     value: function getDerivedStateFromProps(nextProps, prevState) {
       if (nextProps.files === prevState.files) return null;
-      var files = prevState.files || [];
+      var files = nextProps.files || [];
       var showUploadButton = files.filter(function (file) {
         return !file.uploaded;
       }).length > 0;
