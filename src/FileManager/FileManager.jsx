@@ -48,6 +48,8 @@ class FileManager extends Component {
   }
 
   openFileChooser() {
+    // disabled?
+    if (this.state.files.length >= 1 && !this.props.multiple) return;
     this.fileManager.current.click();
   }
 
@@ -180,17 +182,20 @@ class FileManager extends Component {
 
   render() {
     let totalSize = 0;
+    console.log(this.state.files.length >= 1 && !this.props.multiple);
     return (
       <div className="drc-file-upload">
+        <h3>{this.props.label}</h3>
         <input
           type="file"
           ref={this.fileManager}
           onChange={() => (this.fileChosen())}
           id={this.props.id}
-          multiple={true}
+          multiple={this.props.multiple}
         />
         <Button
           onClick={() => (this.openFileChooser())}
+          disabled={this.state.files.length >= 1 && !this.props.multiple}
           text="Choose Files"
         />
         <If condition={this.state.showUploadButton}>
@@ -218,7 +223,7 @@ class FileManager extends Component {
         <table>
           <thead>
           <tr>
-            <th colSpan={3}>Files Chosen</th>
+            <th colSpan={3}>{this.props.label}</th>
           </tr>
           <tr>
             <th>Name</th>
@@ -259,11 +264,13 @@ class FileManager extends Component {
 }
 
 FileManager.propTypes = {
-  id: PropTypes.string.isRequired,
-  onComplete: PropTypes.func,
   accessKeyId: PropTypes.string.isRequired,
   bucketName: PropTypes.string.isRequired,
   endpoint: PropTypes.string.isRequired,
+  id: PropTypes.string.isRequired,
+  label: PropTypes.string.isRequired,
+  multiple: PropTypes.bool.isRequired,
+  onComplete: PropTypes.func,
   secretAccessKey: PropTypes.string.isRequired,
 };
 

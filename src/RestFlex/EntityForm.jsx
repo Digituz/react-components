@@ -82,12 +82,14 @@ class EntityForm extends Component {
       return (
         <div className="sm-12" key={propertyKey}>
           <FileManager
-            id={propertyKey}
-            files={this.getValue(propertyKey)}
-            onComplete={this.updateField(propertyKey)}
             accessKeyId={this.props.fileManagerConfig.accessKeyId}
             bucketName={this.props.fileManagerConfig.bucketName}
             endpoint={this.props.fileManagerConfig.endpoint}
+            files={this.getValue(propertyKey)}
+            id={propertyKey}
+            label={property.label}
+            multiple={property.multiple || false}
+            onComplete={this.updateField(propertyKey)}
             secretAccessKey={this.props.fileManagerConfig.secretAccessKey}
           />
         </div>

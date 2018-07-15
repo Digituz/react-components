@@ -19,11 +19,12 @@ exports.default = {
   plural: _propTypes2.default.string.isRequired,
   description: _propTypes2.default.string.isRequired,
   properties: _propTypes2.default.shape({
-    label: _propTypes2.default.string,
-    placeholder: _propTypes2.default.string,
+    columnClass: _propTypes2.default.string,
     format: _propTypes2.default.string,
     headerClass: _propTypes2.default.string,
-    columnClass: _propTypes2.default.string,
+    label: _propTypes2.default.string,
+    multiple: _propTypes2.default.bool,
+    placeholder: _propTypes2.default.string,
     render: _propTypes2.default.func
   }).isRequired
 };

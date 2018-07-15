@@ -9,11 +9,12 @@ export default {
   plural: PropTypes.string.isRequired,
   description: PropTypes.string.isRequired,
   properties: PropTypes.shape({
-    label: PropTypes.string,
-    placeholder: PropTypes.string,
+    columnClass: PropTypes.string,
     format: PropTypes.string,
     headerClass: PropTypes.string,
-    columnClass: PropTypes.string,
+    label: PropTypes.string,
+    multiple: PropTypes.bool,
+    placeholder: PropTypes.string,
     render: PropTypes.func,
   }).isRequired,
 };

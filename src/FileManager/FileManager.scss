@@ -1,6 +1,13 @@
 @import '../global-style.scss';
 
 div.drc-file-upload {
+  margin-bottom: 20px;
+
+  h3 {
+    margin-top: 0;
+    padding-bottom: 5px;
+    border-bottom: 1px solid $very-light-gray;
+  }
 
   button.upload-button {
     margin-left: 10px;

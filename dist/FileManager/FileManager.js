@@ -89,6 +89,8 @@ var FileManager = function (_Component) {
   }, {
     key: 'openFileChooser',
     value: function openFileChooser() {
+      // disabled?
+      if (this.state.files.length >= 1 && !this.props.multiple) return;
       this.fileManager.current.click();
     }
   }, {
@@ -244,9 +246,15 @@ var FileManager = function (_Component) {
       var _this4 = this;
 
       var totalSize = 0;
+      console.log(this.state.files.length >= 1 && !this.props.multiple);
       return _react2.default.createElement(
         'div',
         { className: 'drc-file-upload' },
+        _react2.default.createElement(
+          'h3',
+          null,
+          this.props.label
+        ),
         _react2.default.createElement('input', {
           type: 'file',
           ref: this.fileManager,
@@ -254,12 +262,13 @@ var FileManager = function (_Component) {
             return _this4.fileChosen();
           },
           id: this.props.id,
-          multiple: true
+          multiple: this.props.multiple
         }),
         _react2.default.createElement(_.Button, {
           onClick: function onClick() {
             return _this4.openFileChooser();
           },
+          disabled: this.state.files.length >= 1 && !this.props.multiple,
           text: 'Choose Files'
         }),
         _react2.default.createElement(
@@ -312,7 +321,7 @@ var FileManager = function (_Component) {
               _react2.default.createElement(
                 'th',
                 { colSpan: 3 },
-                'Files Chosen'
+                this.props.label
               )
             ),
             _react2.default.createElement(
@@ -424,11 +433,13 @@ var FileManager = function (_Component) {
 }(_react.Component);
 
 FileManager.propTypes = {
-  id: _propTypes2.default.string.isRequired,
-  onComplete: _propTypes2.default.func,
   accessKeyId: _propTypes2.default.string.isRequired,
   bucketName: _propTypes2.default.string.isRequired,
   endpoint: _propTypes2.default.string.isRequired,
+  id: _propTypes2.default.string.isRequired,
+  label: _propTypes2.default.string.isRequired,
+  multiple: _propTypes2.default.bool.isRequired,
+  onComplete: _propTypes2.default.func,
   secretAccessKey: _propTypes2.default.string.isRequired
 };
 
