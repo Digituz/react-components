@@ -64,9 +64,6 @@ var EntityForm = function (_Component) {
 
     Object.keys(props.model.properties).forEach(function (propertyKey) {
       var property = _this.props.model.properties[propertyKey];
-      if (property.format === 'date') {
-        return entity[propertyKey] = new Date();
-      }
       if (property.type === 'file') {
         return entity[propertyKey] = [];
       }
@@ -116,13 +113,14 @@ var EntityForm = function (_Component) {
     key: 'getValue',
     value: function getValue(propertyKey, format) {
       if (format === 'number') return this.state.entity[propertyKey] || 0;
+      if (format === 'date') return this.state.entity[propertyKey] || null;
       return this.state.entity[propertyKey] || '';
     }
   }, {
     key: 'getFieldFromProperty',
     value: function getFieldFromProperty(propertyKey) {
       var property = this.props.model.properties[propertyKey];
-      if (property.type === 'string' || property.type === 'number') {
+      if (property.type === 'string' || property.type === 'number' || property.type === 'date') {
         return _react2.default.createElement(
           'div',
           { className: 'sm-12', key: propertyKey },

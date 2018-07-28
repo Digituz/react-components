@@ -47,7 +47,7 @@ InputLabel.propTypes = {
     PropTypes.string,
     PropTypes.number,
     PropTypes.instanceOf(Date),
-  ]).isRequired,
+  ]),
   className: PropTypes.string,
   inputClassName: PropTypes.string,
   placeholder: PropTypes.string,

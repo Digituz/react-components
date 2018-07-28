@@ -4,6 +4,10 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
+var _typeof2 = require('babel-runtime/helpers/typeof');
+
+var _typeof3 = _interopRequireDefault(_typeof2);
+
 var _classCallCheck2 = require('babel-runtime/helpers/classCallCheck');
 
 var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
@@ -75,7 +79,11 @@ var Table = function (_Component) {
       if (!propertyValue) return '';
       if (column.type === 'string' && !column.format) return propertyValue;
       if (column.format === 'currency') return (0, _maskJs.maskCurrency)(propertyValue);
-      if (column.format === 'date') return (0, _maskJs.maskDate)(propertyValue, 'pt-BR');
+      if (column.format === 'date') {
+        if (typeof propertyValue === 'string') return (0, _maskJs.maskDate)(new Date(propertyValue), 'pt-BR');
+        if ((typeof propertyValue === 'undefined' ? 'undefined' : (0, _typeof3.default)(propertyValue)) === 'object') return (0, _maskJs.maskDate)(propertyValue, 'pt-BR');
+        return '';
+      }
       throw new Error('Unexpected state on \'' + column.property + '\' on this record: ' + JSON.stringify(record));
     }
   }, {

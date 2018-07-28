@@ -13,9 +13,6 @@ class EntityForm extends Component {
 
     Object.keys(props.model.properties).forEach(propertyKey => {
       const property = this.props.model.properties[propertyKey];
-      if (property.format === 'date') {
-        return entity[propertyKey] = new Date();
-      }
       if (property.type === 'file') {
         return entity[propertyKey] = [];
       }
@@ -58,12 +55,13 @@ class EntityForm extends Component {
 
   getValue(propertyKey, format) {
     if (format === 'number') return this.state.entity[propertyKey] || 0;
+    if (format === 'date') return this.state.entity[propertyKey] || null;
     return this.state.entity[propertyKey] || '';
   }
 
   getFieldFromProperty(propertyKey) {
     const property = this.props.model.properties[propertyKey];
-    if (property.type === 'string' || property.type === 'number') {
+    if (property.type === 'string' || property.type === 'number' || property.type === 'date') {
       return (
         <div className="sm-12" key={propertyKey}>
           <InputLabel

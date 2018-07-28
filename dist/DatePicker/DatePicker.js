@@ -50,11 +50,13 @@ var DatePicker = function (_Component) {
 
     _this.el = document.createElement('div');
 
-    var year = props.date.getFullYear();
-    var month = props.date.getMonth();
+    var date = props.date ? new Date(props.date) : new Date();
+
+    var year = date.getFullYear();
+    var month = date.getMonth();
 
     _this.state = {
-      selectedDate: props.date,
+      selectedDate: date,
       currentMonth: new Date(year, month, 1)
     };
     return _this;
@@ -225,6 +227,9 @@ var DatePicker = function (_Component) {
             'div',
             { className: 'actions' },
             _react2.default.createElement(_Button2.default, { text: 'Cancel', onClick: this.props.onCancel, className: 'default' }),
+            _react2.default.createElement(_Button2.default, { text: 'Clear', onClick: function onClick() {
+                return _this2.props.onOk(null);
+              }, className: 'default' }),
             _react2.default.createElement(_Button2.default, { text: 'Ok', onClick: function onClick() {
                 return _this2.props.onOk(_this2.state.selectedDate);
               }, className: 'info' })

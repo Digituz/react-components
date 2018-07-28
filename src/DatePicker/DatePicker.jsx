@@ -9,11 +9,13 @@ class DatePicker extends Component {
     super(props);
     this.el = document.createElement('div');
 
-    const year = props.date.getFullYear();
-    const month = props.date.getMonth();
+    const date = props.date ? new Date(props.date) : new Date();
+
+    const year = date.getFullYear();
+    const month = date.getMonth();
 
     this.state = {
-      selectedDate: props.date,
+      selectedDate: date,
       currentMonth: new Date(year, month, 1),
     };
   }
@@ -179,6 +181,7 @@ class DatePicker extends Component {
           </div>
           <div className="actions">
             <Button text="Cancel" onClick={this.props.onCancel} className="default" />
+            <Button text="Clear" onClick={() => (this.props.onOk(null))} className="default" />
             <Button text="Ok" onClick={() => (this.props.onOk(this.state.selectedDate))} className="info" />
           </div>
         </div>

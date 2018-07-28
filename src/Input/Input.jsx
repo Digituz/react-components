@@ -22,6 +22,7 @@ class Input extends Component {
   }
 
   static dateToString(date) {
+    if (!date) return '';
     const mm = date.getMonth() + 1; // getMonth() is zero-based
     const dd = date.getDate();
 
@@ -39,12 +40,13 @@ class Input extends Component {
     if (this.props.type === 'currency') {
       return maskCurrency(value);
     }
-    if (this.props.type === 'date' && typeof value === 'object') {
-      return Input.dateToString(value);
+    if (this.props.type === 'date') {
+      return Input.dateToString(value ? new Date(value) : null);
     }
   }
 
   static valueToDate(value) {
+    if (!value) return null;
     const timezoneDiff = (new Date()).getTimezoneOffset() / 60;
     const year = Number(value.substring(6, 10));
     const month = Number(value.substring(3, 5));
@@ -194,7 +196,7 @@ Input.propTypes = {
     PropTypes.string,
     PropTypes.number,
     PropTypes.instanceOf(Date),
-  ]).isRequired,
+  ]),
   onBlur: PropTypes.func.isRequired,
   id: PropTypes.string,
   className: PropTypes.string,

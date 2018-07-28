@@ -4,10 +4,6 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _typeof2 = require('babel-runtime/helpers/typeof');
-
-var _typeof3 = _interopRequireDefault(_typeof2);
-
 var _classCallCheck2 = require('babel-runtime/helpers/classCallCheck');
 
 var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
@@ -74,8 +70,8 @@ var Input = function (_Component) {
       if (this.props.type === 'currency') {
         return (0, _maskJs.maskCurrency)(value);
       }
-      if (this.props.type === 'date' && (typeof value === 'undefined' ? 'undefined' : (0, _typeof3.default)(value)) === 'object') {
-        return Input.dateToString(value);
+      if (this.props.type === 'date') {
+        return Input.dateToString(value ? new Date(value) : null);
       }
     }
   }, {
@@ -218,6 +214,7 @@ var Input = function (_Component) {
   }], [{
     key: 'dateToString',
     value: function dateToString(date) {
+      if (!date) return '';
       var mm = date.getMonth() + 1; // getMonth() is zero-based
       var dd = date.getDate();
 
@@ -226,6 +223,7 @@ var Input = function (_Component) {
   }, {
     key: 'valueToDate',
     value: function valueToDate(value) {
+      if (!value) return null;
       var timezoneDiff = new Date().getTimezoneOffset() / 60;
       var year = Number(value.substring(6, 10));
       var month = Number(value.substring(3, 5));
@@ -244,7 +242,7 @@ var Input = function (_Component) {
 }(_react.Component);
 
 Input.propTypes = {
-  value: _propTypes2.default.oneOfType([_propTypes2.default.string, _propTypes2.default.number, _propTypes2.default.instanceOf(Date)]).isRequired,
+  value: _propTypes2.default.oneOfType([_propTypes2.default.string, _propTypes2.default.number, _propTypes2.default.instanceOf(Date)]),
   onBlur: _propTypes2.default.func.isRequired,
   id: _propTypes2.default.string,
   className: _propTypes2.default.string,

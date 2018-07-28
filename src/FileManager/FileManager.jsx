@@ -182,7 +182,6 @@ class FileManager extends Component {
 
   render() {
     let totalSize = 0;
-    console.log(this.state.files.length >= 1 && !this.props.multiple);
     return (
       <div className="drc-file-upload">
         <h3>{this.props.label}</h3>

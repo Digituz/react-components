@@ -92,7 +92,7 @@ InputLabel.propTypes = {
   label: _propTypes2.default.string.isRequired,
   inputId: _propTypes2.default.string.isRequired,
   onBlur: _propTypes2.default.func.isRequired,
-  value: _propTypes2.default.oneOfType([_propTypes2.default.string, _propTypes2.default.number, _propTypes2.default.instanceOf(Date)]).isRequired,
+  value: _propTypes2.default.oneOfType([_propTypes2.default.string, _propTypes2.default.number, _propTypes2.default.instanceOf(Date)]),
   className: _propTypes2.default.string,
   inputClassName: _propTypes2.default.string,
   placeholder: _propTypes2.default.string,

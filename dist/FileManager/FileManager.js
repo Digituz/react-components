@@ -246,7 +246,6 @@ var FileManager = function (_Component) {
       var _this4 = this;
 
       var totalSize = 0;
-      console.log(this.state.files.length >= 1 && !this.props.multiple);
       return _react2.default.createElement(
         'div',
         { className: 'drc-file-upload' },

@@ -44,7 +44,11 @@ class Table extends Component {
     if (!propertyValue) return '';
     if (column.type === 'string' && !column.format) return propertyValue;
     if (column.format === 'currency') return maskCurrency(propertyValue);
-    if (column.format === 'date') return maskDate(propertyValue, 'pt-BR');
+    if (column.format === 'date') {
+      if (typeof propertyValue === 'string') return maskDate(new Date(propertyValue), 'pt-BR');
+      if (typeof propertyValue === 'object') return maskDate(propertyValue, 'pt-BR');
+      return '';
+    }
     throw new Error(`Unexpected state on '${column.property}' on this record: ${JSON.stringify(record)}`);
   }
 
